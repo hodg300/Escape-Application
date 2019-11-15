@@ -26,8 +26,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:numColumns="3"
-        android:verticalSpacing="2dp"
-        android:horizontalSpacing="2dp"
         android:stretchMode="columnWidth"
         android:gravity="left"
         >
@@ -37,7 +35,7 @@
         android:id="@+id/move_left"
         android:text="Left"
         android:autoSizeTextType="uniform"
-        android:layout_width="wrap_content"
+        android:layout_width="360px"
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_player"
         android:layout_alignParentLeft="true"
@@ -47,14 +45,14 @@
         android:id="@+id/move_right"
         android:text="Right"
         android:autoSizeTextType="uniform"
-        android:layout_width="wrap_content"
+        android:layout_width="360px"
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_player"
         android:layout_alignParentRight="true" />
 
     <Button
         android:id="@+id/btn_player"
-        android:layout_width="wrap_content"
+        android:layout_width="360px"
         android:layout_height="wrap_content"
         android:layout_below="@id/gv"
         android:layout_centerInParent="true"/>

@@ -21,9 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class GameActivity extends AppCompatActivity {
-    final Button player=findViewById(R.id.btn_player);
-    final Button btnLeft=findViewById(R.id.move_left);
-    final Button btnRight=findViewById(R.id.move_right);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,8 +35,12 @@ public class GameActivity extends AppCompatActivity {
                 startActivity(gameActivityIntent);
             }
         });
-
+        final int NUM_OF_COL=3;
+        final Button player=findViewById(R.id.btn_player);
+        final Button btnLeft=findViewById(R.id.move_left);
+        final Button btnRight=findViewById(R.id.move_right);
     //exmaple from web
+
 
         final GridView gv = (GridView) findViewById(R.id.gv);
 
@@ -114,16 +116,19 @@ public class GameActivity extends AppCompatActivity {
         btnLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                player.setX(0);
-                Log.d("STATE", "onClick: "+player.getX());
+                if(player.getX()>=360)
+                    player.setX(player.getX()-getResources().getDisplayMetrics().widthPixels/NUM_OF_COL);
+
             }
         });
         //move right
         btnRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                player.setX(100);
-                Log.d("STATE", "onClick: "+player.getX());
+                if(player.getX()<720)
+                    player.setX(player.getX()+ getResources().getDisplayMetrics().widthPixels/NUM_OF_COL);
+                Log.d("state", "onClick: "+ getResources().getDisplayMetrics().widthPixels/NUM_OF_COL);
+
             }
         });
     }
