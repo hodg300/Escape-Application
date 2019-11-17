@@ -20,16 +20,34 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"/>
 
-    <GridView
-        android:id="@+id/gv"
+<!--    <GridView-->
+<!--        android:id="@+id/gv"-->
+<!--        android:layout_below="@id/btn_stop"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:numColumns="3"-->
+<!--        android:stretchMode="columnWidth"-->
+<!--        android:gravity="left"-->
+<!--        >-->
+<!--    </GridView>-->
+
+    <GridLayout
+        android:id="@+id/grid_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@id/btn_stop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:numColumns="3"
-        android:stretchMode="columnWidth"
-        android:gravity="left"
+        android:layout_above="@id/btn_player"
+        android:columnCount="3"
+        android:rowCount="3"
+        android:alignmentMode="alignBounds"
+        android:layout_widthPercent="100%"
+        android:layout_aspectRatio="100%"
+        android:background="@color/colorPrimaryDark"
+        android:layout_centerVertical="true"
         >
-    </GridView>
+
+
+    </GridLayout>
 
     <Button
         android:id="@+id/move_left"
@@ -54,7 +72,6 @@
         android:id="@+id/btn_player"
         android:layout_width="360px"
         android:layout_height="wrap_content"
-        android:layout_below="@id/gv"
         android:layout_centerInParent="true"/>
 
 
