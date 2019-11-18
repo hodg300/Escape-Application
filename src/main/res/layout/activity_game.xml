@@ -7,11 +7,26 @@
     tools:context=".GameActivity"
     >
 
-    <TextView
-        android:id="@+id/life_status"
-        android:text="Life:"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+    <ImageView
+        android:id="@+id/life_status1"
+        android:layout_width="24dp"
+        android:layout_height="40dp"
+        android:src="@drawable/heart"
+        />
+    <ImageView
+        android:id="@+id/life_status2"
+        android:layout_width="24dp"
+        android:layout_height="40dp"
+        android:src="@drawable/heart"
+        android:layout_toRightOf="@id/life_status1"
+        />
+    <ImageView
+        android:id="@+id/life_status3"
+        android:layout_width="24dp"
+        android:layout_height="40dp"
+        android:src="@drawable/heart"
+        android:layout_toRightOf="@id/life_status2"
+        />
 
     <Button
         android:id="@+id/btn_stop"
@@ -20,16 +35,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"/>
 
-<!--    <GridView-->
-<!--        android:id="@+id/gv"-->
-<!--        android:layout_below="@id/btn_stop"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:numColumns="3"-->
-<!--        android:stretchMode="columnWidth"-->
-<!--        android:gravity="left"-->
-<!--        >-->
-<!--    </GridView>-->
 
     <GridLayout
         android:id="@+id/grid_layout"
@@ -45,6 +50,17 @@
         android:background="@color/colorPrimaryDark"
         android:layout_centerVertical="true"
         >
+
+        <GridView
+            android:id="@+id/gv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_below="@id/btn_stop"
+            android:gravity="left"
+            android:numColumns="3"
+            android:stretchMode="columnWidth"></GridView>
 
 
     </GridLayout>
