@@ -5,13 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".GameActivity"
+
     >
 
     <ImageView
         android:id="@+id/life_status1"
         android:layout_width="24dp"
         android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
         android:src="@drawable/heart"
+
         />
     <ImageView
         android:id="@+id/life_status2"
@@ -39,29 +42,24 @@
     <GridLayout
         android:id="@+id/grid_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/btn_stop"
         android:layout_above="@id/btn_player"
         android:columnCount="3"
-        android:rowCount="3"
         android:alignmentMode="alignBounds"
-        android:layout_widthPercent="100%"
-        android:layout_aspectRatio="100%"
-        android:background="@color/colorPrimaryDark"
         android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
         >
 
-        <GridView
-            android:id="@+id/gv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <View
+            android:id="@+id/enemy_view"
+            android:layout_width="360px"
+            android:layout_height="130px"
             android:layout_row="0"
             android:layout_column="0"
             android:layout_below="@id/btn_stop"
             android:gravity="left"
-            android:numColumns="3"
-            android:stretchMode="columnWidth"></GridView>
-
+            android:stretchMode="columnWidth"></View>
 
     </GridLayout>
 
@@ -70,8 +68,8 @@
         android:text="Left"
         android:autoSizeTextType="uniform"
         android:layout_width="360px"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btn_player"
+        android:layout_height="130px"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
 
         />
@@ -80,15 +78,17 @@
         android:text="Right"
         android:autoSizeTextType="uniform"
         android:layout_width="360px"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btn_player"
+        android:layout_height="130px"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true" />
 
     <Button
         android:id="@+id/btn_player"
         android:layout_width="360px"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"/>
+        android:layout_height="130px"
+        android:layout_centerInParent="true"
+        android:layout_above="@id/move_right"
+        />
 
 
 
