@@ -44,6 +44,9 @@ public class GameActivity extends AppCompatActivity {
     private ImageView life_status3;
     private float posY;
     private int life=3;
+    private boolean boolthread0=false;
+    private boolean boolthread1=false;
+    private boolean boolthread2=false;
 
 
     @Override
@@ -102,38 +105,50 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
+
         //select random initial enemy
         int random_col;
-        //main process , this part check our life and play all of threads
+        int i=0;
+//main process , this part check our life and play all of threads
         switch(NUM_OF_COL) {
             case 3:
-                Log.d("hod", "onCreate: " + player.getY());
-//                while (life +1 > 2) {
-                for(int i=0;i<7;i++) {
-
+                while(i<10){ //////change to life
                     random_col = (int) (Math.random() * (NUM_OF_COL));
                     if (random_col == 0) {
+                        startPos(enemyView0);
                         enemyView0.setBackgroundColor(Color.RED);
                         firstColThread();
                     } else if (random_col == 1) {
+                        startPos(enemyView1);
                         enemyView1.setBackgroundColor(Color.RED);
                         secondColThread();
                     } else if (random_col == 2) {
+                        startPos(enemyView2);
                         enemyView2.setBackgroundColor(Color.RED);
                         thirdColThread();
                     }
+                    i++;
 //                }
                 }
 
                 break;
-        }
 
+        }
+//        startPos(enemyView0);
+//        enemyView0.setBackgroundColor(Color.RED);
+//        firstColThread();
+//        startPos(enemyView1);
+//        enemyView1.setBackgroundColor(Color.RED);
+//        secondColThread();
+//        startPos(enemyView2);
+//        enemyView2.setBackgroundColor(Color.RED);
+//        thirdColThread();
 
     }
         //here there is a problem , i need to check getx and gety
     private void hitCheck(float x,float y) {
         if(x >=player.getX() && y>=player.getY()){
-            life--;
+            this.life--;
             switch (life+1) {
                 case 1:
                     life_status1.setVisibility(View.INVISIBLE);
@@ -155,30 +170,35 @@ public class GameActivity extends AppCompatActivity {
         thirdThread=new Thread(new Runnable() {
             @Override
             public void run() {
+                if (boolthread2==false) {
+                    boolthread2=true;
+                    try {
+                        Thread.sleep(1000);
+                        myHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                while (enemyView2.getY() < gl.getHeight()) {
+                                    try {
+                                        changePos(enemyView2);
+                                        hitCheck(enemyView2.getX(), enemyView2.getY());
+                                        Thread.sleep(500);
+                                    } catch (Exception c) {
 
-                try {
-                    Thread.sleep(1000);
-                    myHandler.post(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            while (enemyView2.getY() < gl.getHeight()) {
-                                try {
-                                    changePos(enemyView2);
-                                    hitCheck(enemyView2.getX(),enemyView2.getY());
-                                    Thread.sleep(500);
-                                } catch (Exception c) {
-
+                                    }
                                 }
+                                startPos(enemyView2);
                             }
-                        }
-                    });
+                        },1100);
 
 
-                } catch (Exception c) {
+
+                    } catch (Exception c) {
+                    }
+
                 }
-
+                boolthread2=false;
             }
+
         });
         thirdThread.start();
     }
@@ -187,62 +207,70 @@ public class GameActivity extends AppCompatActivity {
         secondThread=new Thread(new Runnable() {
             @Override
             public void run() {
+                if (boolthread1==false) {
+                    boolthread1 = true;
+                    try {
+                        Thread.sleep(1000);
+                        myHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                while (enemyView1.getY() < gl.getHeight()) {
+                                    try {
+                                        changePos(enemyView1);
+                                        hitCheck(enemyView1.getX(), enemyView1.getY());
+                                        Thread.sleep(500);
+                                    } catch (Exception c) {
 
-                try {
-                    Thread.sleep(700);
-                    myHandler.post(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            while (enemyView1.getY() < gl.getHeight()) {
-                                try {
-                                    changePos(enemyView1);
-                                    hitCheck(enemyView1.getX(),enemyView1.getY());
-                                    Thread.sleep(500);
-                                } catch (Exception c) {
-
+                                    }
                                 }
+                                startPos(enemyView1);
                             }
-                        }
-                    });
+                        },700);
 
 
-                } catch (Exception c) {
+
+                    } catch (Exception c) {
+                    }
                 }
-
+                boolthread1=false;
             }
         });
         secondThread.start();
     }
+
 
     private void firstColThread(){
         //move down the enemies
         firstThread=new Thread(new Runnable() {
             @Override
             public void run() {
+                if (boolthread0==false) {
+                    boolthread0 = true;
+                    try {
 
-                try {
+                        Thread.sleep(1000);
+                        myHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                while (enemyView0.getY() < gl.getHeight()) {
+                                    try {
+                                        changePos(enemyView0);
 
-                    Thread.sleep(500);
+                                        hitCheck(enemyView0.getX(), enemyView0.getY());
+                                        Thread.sleep(500);
+                                    } catch (Exception c) {
 
-                    myHandler.post(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            while (enemyView0.getY() < gl.getHeight()) {
-                                try {
-                                    changePos(enemyView0);
-                                    hitCheck(enemyView0.getX(),enemyView0.getY());
-                                    Thread.sleep(500);
-                                } catch (Exception c) {
-
+                                    }
                                 }
+                                startPos(enemyView0);
                             }
-                        }
-                    });
-                } catch (Exception c) {
-                }
+                        },1000);
 
+
+                    } catch (Exception c) {
+                    }
+                }
+                boolthread0=false;
             }
         });
         firstThread.start();
@@ -250,11 +278,15 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
+    //bring back the enemy views to the top
+    private void startPos(View v){
+        posY=-130;
+        v.setY(posY);
+    }
     //move down
     public void changePos(View v) {
         posY += 130;
         v.setY(posY);
-        Log.d("askfas", "changePos: " + v.getHeight());
     }
 
 }
