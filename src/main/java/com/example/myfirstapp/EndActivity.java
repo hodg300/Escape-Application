@@ -23,13 +23,13 @@ public class EndActivity extends AppCompatActivity {
             }
         });
 
-        //press End Game to finish the game and destroy the progress
-        findViewById(R.id.btn_destroy).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onDestroy();
 
-            }
-        });
+
+    }
+
+    //press End Game to finish the game and destroy the progress
+    public void clickExit(View view) {
+        moveTaskToBack(true);
+        System.exit(1);
     }
 }

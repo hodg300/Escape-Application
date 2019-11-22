@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".GameActivity"
     android:id="@+id/rl"
+
     android:paddingBottom="10dp"
     >
 
@@ -39,50 +40,65 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"/>
 
-
-    <GridLayout
-        android:id="@+id/grid_layout"
+    <LinearLayout
+        android:id="@+id/main_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="horizontal"
         android:layout_below="@id/btn_stop"
-        android:layout_above="@id/player"
-        android:columnCount="3"
-        android:alignmentMode="alignBounds"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
+        android:layout_above="@id/move_left"
+        android:weightSum="3"
         >
-
-        <View
-            android:id="@+id/enemy_view0"
-            android:layout_width="360px"
-            android:layout_height="130px"
-            android:layout_row="0"
-            android:layout_column="0"
+        <LinearLayout
+            android:id="@+id/linear1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
             android:layout_below="@id/btn_stop"
-            android:gravity="left"
-            android:stretchMode="columnWidth"></View>
-        <View
-            android:id="@+id/enemy_view1"
-            android:layout_width="360px"
-            android:layout_height="130px"
-            android:layout_row="0"
-            android:layout_column="1"
+            android:layout_above="@id/move_left"
+            android:layout_weight="1"
+            >
+            <View
+                android:id="@+id/enemy1"
+                android:layout_width="match_parent"
+                android:layout_height="130px"
+                android:background="@color/colorPrimaryDark"
+            />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linear2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
             android:layout_below="@id/btn_stop"
-            android:gravity="left"
-            android:stretchMode="columnWidth"></View>
-        <View
-            android:id="@+id/enemy_view2"
-            android:layout_width="360px"
-            android:layout_height="130px"
-            android:layout_row="0"
-            android:layout_column="2"
+            android:layout_above="@id/move_left"
+            android:layout_weight="1"
+            >
+            <View
+                android:id="@+id/enemy2"
+                android:layout_width="match_parent"
+                android:layout_height="130px"
+                android:background="@color/colorAccent"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linear3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
             android:layout_below="@id/btn_stop"
-            android:gravity="left"
-            android:stretchMode="columnWidth"></View>
+            android:layout_above="@id/move_left"
+            android:layout_weight="1"
+            >
+            <View
+                android:id="@+id/enemy3"
+                android:layout_width="match_parent"
+                android:layout_height="130px"
+                android:background="@color/colorPrimaryDark"
+                />
+        </LinearLayout>
 
-
-
-    </GridLayout>
+    </LinearLayout>
 
     <Button
         android:id="@+id/move_left"
