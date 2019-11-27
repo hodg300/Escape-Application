@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".GameActivity"
     android:id="@+id/rl"
-
+    android:background="@drawable/background"
     android:paddingBottom="10dp"
     >
 
@@ -15,21 +15,21 @@
         android:layout_width="24dp"
         android:layout_height="40dp"
         android:layout_alignParentLeft="true"
-        android:src="@drawable/heart"
+        android:src="@drawable/like"
 
         />
     <ImageView
         android:id="@+id/life_status2"
         android:layout_width="24dp"
         android:layout_height="40dp"
-        android:src="@drawable/heart"
+        android:src="@drawable/like"
         android:layout_toRightOf="@id/life_status1"
         />
     <ImageView
         android:id="@+id/life_status3"
         android:layout_width="24dp"
         android:layout_height="40dp"
-        android:src="@drawable/heart"
+        android:src="@drawable/like"
         android:layout_toRightOf="@id/life_status2"
         />
 
@@ -78,7 +78,7 @@
                 android:id="@+id/enemy2"
                 android:layout_width="match_parent"
                 android:layout_height="130px"
-                android:background="@color/colorAccent"
+                android:background="@color/colorPrimaryDark"
                 />
         </LinearLayout>
         <LinearLayout
@@ -126,7 +126,7 @@
         android:layout_height="130px"
         android:layout_above="@id/move_right"
         android:layout_centerInParent="true"
-        android:background="@color/colorPrimary" />
+        android:background="@android:color/holo_red_dark" />
 
 
 

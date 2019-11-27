@@ -117,7 +117,7 @@ public class GameActivity extends AppCompatActivity {
 
         //create animation
         animation1 = ValueAnimator.ofInt(-130,screenHeight);
-        animation1.setDuration(10000).setRepeatCount(Animation.INFINITE);
+        animation1.setDuration(7000).setRepeatCount(Animation.INFINITE);
         animation1.start();
         animation1.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -125,12 +125,14 @@ public class GameActivity extends AppCompatActivity {
 
                 int animatedValue = (int)updatedAnimation.getAnimatedValue();
                 enemy1.setTranslationY(animatedValue);
-//              if(isCollision(enemy1,player))
-//                    hitCheck();
+              if(isCollision(enemy1,player)) {
+                  hitCheck();
+                  updatedAnimation.start();
+              }
             }
         });
         animation2 = ValueAnimator.ofInt(-130,screenHeight);
-        animation2.setDuration(5000).setRepeatCount(Animation.INFINITE);
+        animation2.setDuration(4000).setRepeatCount(Animation.INFINITE);
         animation2.start();
         animation2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -139,13 +141,15 @@ public class GameActivity extends AppCompatActivity {
                 int animatedValue = (int)updatedAnimation.getAnimatedValue();
 
                 enemy2.setTranslationY(animatedValue);
-//              if(isCollision(enemy2,player))
-//                    hitCheck();
+              if(isCollision(enemy2,player)) {
+                  hitCheck();
+                  updatedAnimation.start();
+              }
             }
         });
 
         animation3 = ValueAnimator.ofInt(-130,screenHeight);
-        animation3.setDuration(8000).setRepeatCount(Animation.INFINITE);
+        animation3.setDuration(6000).setRepeatCount(Animation.INFINITE);
         animation3.start();
         animation3.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -153,8 +157,10 @@ public class GameActivity extends AppCompatActivity {
 
                 int animatedValue = (int)updatedAnimation.getAnimatedValue();
                 enemy3.setTranslationY(animatedValue);
-                if(isCollision(enemy3,player))
+                if(isCollision(enemy3,player)) {
                     hitCheck();
+                    updatedAnimation.start();
+                }
 
             }
         });
@@ -162,7 +168,9 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    private void hitCheck() {
+    private synchronized  void hitCheck() {
+
+        Log.d("hod", "hitCheck: " + life);
             this.life--;
                 if (life == 0) {
                     life_status1.setVisibility(View.INVISIBLE);
@@ -177,7 +185,9 @@ public class GameActivity extends AppCompatActivity {
                 } else if (life == 2) {
                     life_status3.setVisibility(View.INVISIBLE);
 
+
                 }
+
 
         return;
     }
@@ -189,17 +199,17 @@ public class GameActivity extends AppCompatActivity {
         e.getLocationOnScreen(enemy_locate);
         p.getLocationOnScreen(player_locate);
 
-        Log.d("enemy", "isCollision enemy : " + e.getX() +" " + e.getY());
-        Log.d("player", "isCollision player : " + p.getX() +" " + p.getY());
+//        Log.d("enemy", "isCollision enemy : " + e.getX() +" " + e.getY());
+//        Log.d("player", "isCollision player : " + p.getX() +" " + p.getY());
 //        Log.d("sis", "isCollosion1: " + enemy_locate[0] + " " + enemy_locate[1]);
 //        Log.d("sis", "isCollosion2: " + player_locate[0] + " " + player_locate[1]);
-        Rect rect1=new Rect(enemy_locate[0],enemy_locate[1],e.getRight(),e.getHeight()+enemy_locate[0]);
-        Log.d("rect1", "isCollision: " + enemy_locate[0] + " " +enemy_locate[1] + " " + e.getWidth() + " "+ e.getHeight()+" " + enemy_locate[0] );
-        Rect rect2=new Rect(player_locate[0],player_locate[1],p.getRight(),p.getHeight()+player_locate[0]);
-        Log.d("rect2", "isCollision: " + player_locate[0] + " " +player_locate[1] + " " + p.getWidth() + " "+ p.getHeight()+" " + player_locate[0] );
+        Rect rect1=new Rect(enemy_locate[0],enemy_locate[1],(int)(enemy_locate[0]+ e.getWidth()),(int)(enemy_locate[1]+e.getHeight()));
+//        Log.d("rect1", "isCollision: " + enemy_locate[0] + " " +enemy_locate[1] + " " + e.getWidth() + " "+ e.getHeight()+" " + enemy_locate[0] );
+        Rect rect2=new Rect(player_locate[0],player_locate[1],(int)(player_locate[0]+ p.getWidth()),(int)(player_locate[1]+p.getHeight()));
+//        Log.d("rect2", "isCollision: " + player_locate[0] + " " +player_locate[1] + " " + p.getWidth() + " "+ p.getHeight()+" " + player_locate[0] );
 
 
-        Log.d("answer", "isCollision: " + Rect.intersects(rect1,rect2));
+//        Log.d("answer", "isCollision: " + Rect.intersects(rect1,rect2));
 
         return Rect.intersects(rect1,rect2);
     }
