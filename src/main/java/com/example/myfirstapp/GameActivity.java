@@ -82,44 +82,13 @@ public class GameActivity extends AppCompatActivity {
         disp.getSize(size);
         screenHeight=size.y;
 
-        //stop game and going to end screen
-        findViewById(R.id.btn_stop).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                animation1.pause();
-                animation2.pause();
-                animation3.pause();
-                Intent gameActivityIntent = new Intent(GameActivity.this, EndActivity.class);
-                startActivity(gameActivityIntent);
-            }
-        });
 
 
 
-        //move left
-        btnLeft.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (player.getX() >= (getResources().getDisplayMetrics().widthPixels * 1 / NUM_OF_COL))
-                    player.setX(player.getX() - getResources().getDisplayMetrics().widthPixels / NUM_OF_COL);
-                Log.d("state", "onClick: " + player.getX());
-            }
-        });
-        //move right
-        btnRight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (player.getX() < (getResources().getDisplayMetrics().widthPixels * 2 / NUM_OF_COL))
-                    player.setX(player.getX() + getResources().getDisplayMetrics().widthPixels / NUM_OF_COL);
-                Log.d("state", "onClick: " + player.getX());
-
-            }
-        });
 
         //create animation
         animation1 = ValueAnimator.ofInt(-130,screenHeight);
-        animation1.setDuration(5000).setRepeatCount(Animation.INFINITE);
+        animation1.setDuration(6000).setRepeatCount(Animation.INFINITE);
         animation1.start();
         animation1.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -155,7 +124,7 @@ public class GameActivity extends AppCompatActivity {
         });
 
         animation3 = ValueAnimator.ofInt(-130,screenHeight);
-        animation3.setDuration(4500).setRepeatCount(Animation.INFINITE);
+        animation3.setDuration(3000).setRepeatCount(Animation.INFINITE);
         animation3.start();
         animation3.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -223,6 +192,24 @@ public class GameActivity extends AppCompatActivity {
         animation1.resume();
         animation2.resume();
         animation3.resume();
+    }
+
+    public void clickToStop(View view) {
+        animation1.pause();
+        animation2.pause();
+        animation3.pause();
+        Intent gameActivityIntent = new Intent(GameActivity.this, EndActivity.class);
+        startActivity(gameActivityIntent);
+    }
+
+    public void clickToMoveRight(View view) {
+        if (player.getX() < (getResources().getDisplayMetrics().widthPixels * 2 / NUM_OF_COL))
+            player.setX(player.getX() + getResources().getDisplayMetrics().widthPixels / NUM_OF_COL);
+    }
+
+    public void clickToMoveLeft(View view) {
+        if (player.getX() >= (getResources().getDisplayMetrics().widthPixels * 1 / NUM_OF_COL))
+            player.setX(player.getX() - getResources().getDisplayMetrics().widthPixels / NUM_OF_COL);
     }
 }
 
