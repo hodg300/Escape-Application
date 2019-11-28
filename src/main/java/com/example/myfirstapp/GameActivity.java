@@ -44,7 +44,6 @@ public class GameActivity extends AppCompatActivity {
     private View enemy3;
     private Button btnLeft;
     private Button btnRight;
-    private Button btnPause;
     private ImageView life_status1;
     private ImageView life_status2;
     private ImageView life_status3;
@@ -53,8 +52,7 @@ public class GameActivity extends AppCompatActivity {
     private ValueAnimator animation2;
     private ValueAnimator animation3;
     private int screenHeight;
-    final int MIN =3000;
-    final int MAX=6000;
+    private int score;
 
 
 
@@ -68,7 +66,6 @@ public class GameActivity extends AppCompatActivity {
         player = (View) findViewById(R.id.player);
         btnLeft = findViewById(R.id.move_left);
         btnRight = findViewById(R.id.move_right);
-        btnPause=findViewById(R.id.btn_pause);
         enemy1 = (View) findViewById(R.id.enemy1);
         enemy2 = (View) findViewById(R.id.enemy2);
         enemy3 = (View) findViewById(R.id.enemy3);
@@ -96,28 +93,6 @@ public class GameActivity extends AppCompatActivity {
                 startActivity(gameActivityIntent);
             }
         });
-
-//            findViewById(R.id.btn_pause).setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    animation1.pause();
-//                    animation2.pause();
-//                    animation3.pause();
-//                    btnPause.setText("RESUME");
-//                }
-//            });
-//        findViewById(R.id.btn_pause).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(btnPause.getText()=="RESUME") {
-//                    animation1.pause();
-//                    animation2.pause();
-//                    animation3.pause();
-//                    btnPause.setText("RESUME");
-//                }
-//            }
-//        });
-
 
 
 
@@ -155,6 +130,8 @@ public class GameActivity extends AppCompatActivity {
               if(isCollision(enemy1,player)) {
                   hitCheck();
                   updatedAnimation.start();
+              }else if(enemy3.getY()>player.getY()+player.getHeight()){
+                  score +=100;
               }
             }
         });
@@ -171,6 +148,8 @@ public class GameActivity extends AppCompatActivity {
               if(isCollision(enemy2,player)) {
                   hitCheck();
                   updatedAnimation.start();
+              }else if(enemy3.getY()>player.getY()+player.getHeight()){
+                  score +=100;
               }
             }
         });
@@ -187,6 +166,8 @@ public class GameActivity extends AppCompatActivity {
                 if(isCollision(enemy3,player)) {
                     hitCheck();
                     updatedAnimation.start();
+                }else if(enemy3.getY()>player.getY()+player.getHeight()){
+                    score +=100;
                 }
 
             }
