@@ -42,6 +42,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"/>
+    <Button
+        android:id="@+id/btn_pause"
+        android:text="PAUSE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="clickToPause"
+        android:layout_toLeftOf="@id/btn_stop"/>
+    <Button
+        android:id="@+id/btn_resume"
+        android:text="RESUME"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/btn_pause"
+        android:onClick="clickToResume"/>
+
 
     <LinearLayout
         android:id="@+id/main_layout"

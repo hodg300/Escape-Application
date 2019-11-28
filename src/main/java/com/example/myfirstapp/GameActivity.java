@@ -44,6 +44,7 @@ public class GameActivity extends AppCompatActivity {
     private View enemy3;
     private Button btnLeft;
     private Button btnRight;
+    private Button btnPause;
     private ImageView life_status1;
     private ImageView life_status2;
     private ImageView life_status3;
@@ -52,6 +53,8 @@ public class GameActivity extends AppCompatActivity {
     private ValueAnimator animation2;
     private ValueAnimator animation3;
     private int screenHeight;
+    final int MIN =3000;
+    final int MAX=6000;
 
 
 
@@ -65,6 +68,7 @@ public class GameActivity extends AppCompatActivity {
         player = (View) findViewById(R.id.player);
         btnLeft = findViewById(R.id.move_left);
         btnRight = findViewById(R.id.move_right);
+        btnPause=findViewById(R.id.btn_pause);
         enemy1 = (View) findViewById(R.id.enemy1);
         enemy2 = (View) findViewById(R.id.enemy2);
         enemy3 = (View) findViewById(R.id.enemy3);
@@ -93,6 +97,29 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
+//            findViewById(R.id.btn_pause).setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    animation1.pause();
+//                    animation2.pause();
+//                    animation3.pause();
+//                    btnPause.setText("RESUME");
+//                }
+//            });
+//        findViewById(R.id.btn_pause).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(btnPause.getText()=="RESUME") {
+//                    animation1.pause();
+//                    animation2.pause();
+//                    animation3.pause();
+//                    btnPause.setText("RESUME");
+//                }
+//            }
+//        });
+
+
+
 
         //move left
         btnLeft.setOnClickListener(new View.OnClickListener() {
@@ -117,7 +144,7 @@ public class GameActivity extends AppCompatActivity {
 
         //create animation
         animation1 = ValueAnimator.ofInt(-130,screenHeight);
-        animation1.setDuration(7000).setRepeatCount(Animation.INFINITE);
+        animation1.setDuration(5000).setRepeatCount(Animation.INFINITE);
         animation1.start();
         animation1.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -149,7 +176,7 @@ public class GameActivity extends AppCompatActivity {
         });
 
         animation3 = ValueAnimator.ofInt(-130,screenHeight);
-        animation3.setDuration(6000).setRepeatCount(Animation.INFINITE);
+        animation3.setDuration(4500).setRepeatCount(Animation.INFINITE);
         animation3.start();
         animation3.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -199,19 +226,22 @@ public class GameActivity extends AppCompatActivity {
         e.getLocationOnScreen(enemy_locate);
         p.getLocationOnScreen(player_locate);
 
-//        Log.d("enemy", "isCollision enemy : " + e.getX() +" " + e.getY());
-//        Log.d("player", "isCollision player : " + p.getX() +" " + p.getY());
-//        Log.d("sis", "isCollosion1: " + enemy_locate[0] + " " + enemy_locate[1]);
-//        Log.d("sis", "isCollosion2: " + player_locate[0] + " " + player_locate[1]);
         Rect rect1=new Rect(enemy_locate[0],enemy_locate[1],(int)(enemy_locate[0]+ e.getWidth()),(int)(enemy_locate[1]+e.getHeight()));
-//        Log.d("rect1", "isCollision: " + enemy_locate[0] + " " +enemy_locate[1] + " " + e.getWidth() + " "+ e.getHeight()+" " + enemy_locate[0] );
         Rect rect2=new Rect(player_locate[0],player_locate[1],(int)(player_locate[0]+ p.getWidth()),(int)(player_locate[1]+p.getHeight()));
-//        Log.d("rect2", "isCollision: " + player_locate[0] + " " +player_locate[1] + " " + p.getWidth() + " "+ p.getHeight()+" " + player_locate[0] );
-
-
-//        Log.d("answer", "isCollision: " + Rect.intersects(rect1,rect2));
 
         return Rect.intersects(rect1,rect2);
+    }
+
+    public void clickToPause(View view) {
+        animation1.pause();
+        animation2.pause();
+        animation3.pause();
+    }
+
+    public void clickToResume(View view) {
+        animation1.resume();
+        animation2.resume();
+        animation3.resume();
     }
 }
 
