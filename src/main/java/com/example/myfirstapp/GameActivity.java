@@ -194,12 +194,16 @@ public class GameActivity extends AppCompatActivity {
         animation1.pause();
         animation2.pause();
         animation3.pause();
+        findViewById(R.id.move_left).setEnabled(false);
+        findViewById(R.id.move_right).setEnabled(false);
     }
 
     public void clickToResume(View view) {
         animation1.resume();
         animation2.resume();
         animation3.resume();
+        findViewById(R.id.move_left).setEnabled(true);
+        findViewById(R.id.move_right).setEnabled(true);
     }
 
     public void clickToStop(View view) {
