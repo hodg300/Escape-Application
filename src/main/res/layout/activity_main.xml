@@ -13,18 +13,20 @@
         android:layout_height="wrap_content"
         android:text="ESCAPE"
         android:textStyle="bold"
-        android:textSize="50dp"
+        android:fontFamily="casual"
+        android:textSize="70dp"
         android:textColor="@android:color/holo_blue_dark"
         android:paddingTop="40dp"
         android:layout_above="@id/btn_startGame"
         android:padding="30dp"
         android:layout_centerHorizontal="true"/>
 
-    <Button
+    <ImageView
         android:id="@+id/btn_startGame"
-        android:text="Start Game"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:src="@drawable/start"
+        android:onClick="clickToStart"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_centerInParent="true"/>
 
 

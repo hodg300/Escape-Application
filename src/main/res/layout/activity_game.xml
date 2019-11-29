@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".GameActivity"
     android:id="@+id/rl"
-    android:background="@drawable/background"
+    android:background="@drawable/space_photo"
     android:paddingBottom="10dp"
     >
 
@@ -41,6 +41,7 @@
         android:layout_height="130px"
         android:layout_toRightOf="@id/life_status3"
         android:text="SCORE:"
+        android:layout_marginLeft="3dp"
         android:textColor="@android:color/white"
         android:textSize="24dp"
         android:layout_marginTop="4dp" />

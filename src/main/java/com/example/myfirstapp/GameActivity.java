@@ -50,7 +50,7 @@ public class GameActivity extends AppCompatActivity {
     private ValueAnimator animation2;
     private ValueAnimator animation3;
     private int screenHeight;
-    private int score;
+    private int score=0;
     private TextView scoreView;
 
 
@@ -147,7 +147,12 @@ public class GameActivity extends AppCompatActivity {
     private synchronized void addScore(View enemy,ValueAnimator updatedAnimation){
         if(enemy.getY()>player.getY()+player.getHeight()){
             score +=100;
-            scoreView.setText("SCORE: " + score);
+            if(score<9999) {
+                scoreView.setText("SCORE: " + score);
+            }else{
+                scoreView.setText("SCORE: " +score);
+                scoreView.setTextSize(20);
+            }
             updatedAnimation.start();
         }
     }

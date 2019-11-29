@@ -14,15 +14,11 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //press click on start and you are going to the game
-        findViewById(R.id.btn_startGame).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Button urlEditTxt=findViewById(R.id.btn_startGame);
-                Intent gameActivityIntent=new Intent(StartActivity.this,GameActivity.class);
-                startActivity(gameActivityIntent);
-            }
-        });
+    }
 
+
+    public void clickToStart(View view) {
+        Intent gameActivityIntent=new Intent(StartActivity.this,GameActivity.class);
+        startActivity(gameActivityIntent);
     }
 }
