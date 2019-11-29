@@ -75,19 +75,12 @@ public class GameActivity extends AppCompatActivity {
         //initail score
         scoreView.setText("SCORE: " + '0');
 
-
-
-
         //get screenHeight
         WindowManager wm=getWindowManager();
         Display disp= wm.getDefaultDisplay();
         Point size=new Point();
         disp.getSize(size);
         screenHeight=size.y;
-
-
-
-
 
         //create animation
         animation1 = ValueAnimator.ofInt(-130,screenHeight);
@@ -174,11 +167,7 @@ public class GameActivity extends AppCompatActivity {
 
                 } else if (life == 2) {
                     life_status3.setVisibility(View.INVISIBLE);
-
-
                 }
-
-
         return;
     }
 
