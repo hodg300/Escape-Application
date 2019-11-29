@@ -40,7 +40,7 @@
         android:layout_width="450px"
         android:layout_height="130px"
         android:layout_toRightOf="@id/life_status3"
-        android:text="Score:"
+        android:text="SCORE:"
         android:textColor="@android:color/white"
         android:textSize="24dp"
         android:layout_marginTop="4dp" />

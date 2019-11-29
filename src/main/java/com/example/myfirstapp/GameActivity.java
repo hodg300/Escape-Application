@@ -73,7 +73,7 @@ public class GameActivity extends AppCompatActivity {
 
 
         //initail score
-        scoreView.setText("Score: " + '0');
+        scoreView.setText("SCORE: " + '0');
 
 
 
@@ -91,7 +91,7 @@ public class GameActivity extends AppCompatActivity {
 
         //create animation
         animation1 = ValueAnimator.ofInt(-130,screenHeight);
-        animation1.setDuration(6000).setRepeatCount(Animation.INFINITE);
+        animation1.setDuration(4000).setRepeatCount(Animation.INFINITE);
         animation1.start();
         animation1.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -107,7 +107,7 @@ public class GameActivity extends AppCompatActivity {
             }
         });
         animation2 = ValueAnimator.ofInt(-130,screenHeight);
-        animation2.setDuration(4000).setRepeatCount(Animation.INFINITE);
+        animation2.setDuration(5000).setRepeatCount(Animation.INFINITE);
         animation2.start();
         animation2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -125,7 +125,7 @@ public class GameActivity extends AppCompatActivity {
         });
 
         animation3 = ValueAnimator.ofInt(-130,screenHeight);
-        animation3.setDuration(3000).setRepeatCount(Animation.INFINITE);
+        animation3.setDuration(2700).setRepeatCount(Animation.INFINITE);
         animation3.start();
         animation3.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -147,7 +147,7 @@ public class GameActivity extends AppCompatActivity {
     private synchronized void addScore(View enemy,ValueAnimator updatedAnimation){
         if(enemy.getY()>player.getY()+player.getHeight()){
             score +=100;
-            scoreView.setText("Score: " + score);
+            scoreView.setText("SCORE: " + score);
             updatedAnimation.start();
         }
     }
@@ -162,7 +162,7 @@ public class GameActivity extends AppCompatActivity {
                     animation2.pause();
                     animation3.pause();
                     Intent gameActivityIntent = new Intent(GameActivity.this, EndActivity.class);
-//                    gameActivityIntent.putExtra("score",score);
+                    gameActivityIntent.putExtra("score",score);
                     startActivity(gameActivityIntent);
                 } else if (life == 1) {
                     life_status2.setVisibility(View.INVISIBLE);
@@ -207,7 +207,7 @@ public class GameActivity extends AppCompatActivity {
         animation2.pause();
         animation3.pause();
         Intent gameActivityIntent = new Intent(GameActivity.this, EndActivity.class);
-//        gameActivityIntent.putExtra("score",score);
+        gameActivityIntent.putExtra("score",score);
         startActivity(gameActivityIntent);
     }
 

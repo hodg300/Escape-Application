@@ -26,11 +26,9 @@ public class EndActivity extends AppCompatActivity {
                 startActivity(gameActivityIntent);
             }
         });
-//        Intent gameActivityIntent=new Intent(EndActivity.this, GameActivity.class);
-//        int score=gameActivityIntent.getExtras().getInt("score");
-//
-//        scoreView.setText("Your Score: " + score);
 
+        Intent intent=getIntent();
+        scoreView.setText("YOUR SCORE: " + intent.getIntExtra("score",0));
     }
 
     //press End Game to finish the game and destroy the progress
