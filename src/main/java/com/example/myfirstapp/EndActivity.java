@@ -6,13 +6,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class EndActivity extends AppCompatActivity {
-
+    private TextView scoreView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end);
+
+
+        scoreView=findViewById(R.id.your_score);
 
         //press restart and return to a new game
         findViewById(R.id.btn_restart).setOnClickListener(new View.OnClickListener() {
@@ -22,8 +26,10 @@ public class EndActivity extends AppCompatActivity {
                 startActivity(gameActivityIntent);
             }
         });
-
-
+//        Intent gameActivityIntent=new Intent(EndActivity.this, GameActivity.class);
+//        int score=gameActivityIntent.getExtras().getInt("score");
+//
+//        scoreView.setText("Your Score: " + score);
 
     }
 

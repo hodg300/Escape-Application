@@ -42,8 +42,6 @@ public class GameActivity extends AppCompatActivity {
     private View enemy1;
     private View enemy2;
     private View enemy3;
-    private Button btnLeft;
-    private Button btnRight;
     private ImageView life_status1;
     private ImageView life_status2;
     private ImageView life_status3;
@@ -53,6 +51,7 @@ public class GameActivity extends AppCompatActivity {
     private ValueAnimator animation3;
     private int screenHeight;
     private int score;
+    private TextView scoreView;
 
 
 
@@ -64,14 +63,18 @@ public class GameActivity extends AppCompatActivity {
 
 
         player = (View) findViewById(R.id.player);
-        btnLeft = findViewById(R.id.move_left);
-        btnRight = findViewById(R.id.move_right);
         enemy1 = (View) findViewById(R.id.enemy1);
         enemy2 = (View) findViewById(R.id.enemy2);
         enemy3 = (View) findViewById(R.id.enemy3);
         life_status1 = (ImageView) findViewById(R.id.life_status1);
         life_status2 = (ImageView) findViewById(R.id.life_status2);
         life_status3 = (ImageView) findViewById(R.id.life_status3);
+        scoreView=findViewById(R.id.score_view);
+
+
+        //initail score
+        scoreView.setText("Score: " + '0');
+
 
 
 
@@ -99,9 +102,8 @@ public class GameActivity extends AppCompatActivity {
               if(isCollision(enemy1,player)) {
                   hitCheck();
                   updatedAnimation.start();
-              }else if(enemy3.getY()>player.getY()+player.getHeight()){
-                  score +=100;
               }
+                addScore(enemy1,updatedAnimation);
             }
         });
         animation2 = ValueAnimator.ofInt(-130,screenHeight);
@@ -117,9 +119,8 @@ public class GameActivity extends AppCompatActivity {
               if(isCollision(enemy2,player)) {
                   hitCheck();
                   updatedAnimation.start();
-              }else if(enemy3.getY()>player.getY()+player.getHeight()){
-                  score +=100;
               }
+                addScore(enemy2,updatedAnimation);
             }
         });
 
@@ -135,14 +136,20 @@ public class GameActivity extends AppCompatActivity {
                 if(isCollision(enemy3,player)) {
                     hitCheck();
                     updatedAnimation.start();
-                }else if(enemy3.getY()>player.getY()+player.getHeight()){
-                    score +=100;
                 }
-
+                addScore(enemy3,updatedAnimation);
             }
         });
 
 
+    }
+
+    private synchronized void addScore(View enemy,ValueAnimator updatedAnimation){
+        if(enemy.getY()>player.getY()+player.getHeight()){
+            score +=100;
+            scoreView.setText("Score: " + score);
+            updatedAnimation.start();
+        }
     }
 
     private synchronized  void hitCheck() {
@@ -155,6 +162,7 @@ public class GameActivity extends AppCompatActivity {
                     animation2.pause();
                     animation3.pause();
                     Intent gameActivityIntent = new Intent(GameActivity.this, EndActivity.class);
+//                    gameActivityIntent.putExtra("score",score);
                     startActivity(gameActivityIntent);
                 } else if (life == 1) {
                     life_status2.setVisibility(View.INVISIBLE);
@@ -199,6 +207,7 @@ public class GameActivity extends AppCompatActivity {
         animation2.pause();
         animation3.pause();
         Intent gameActivityIntent = new Intent(GameActivity.this, EndActivity.class);
+//        gameActivityIntent.putExtra("score",score);
         startActivity(gameActivityIntent);
     }
 

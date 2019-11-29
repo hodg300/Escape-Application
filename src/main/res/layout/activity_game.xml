@@ -35,6 +35,16 @@
         android:layout_margin="3dp"
         android:layout_toRightOf="@id/life_status2"
         />
+    <TextView
+        android:id="@+id/score_view"
+        android:layout_width="450px"
+        android:layout_height="130px"
+        android:layout_toRightOf="@id/life_status3"
+        android:text="Score:"
+        android:textColor="@android:color/white"
+        android:textSize="24dp"
+        android:layout_marginTop="4dp" />
+
 
     <ImageView
         android:id="@+id/btn_stop"
@@ -80,11 +90,12 @@
             android:layout_above="@id/move_left"
             android:layout_weight="1"
             >
-            <View
+            <ImageView
                 android:id="@+id/enemy1"
                 android:layout_width="match_parent"
                 android:layout_height="130px"
-                android:background="#6000CC"
+                android:src="@drawable/asteroid"
+
             />
         </LinearLayout>
         <LinearLayout
@@ -96,11 +107,11 @@
             android:layout_above="@id/move_left"
             android:layout_weight="1"
             >
-            <View
+            <ImageView
                 android:id="@+id/enemy2"
                 android:layout_width="match_parent"
                 android:layout_height="130px"
-                android:background="#6000CC"
+                android:src="@drawable/asteroid"
                 />
         </LinearLayout>
         <LinearLayout
@@ -112,31 +123,27 @@
             android:layout_above="@id/move_left"
             android:layout_weight="1"
             >
-            <View
+            <ImageView
                 android:id="@+id/enemy3"
                 android:layout_width="match_parent"
                 android:layout_height="130px"
-                android:background="#6000CC"
+                android:src="@drawable/asteroid"
                 />
         </LinearLayout>
 
     </LinearLayout>
 
-    <Button
+    <ImageView
         android:id="@+id/move_left"
-        android:text="Left"
-        android:autoSizeTextType="uniform"
+        android:src="@drawable/left"
         android:layout_width="360px"
         android:layout_height="130px"
         android:onClick="clickToMoveLeft"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-
-        />
-    <Button
+        android:layout_alignParentLeft="true"/>
+    <ImageView
         android:id="@+id/move_right"
-        android:text="Right"
-        android:autoSizeTextType="uniform"
+        android:src="@drawable/right"
         android:layout_width="360px"
         android:layout_height="130px"
         android:onClick="clickToMoveRight"
@@ -144,13 +151,14 @@
         android:layout_alignParentRight="true" />
 
 
-    <View
+    <ImageView
         android:id="@+id/player"
+        android:src="@drawable/spaceship"
         android:layout_width="360px"
         android:layout_height="130px"
         android:layout_above="@id/move_right"
         android:layout_centerInParent="true"
-        android:background="#AA77CC" />
+        />
 
 
 
