@@ -52,6 +52,7 @@ public class GameActivity extends AppCompatActivity {
     private int screenHeight;
     private int score=0;
     private TextView scoreView;
+    private final int SPEED=3000;
 
 
 
@@ -72,8 +73,13 @@ public class GameActivity extends AppCompatActivity {
         scoreView=findViewById(R.id.score_view);
 
 
-        //initail score
+        //initial score
         scoreView.setText("SCORE: " + '0');
+
+        //initial enemies
+        enemy1.setTranslationY(-130);
+        enemy2.setTranslationY(-130);
+        enemy3.setTranslationY(-130);
 
         //get screenHeight
         WindowManager wm=getWindowManager();
@@ -83,8 +89,9 @@ public class GameActivity extends AppCompatActivity {
         screenHeight=size.y;
 
         //create animation
-        animation1 = ValueAnimator.ofInt(-130,screenHeight);
-        animation1.setDuration(4000).setRepeatCount(Animation.INFINITE);
+        animation1 = ValueAnimator.ofInt(-130,screenHeight+400);
+        animation1.setDuration(SPEED).setRepeatCount(Animation.INFINITE);
+        animation1.setStartDelay(200);
         animation1.start();
         animation1.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -93,14 +100,16 @@ public class GameActivity extends AppCompatActivity {
                 int animatedValue = (int)updatedAnimation.getAnimatedValue();
                 enemy1.setTranslationY(animatedValue);
               if(isCollision(enemy1,player)) {
+                  enemy1.setY(-130);
                   hitCheck();
                   updatedAnimation.start();
               }
                 addScore(enemy1,updatedAnimation);
             }
         });
-        animation2 = ValueAnimator.ofInt(-130,screenHeight);
-        animation2.setDuration(5000).setRepeatCount(Animation.INFINITE);
+        animation2 = ValueAnimator.ofInt(-130,screenHeight +400);
+        animation2.setDuration(SPEED).setRepeatCount(Animation.INFINITE);
+        animation2.setStartDelay(1700);
         animation2.start();
         animation2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -110,6 +119,7 @@ public class GameActivity extends AppCompatActivity {
 
                 enemy2.setTranslationY(animatedValue);
               if(isCollision(enemy2,player)) {
+                  enemy2.setY(-130);
                   hitCheck();
                   updatedAnimation.start();
               }
@@ -117,8 +127,9 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
-        animation3 = ValueAnimator.ofInt(-130,screenHeight);
-        animation3.setDuration(2700).setRepeatCount(Animation.INFINITE);
+        animation3 = ValueAnimator.ofInt(-130,screenHeight +400);
+        animation3.setDuration(SPEED).setRepeatCount(Animation.INFINITE);
+        animation3.setStartDelay(1000);
         animation3.start();
         animation3.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -127,6 +138,7 @@ public class GameActivity extends AppCompatActivity {
                 int animatedValue = (int)updatedAnimation.getAnimatedValue();
                 enemy3.setTranslationY(animatedValue);
                 if(isCollision(enemy3,player)) {
+                    enemy3.setY(-130);
                     hitCheck();
                     updatedAnimation.start();
                 }
