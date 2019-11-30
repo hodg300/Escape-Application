@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -53,14 +54,21 @@ public class GameActivity extends AppCompatActivity {
     private int score=0;
     private TextView scoreView;
     private final int SPEED=3000;
-
+    private MediaPlayer mp;
+    private final static int MAX_VOLUME = 100;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        //create handler thread
+        //MediaPlayer
+        mp=MediaPlayer.create(getApplicationContext(),R.raw.starwars);
+        mp.setLooping(true);
+
+        final float volume = (float) (1 - (Math.log(MAX_VOLUME - 5) / Math.log(MAX_VOLUME)));
+        mp.setVolume(volume, volume);
+        mp.start();
 
 
         player = (View) findViewById(R.id.player);
@@ -109,7 +117,7 @@ public class GameActivity extends AppCompatActivity {
         });
         animation2 = ValueAnimator.ofInt(-130,screenHeight +400);
         animation2.setDuration(SPEED).setRepeatCount(Animation.INFINITE);
-        animation2.setStartDelay(1700);
+        animation2.setStartDelay(2200);
         animation2.start();
         animation2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -129,7 +137,7 @@ public class GameActivity extends AppCompatActivity {
 
         animation3 = ValueAnimator.ofInt(-130,screenHeight +400);
         animation3.setDuration(SPEED).setRepeatCount(Animation.INFINITE);
-        animation3.setStartDelay(1000);
+        animation3.setStartDelay(1100);
         animation3.start();
         animation3.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -229,6 +237,18 @@ public class GameActivity extends AppCompatActivity {
     public void clickToMoveLeft(View view) {
         if (player.getX() >= (getResources().getDisplayMetrics().widthPixels * 1 / NUM_OF_COL))
             player.setX(player.getX() - getResources().getDisplayMetrics().widthPixels / NUM_OF_COL);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mp.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mp.start();
     }
 }
 

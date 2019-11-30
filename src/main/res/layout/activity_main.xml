@@ -15,7 +15,7 @@
         android:textStyle="bold"
         android:fontFamily="casual"
         android:textSize="70dp"
-        android:textColor="@android:color/holo_blue_dark"
+        android:textColor="#0159A0"
         android:paddingTop="40dp"
         android:layout_above="@id/btn_startGame"
         android:padding="30dp"
