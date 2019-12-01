@@ -6,15 +6,19 @@ import androidx.constraintlayout.solver.widgets.Rectangle;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -54,22 +58,31 @@ public class GameActivity extends AppCompatActivity {
     private int score=0;
     private TextView scoreView;
     private final int SPEED=3000;
-    private MediaPlayer mp;
+    private MediaPlayer mpBackground;
+//    private MediaPlayer mpHitSound;
     private final static int MAX_VOLUME = 100;
-
+//    private Vibrator vibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        //MediaPlayer
-        mp=MediaPlayer.create(getApplicationContext(),R.raw.starwars);
-        mp.setLooping(true);
 
+
+        //MediaPlayer mpBackground
+        mpBackground = MediaPlayer.create(getApplicationContext(),R.raw.starwars);
+        mpBackground.setLooping(true);
         final float volume = (float) (1 - (Math.log(MAX_VOLUME - 5) / Math.log(MAX_VOLUME)));
-        mp.setVolume(volume, volume);
-        mp.start();
+        mpBackground.setVolume(volume, volume);
+        mpBackground.start();
 
+        //Media Player HitSound
+//        mpHitSound = MediaPlayer.create(getApplicationContext(),R.raw.hitsound);
+//        mpHitSound.setLooping(false);
+//        mpHitSound.setVolume(volume, volume);
+//
+//        //vibration every time that hit you asteroid
+//        vibrator= (Vibrator) getSystemService(VIBRATOR_SERVICE);
 
         player = (View) findViewById(R.id.player);
         enemy1 = (View) findViewById(R.id.enemy1);
@@ -176,9 +189,6 @@ public class GameActivity extends AppCompatActivity {
             this.life--;
                 if (life == 0) {
                     life_status1.setVisibility(View.INVISIBLE);
-                    animation1.pause();
-                    animation2.pause();
-                    animation3.pause();
                     Intent gameActivityIntent = new Intent(GameActivity.this, EndActivity.class);
                     gameActivityIntent.putExtra("score",score);
                     startActivity(gameActivityIntent);
@@ -187,6 +197,7 @@ public class GameActivity extends AppCompatActivity {
 
                 } else if (life == 2) {
                     life_status3.setVisibility(View.INVISIBLE);
+
                 }
         return;
     }
@@ -210,6 +221,8 @@ public class GameActivity extends AppCompatActivity {
         animation3.pause();
         findViewById(R.id.move_left).setEnabled(false);
         findViewById(R.id.move_right).setEnabled(false);
+        mpBackground.pause();
+
     }
 
     public void clickToResume(View view) {
@@ -218,12 +231,13 @@ public class GameActivity extends AppCompatActivity {
         animation3.resume();
         findViewById(R.id.move_left).setEnabled(true);
         findViewById(R.id.move_right).setEnabled(true);
+        mpBackground.start();
+
     }
 
     public void clickToStop(View view) {
-        animation1.pause();
-        animation2.pause();
-        animation3.pause();
+        Log.d("hod", "hitCheck: " + life);
+        onStop();
         Intent gameActivityIntent = new Intent(GameActivity.this, EndActivity.class);
         gameActivityIntent.putExtra("score",score);
         startActivity(gameActivityIntent);
@@ -242,13 +256,26 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        mp.pause();
+        mpBackground.pause();
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mp.start();
+        Log.d("hod", "onResume:  imm hereee");
+        if(!findViewById(R.id.btn_pause).isEnabled()) {
+            mpBackground.start();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        animation1.pause();
+        animation2.pause();
+        animation3.pause();
+        mpBackground.pause();
     }
 }
 
