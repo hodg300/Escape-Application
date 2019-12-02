@@ -257,7 +257,8 @@ public class GameActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         mpBackground.pause();
-
+        findViewById(R.id.move_left).setEnabled(false);
+        findViewById(R.id.move_right).setEnabled(false);
     }
 
     @Override
