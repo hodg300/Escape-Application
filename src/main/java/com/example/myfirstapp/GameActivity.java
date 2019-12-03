@@ -59,9 +59,8 @@ public class GameActivity extends AppCompatActivity {
     private TextView scoreView;
     private final int SPEED=3000;
     private MediaPlayer mpBackground;
-//    private MediaPlayer mpHitSound;
     private final static int MAX_VOLUME = 100;
-//    private Vibrator vibrator;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,14 +75,7 @@ public class GameActivity extends AppCompatActivity {
         mpBackground.setVolume(volume, volume);
         mpBackground.start();
 
-        //Media Player HitSound
-//        mpHitSound = MediaPlayer.create(getApplicationContext(),R.raw.hitsound);
-//        mpHitSound.setLooping(false);
-//        mpHitSound.setVolume(volume, volume);
-//
-//        //vibration every time that hit you asteroid
-//        vibrator= (Vibrator) getSystemService(VIBRATOR_SERVICE);
-
+        //initial views
         player = (View) findViewById(R.id.player);
         enemy1 = (View) findViewById(R.id.enemy1);
         enemy2 = (View) findViewById(R.id.enemy2);
@@ -185,7 +177,6 @@ public class GameActivity extends AppCompatActivity {
 
     private synchronized  void hitCheck() {
 
-        Log.d("hod", "hitCheck: " + life);
             this.life--;
                 if (life == 0) {
                     life_status1.setVisibility(View.INVISIBLE);
@@ -236,7 +227,6 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void clickToStop(View view) {
-        Log.d("hod", "hitCheck: " + life);
         onStop();
         Intent gameActivityIntent = new Intent(GameActivity.this, EndActivity.class);
         gameActivityIntent.putExtra("score",score);
@@ -264,7 +254,6 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("hod", "onResume:  imm hereee");
         if(!findViewById(R.id.btn_pause).isEnabled()) {
             mpBackground.start();
         }
