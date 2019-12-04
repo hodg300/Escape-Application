@@ -1,5 +1,7 @@
 package com.example.myfirstapp;
 
+
+//hod gohasi
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.solver.widgets.Rectangle;
 
