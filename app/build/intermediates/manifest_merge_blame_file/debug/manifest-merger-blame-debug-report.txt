@@ -6,52 +6,51 @@
 6
 7    <uses-sdk
 8        android:minSdkVersion="21"
-8-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\app\src\main\AndroidManifest.xml
+8-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml
 9        android:targetSdkVersion="28" />
-9-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\app\src\main\AndroidManifest.xml
+9-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml
 10
 11    <uses-permission android:name="android.permission.VIBRATE" />
-11-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\app\src\main\AndroidManifest.xml:5:5-66
-11-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\app\src\main\AndroidManifest.xml:5:22-63
+11-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:5:5-66
+11-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:5:22-63
 12
 13    <application
-13-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\app\src\main\AndroidManifest.xml:6:5-22:19
+13-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:6:5-22:19
 14        android:allowBackup="true"
-14-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\app\src\main\AndroidManifest.xml:7:9-35
+14-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:7:9-35
 15        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 15-->[androidx.core:core:1.1.0] C:\Users\Hod\.gradle\caches\transforms-2\files-2.1\f01b27bb220ecb79298884ef36a7a2fb\core-1.1.0\AndroidManifest.xml:24:18-86
 16        android:debuggable="true"
 17        android:icon="@mipmap/ic_launcher"
-17-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\app\src\main\AndroidManifest.xml:8:9-43
+17-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:8:9-43
 18        android:label="@string/app_name"
-18-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\app\src\main\AndroidManifest.xml:9:9-41
+18-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:9:9-41
 19        android:roundIcon="@mipmap/ic_launcher_round"
-19-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\app\src\main\AndroidManifest.xml:10:9-54
+19-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:10:9-54
 20        android:supportsRtl="true"
-20-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\app\src\main\AndroidManifest.xml:11:9-35
-21        android:testOnly="true"
-22        android:theme="@style/AppTheme" >
-22-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\app\src\main\AndroidManifest.xml:12:9-40
-23        <activity android:name="com.example.myfirstapp.EndActivity" />
-23-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\app\src\main\AndroidManifest.xml:13:9-58
-23-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\app\src\main\AndroidManifest.xml:13:19-46
-24        <activity android:name="com.example.myfirstapp.GameActivity" />
-24-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\app\src\main\AndroidManifest.xml:14:9-50
-24-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\app\src\main\AndroidManifest.xml:14:19-47
-25        <activity android:name="com.example.myfirstapp.StartActivity" >
-25-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\app\src\main\AndroidManifest.xml:15:9-21:20
-25-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\app\src\main\AndroidManifest.xml:15:19-48
-26            <intent-filter>
-26-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\app\src\main\AndroidManifest.xml:16:13-20:29
-27                <action android:name="android.intent.action.MAIN" />
-27-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\app\src\main\AndroidManifest.xml:17:17-69
-27-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\app\src\main\AndroidManifest.xml:17:25-66
-28
-29                <category android:name="android.intent.category.LAUNCHER" />
-29-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\app\src\main\AndroidManifest.xml:19:17-77
-29-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\app\src\main\AndroidManifest.xml:19:27-74
-30            </intent-filter>
-31        </activity>
-32    </application>
-33
-34</manifest>
+20-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:11:9-35
+21        android:theme="@style/AppTheme" >
+21-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:12:9-40
+22        <activity android:name="com.example.myfirstapp.EndActivity" />
+22-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:13:9-58
+22-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:13:19-46
+23        <activity android:name="com.example.myfirstapp.GameActivity" />
+23-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:14:9-50
+23-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:14:19-47
+24        <activity android:name="com.example.myfirstapp.StartActivity" >
+24-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:15:9-21:20
+24-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:15:19-48
+25            <intent-filter>
+25-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:16:13-20:29
+26                <action android:name="android.intent.action.MAIN" />
+26-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:17:17-69
+26-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:17:25-66
+27
+28                <category android:name="android.intent.category.LAUNCHER" />
+28-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:19:17-77
+28-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:19:27-74
+29            </intent-filter>
+30        </activity>
+31    </application>
+32
+33</manifest>

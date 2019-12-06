@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-//hod gohasi
+
 public class StartActivity extends AppCompatActivity {
 
 
