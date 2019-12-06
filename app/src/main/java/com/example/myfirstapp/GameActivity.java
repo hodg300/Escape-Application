@@ -45,6 +45,7 @@ import java.util.Random;
 
 public class GameActivity extends AppCompatActivity {
     private int NUM_OF_COL = 3;
+    private String SCORE = "score";
     private View player;
     private View enemy1;
     private View enemy2;
@@ -183,7 +184,7 @@ public class GameActivity extends AppCompatActivity {
                 if (life == 0) {
                     life_status1.setVisibility(View.INVISIBLE);
                     Intent gameActivityIntent = new Intent(GameActivity.this, EndActivity.class);
-                    gameActivityIntent.putExtra("score",score);
+                    gameActivityIntent.putExtra(SCORE,score);
                     startActivity(gameActivityIntent);
                 } else if (life == 1) {
                     life_status2.setVisibility(View.INVISIBLE);
@@ -231,7 +232,7 @@ public class GameActivity extends AppCompatActivity {
     public void clickToStop(View view) {
         onStop();
         Intent gameActivityIntent = new Intent(GameActivity.this, EndActivity.class);
-        gameActivityIntent.putExtra("score",score);
+        gameActivityIntent.putExtra(SCORE,score);
         startActivity(gameActivityIntent);
     }
 
