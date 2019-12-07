@@ -45,7 +45,8 @@ import java.util.Random;
 
 public class GameActivity extends AppCompatActivity {
     private int NUM_OF_COL = 3;
-    private String SCORE = "score";
+    private final String SCORE = "score";
+    private final String TEXT_SCORE = "SCORE: ";
     private View player;
     private View enemy1;
     private View enemy2;
@@ -90,7 +91,7 @@ public class GameActivity extends AppCompatActivity {
 
 
         //initial score
-        scoreView.setText("SCORE: " + '0');
+        scoreView.setText(TEXT_SCORE + '0');
 
         //initial enemies
         enemy1.setTranslationY(-130);
@@ -104,7 +105,8 @@ public class GameActivity extends AppCompatActivity {
         disp.getSize(size);
         screenHeight=size.y;
 
-        //create animation
+
+//        create animation
         animation1 = ValueAnimator.ofInt(-130,screenHeight+400);
         animation1.setDuration(SPEED).setRepeatCount(Animation.INFINITE);
         animation1.setStartDelay(200);
@@ -169,9 +171,9 @@ public class GameActivity extends AppCompatActivity {
         if(enemy.getY()>player.getY()+player.getHeight()){
             score +=100;
             if(score<9999) {
-                scoreView.setText("SCORE: " + score);
+                scoreView.setText(TEXT_SCORE + score);
             }else{
-                scoreView.setText("SCORE: " +score);
+                scoreView.setText(TEXT_SCORE +score);
                 scoreView.setTextSize(20);
             }
             updatedAnimation.start();
