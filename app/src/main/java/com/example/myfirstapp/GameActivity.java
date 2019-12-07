@@ -186,6 +186,7 @@ public class GameActivity extends AppCompatActivity {
                     Intent gameActivityIntent = new Intent(GameActivity.this, EndActivity.class);
                     gameActivityIntent.putExtra(SCORE,score);
                     startActivity(gameActivityIntent);
+                    finish();
                 } else if (life == 1) {
                     life_status2.setVisibility(View.INVISIBLE);
 
@@ -234,6 +235,7 @@ public class GameActivity extends AppCompatActivity {
         Intent gameActivityIntent = new Intent(GameActivity.this, EndActivity.class);
         gameActivityIntent.putExtra(SCORE,score);
         startActivity(gameActivityIntent);
+        finish();
     }
 
     public void clickToMoveRight(View view) {

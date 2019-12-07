@@ -20,6 +20,7 @@ public class EndActivity extends AppCompatActivity {
         scoreView=findViewById(R.id.your_score);
         Intent intent=getIntent();
         scoreView.setText("YOUR SCORE : " + intent.getIntExtra("score",0));
+
     }
 
     //press End Game to finish the game and destroy the progress
@@ -31,5 +32,6 @@ public class EndActivity extends AppCompatActivity {
     public void cliclToRestart(View view) {
         Intent gameActivityIntent=new Intent(EndActivity.this,GameActivity.class);
         startActivity(gameActivityIntent);
+        finish();
     }
 }

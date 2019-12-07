@@ -24,6 +24,7 @@ public class StartActivity extends AppCompatActivity {
     public void clickToStart(View view) {
         Intent gameActivityIntent=new Intent(StartActivity.this,GameActivity.class);
         startActivity(gameActivityIntent);
+        finish();
     }
 
 
