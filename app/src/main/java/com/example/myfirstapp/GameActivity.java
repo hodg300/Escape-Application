@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
@@ -44,20 +45,38 @@ import java.util.List;
 import java.util.Random;
 
 public class GameActivity extends AppCompatActivity {
-    private int NUM_OF_COL = 3;
+    private int NUM_OF_COL = 5;
     private final String SCORE = "score";
     private final String TEXT_SCORE = "SCORE: ";
     private View player;
+    private View[] enemies = new View[NUM_OF_COL];
     private View enemy1;
     private View enemy2;
     private View enemy3;
+    private View enemy4;
+    private View enemy5;
+    private View[] bonus_staff = new View[NUM_OF_COL];
+    private View coin1;
+    private View coin2;
+    private View coin3;
+    private View coin4;
+    private View coin5;
     private ImageView life_status1;
     private ImageView life_status2;
     private ImageView life_status3;
+    private ImageView btnLeft;
+    private ImageView btnRight;
     private int life = 3;
-    private ValueAnimator animation1;
-    private ValueAnimator animation2;
-    private ValueAnimator animation3;
+    private ValueAnimator enemy1_anim;
+    private ValueAnimator enemy2_anim;
+    private ValueAnimator enemy3_anim;
+    private ValueAnimator enemy4_anim;
+    private ValueAnimator enemy5_anim;
+    private ValueAnimator bonus1_anim;
+    private ValueAnimator bonus2_anim;
+    private ValueAnimator bonus3_anim;
+    private ValueAnimator bonus4_anim;
+    private ValueAnimator bonus5_anim;
     private int screenHeight;
     private int score=0;
     private TextView scoreView;
@@ -84,19 +103,44 @@ public class GameActivity extends AppCompatActivity {
         enemy1 = (View) findViewById(R.id.enemy1);
         enemy2 = (View) findViewById(R.id.enemy2);
         enemy3 = (View) findViewById(R.id.enemy3);
+        enemy4 = (View) findViewById(R.id.enemy4);
+        enemy5 = (View) findViewById(R.id.enemy5);
+        enemies[0]=enemy1;
+        enemies[1]=enemy2;
+        enemies[2]=enemy3;
+        enemies[3]=enemy4;
+        enemies[4]=enemy5;
+        coin1  = (View) findViewById(R.id.coin1);
+        coin2  = (View) findViewById(R.id.coin2);
+        coin3  = (View) findViewById(R.id.coin3);
+        coin4  = (View) findViewById(R.id.coin4);
+        coin5  = (View) findViewById(R.id.coin5);
+        bonus_staff[0]=coin1;
+        bonus_staff[1]=coin2;
+        bonus_staff[2]=coin3;
+        bonus_staff[3]=coin4;
+        bonus_staff[4]=coin5;
         life_status1 = (ImageView) findViewById(R.id.life_status1);
         life_status2 = (ImageView) findViewById(R.id.life_status2);
         life_status3 = (ImageView) findViewById(R.id.life_status3);
         scoreView=findViewById(R.id.score_view);
 
 
+        //initial Buttons
+        btnLeft=(ImageView) findViewById(R.id.move_left);
+        btnRight=(ImageView) findViewById(R.id.move_right);
+
+
+
         //initial score
         scoreView.setText(TEXT_SCORE + '0');
 
         //initial enemies
-        enemy1.setTranslationY(-130);
-        enemy2.setTranslationY(-130);
-        enemy3.setTranslationY(-130);
+        for(int i=0;i<NUM_OF_COL;i++) {
+            enemies[i].setTranslationY(-130f);
+            bonus_staff[i].setTranslationY(-260f);
+        }
+
 
         //get screenHeight
         WindowManager wm=getWindowManager();
@@ -106,12 +150,129 @@ public class GameActivity extends AppCompatActivity {
         screenHeight=size.y;
 
 
-//        create animation
-        animation1 = ValueAnimator.ofInt(-130,screenHeight+400);
-        animation1.setDuration(SPEED).setRepeatCount(Animation.INFINITE);
-        animation1.setStartDelay(200);
-        animation1.start();
-        animation1.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+        //move right
+        btnRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (player.getX() < (getResources().getDisplayMetrics().widthPixels * (NUM_OF_COL-1) / NUM_OF_COL))
+                    player.setX(player.getX() + getResources().getDisplayMetrics().widthPixels / NUM_OF_COL);
+                scoreView.setTextColor(Color.WHITE);
+            }
+        });
+
+        //move left
+        btnLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (player.getX() >= (getResources().getDisplayMetrics().widthPixels * 1 / NUM_OF_COL))
+                    player.setX(player.getX() - getResources().getDisplayMetrics().widthPixels / NUM_OF_COL);
+                scoreView.setTextColor(Color.WHITE);
+            }
+        });
+
+
+
+//      create bonus animations----------------------------------------------------------
+        bonus1_anim = ValueAnimator.ofInt(-260, screenHeight + 400);
+        bonus1_anim.setDuration(SPEED).setRepeatCount(Animation.INFINITE);
+        bonus1_anim.setStartDelay(10000);
+        bonus1_anim.start();
+        bonus1_anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator updatedAnimation) {
+                    int animatedValue = (int) updatedAnimation.getAnimatedValue();
+                    coin1.setTranslationY(animatedValue);
+                    if (isCollision(coin1, player)) {
+                        score += 500;
+                        coin1.setY(-130);
+                        scoreView.setTextColor(Color.GREEN);
+                        updatedAnimation.start();
+                    }
+                }
+            });
+
+        bonus2_anim = ValueAnimator.ofInt(-260, screenHeight + 400);
+        bonus2_anim.setDuration(SPEED).setRepeatCount(Animation.INFINITE);
+        bonus2_anim.setStartDelay(22000);
+        bonus2_anim.start();
+        bonus2_anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator updatedAnimation) {
+                int animatedValue = (int) updatedAnimation.getAnimatedValue();
+                coin2.setTranslationY(animatedValue);
+                if (isCollision(coin2, player)) {
+                    score += 500;
+                    coin2.setY(-130);
+                    scoreView.setTextColor(Color.GREEN);
+                    updatedAnimation.start();
+                }
+            }
+        });
+
+        bonus3_anim = ValueAnimator.ofInt(-260, screenHeight + 400);
+        bonus3_anim.setDuration(SPEED).setRepeatCount(Animation.INFINITE);
+        bonus3_anim.setStartDelay(10000);
+        bonus3_anim.start();
+        bonus3_anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator updatedAnimation) {
+                int animatedValue = (int) updatedAnimation.getAnimatedValue();
+                coin3.setTranslationY(animatedValue);
+                if (isCollision(coin3, player)) {
+                    score += 500;
+                    coin3.setY(-130);
+                    scoreView.setTextColor(Color.GREEN);
+                    updatedAnimation.start();
+                }
+            }
+        });
+
+        bonus4_anim = ValueAnimator.ofInt(-260, screenHeight + 400);
+        bonus4_anim.setDuration(SPEED).setRepeatCount(Animation.INFINITE);
+        bonus4_anim.setStartDelay(17000);
+        bonus4_anim.start();
+        bonus4_anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator updatedAnimation) {
+                int animatedValue = (int) updatedAnimation.getAnimatedValue();
+                coin4.setTranslationY(animatedValue);
+                if (isCollision(coin4, player)) {
+                    score += 500;
+                    coin4.setY(-130);
+                    scoreView.setTextColor(Color.GREEN);
+                    updatedAnimation.start();
+                }
+            }
+        });
+
+        bonus5_anim = ValueAnimator.ofInt(-260, screenHeight + 400);
+        bonus5_anim.setDuration(SPEED).setRepeatCount(Animation.INFINITE);
+        bonus5_anim.setStartDelay(12000);
+        bonus5_anim.start();
+        bonus5_anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator updatedAnimation) {
+                int animatedValue = (int) updatedAnimation.getAnimatedValue();
+                coin5.setTranslationY(animatedValue);
+                if (isCollision(coin5, player)) {
+                    score += 500;
+                    coin5.setY(-130);
+                    scoreView.setTextColor(Color.GREEN);
+                    updatedAnimation.start();
+                }
+            }
+        });
+
+
+        
+        
+//        create animation------------------------------------------------------------------
+        enemy1_anim = ValueAnimator.ofInt(-130,screenHeight+400);
+        enemy1_anim.setDuration(SPEED).setRepeatCount(Animation.INFINITE);
+        enemy1_anim.setStartDelay(200);
+        enemy1_anim.start();
+        enemy1_anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator updatedAnimation) {
 
@@ -123,13 +284,14 @@ public class GameActivity extends AppCompatActivity {
                   updatedAnimation.start();
               }
                 addScore(enemy1,updatedAnimation);
+             
             }
         });
-        animation2 = ValueAnimator.ofInt(-130,screenHeight +400);
-        animation2.setDuration(SPEED).setRepeatCount(Animation.INFINITE);
-        animation2.setStartDelay(2200);
-        animation2.start();
-        animation2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        enemy2_anim = ValueAnimator.ofInt(-130,screenHeight +400);
+        enemy2_anim.setDuration(SPEED).setRepeatCount(Animation.INFINITE);
+        enemy2_anim.setStartDelay(2200);
+        enemy2_anim.start();
+        enemy2_anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator updatedAnimation) {
 
@@ -145,11 +307,11 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
-        animation3 = ValueAnimator.ofInt(-130,screenHeight +400);
-        animation3.setDuration(SPEED).setRepeatCount(Animation.INFINITE);
-        animation3.setStartDelay(1100);
-        animation3.start();
-        animation3.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        enemy3_anim = ValueAnimator.ofInt(-130,screenHeight +400);
+        enemy3_anim.setDuration(SPEED).setRepeatCount(Animation.INFINITE);
+        enemy3_anim.setStartDelay(1100);
+        enemy3_anim.start();
+        enemy3_anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator updatedAnimation) {
 
@@ -165,7 +327,50 @@ public class GameActivity extends AppCompatActivity {
         });
 
 
+        enemy4_anim = ValueAnimator.ofInt(-130,screenHeight +400);
+        enemy4_anim.setDuration(SPEED).setRepeatCount(Animation.INFINITE);
+        enemy4_anim.setStartDelay(1500);
+        enemy4_anim.start();
+        enemy4_anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator updatedAnimation) {
+
+                int animatedValue = (int)updatedAnimation.getAnimatedValue();
+                enemy4.setTranslationY(animatedValue);
+                if(isCollision(enemy4,player)) {
+                    enemy4.setY(-130);
+                    hitCheck();
+                    updatedAnimation.start();
+                }
+                addScore(enemy4,updatedAnimation);
+            }
+        });
+
+
+
+        enemy5_anim = ValueAnimator.ofInt(-130,screenHeight +400);
+        enemy5_anim.setDuration(SPEED).setRepeatCount(Animation.INFINITE);
+        enemy5_anim.setStartDelay(1300);
+        enemy5_anim.start();
+        enemy5_anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator updatedAnimation) {
+
+                int animatedValue = (int)updatedAnimation.getAnimatedValue();
+                enemy5.setTranslationY(animatedValue);
+                if(isCollision(enemy5,player)) {
+                    enemy5.setY(-130);
+                    hitCheck();
+                    updatedAnimation.start();
+                }
+                addScore(enemy5,updatedAnimation);
+            }
+        });
+
+
     }
+
+    ///-----------------------Method--------------------------------------
 
     private synchronized void addScore(View enemy,ValueAnimator updatedAnimation){
         if(enemy.getY()>player.getY()+player.getHeight()){
@@ -213,9 +418,11 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void clickToPause(View view) {
-        animation1.pause();
-        animation2.pause();
-        animation3.pause();
+        enemy1_anim.pause();
+        enemy2_anim.pause();
+        enemy3_anim.pause();
+        enemy4_anim.pause();
+        enemy5_anim.pause();
         findViewById(R.id.move_left).setEnabled(false);
         findViewById(R.id.move_right).setEnabled(false);
         mpBackground.pause();
@@ -223,9 +430,11 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void clickToResume(View view) {
-        animation1.resume();
-        animation2.resume();
-        animation3.resume();
+        enemy1_anim.resume();
+        enemy2_anim.resume();
+        enemy3_anim.resume();
+        enemy4_anim.resume();
+        enemy5_anim.resume();
         findViewById(R.id.move_left).setEnabled(true);
         findViewById(R.id.move_right).setEnabled(true);
         mpBackground.start();
@@ -240,15 +449,6 @@ public class GameActivity extends AppCompatActivity {
         finish();
     }
 
-    public void clickToMoveRight(View view) {
-        if (player.getX() < (getResources().getDisplayMetrics().widthPixels * 2 / NUM_OF_COL))
-            player.setX(player.getX() + getResources().getDisplayMetrics().widthPixels / NUM_OF_COL);
-    }
-
-    public void clickToMoveLeft(View view) {
-        if (player.getX() >= (getResources().getDisplayMetrics().widthPixels * 1 / NUM_OF_COL))
-            player.setX(player.getX() - getResources().getDisplayMetrics().widthPixels / NUM_OF_COL);
-    }
 
     @Override
     protected void onPause() {
@@ -269,10 +469,19 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        animation1.pause();
-        animation2.pause();
-        animation3.pause();
+        enemy1_anim.pause();
+        enemy2_anim.pause();
+        enemy3_anim.pause();
+        enemy4_anim.pause();
+        enemy5_anim.pause();
         mpBackground.pause();
+    }
+
+
+    //disable back press
+    @Override
+    public void onBackPressed() {
+
     }
 }
 
