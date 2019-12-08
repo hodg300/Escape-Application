@@ -46,8 +46,11 @@ import java.util.Random;
 
 public class GameActivity extends AppCompatActivity {
     private int NUM_OF_COL = 5;
+    public final String CHECK_BOX = "check_box";
     private final String SCORE = "score";
     private final String TEXT_SCORE = "SCORE: ";
+    private final int SPEED=3000;
+    private final static int MAX_VOLUME = 100;
     private View player;
     private View[] enemies = new View[NUM_OF_COL];
     private View enemy1;
@@ -82,9 +85,8 @@ public class GameActivity extends AppCompatActivity {
     private int screenHeight;
     private int score=0;
     private TextView scoreView;
-    private final int SPEED=3000;
     private MediaPlayer mpBackground;
-    private final static int MAX_VOLUME = 100;
+
 
 
     @Override
@@ -165,29 +167,37 @@ public class GameActivity extends AppCompatActivity {
         disp.getSize(size);
         screenHeight=size.y;
 
+        //check box :tue or false ?
+        Intent intent=getIntent();
+
+        if(!(intent.getBooleanExtra(CHECK_BOX,false))) {
+            //move right
+            btnRight.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (player.getX() < (getResources().getDisplayMetrics().widthPixels * (NUM_OF_COL - 1) / NUM_OF_COL))
+                        player.setX(player.getX() + getResources().getDisplayMetrics().widthPixels / NUM_OF_COL);
+                    scoreView.setTextColor(Color.WHITE);
+                }
+            });
+
+            //move left
+            btnLeft.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (player.getX() >= (getResources().getDisplayMetrics().widthPixels * 1 / NUM_OF_COL))
+                        player.setX(player.getX() - getResources().getDisplayMetrics().widthPixels / NUM_OF_COL);
+                    scoreView.setTextColor(Color.WHITE);
+                }
+            });
+
+        }else{
 
 
-        //move right
-        btnRight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (player.getX() < (getResources().getDisplayMetrics().widthPixels * (NUM_OF_COL-1) / NUM_OF_COL))
-                    player.setX(player.getX() + getResources().getDisplayMetrics().widthPixels / NUM_OF_COL);
-                scoreView.setTextColor(Color.WHITE);
-            }
-        });
-
-        //move left
-        btnLeft.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (player.getX() >= (getResources().getDisplayMetrics().widthPixels * 1 / NUM_OF_COL))
-                    player.setX(player.getX() - getResources().getDisplayMetrics().widthPixels / NUM_OF_COL);
-                scoreView.setTextColor(Color.WHITE);
-            }
-        });
-
-
+            //
+            //
+            //Motion Sensors
+        }
 
 //      create bonus animations----------------------------------------------------------
         bonus1_anim = ValueAnimator.ofInt(-260, screenHeight + 400);

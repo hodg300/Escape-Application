@@ -764,6 +764,7 @@ id btn_stop
 id buttonPanel
 id center_vertical
 id chains
+id check_btn
 id checkbox
 id checked
 id chronometer

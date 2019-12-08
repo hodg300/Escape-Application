@@ -28,6 +28,23 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_centerInParent="true"/>
+    <CheckBox
+        android:id="@+id/check_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_startGame"
+        android:layout_centerInParent="true"
+        android:background="@android:color/holo_blue_dark"
+        android:layout_marginTop="20dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Motion Sensor"
+        android:textColor="@android:color/holo_blue_dark"
+        android:layout_below="@id/check_btn"
+        android:textSize="20dp"
+        android:layout_centerInParent="true"/>
+
 
 
 

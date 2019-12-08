@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 public class EndActivity extends AppCompatActivity {
     private TextView scoreView;
+    private final String SCORE="score";
 
 
     @Override
@@ -19,7 +20,7 @@ public class EndActivity extends AppCompatActivity {
 
         scoreView=findViewById(R.id.your_score);
         Intent intent=getIntent();
-        scoreView.setText("YOUR SCORE : " + intent.getIntExtra("score",0));
+        scoreView.setText("YOUR SCORE : " + intent.getIntExtra(SCORE,0));
 
     }
 
