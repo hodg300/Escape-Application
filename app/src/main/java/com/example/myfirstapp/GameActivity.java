@@ -67,11 +67,13 @@ public class GameActivity extends AppCompatActivity {
     private ImageView btnLeft;
     private ImageView btnRight;
     private int life = 3;
+    private ValueAnimator[] enemies_anim=new ValueAnimator[NUM_OF_COL];
     private ValueAnimator enemy1_anim;
     private ValueAnimator enemy2_anim;
     private ValueAnimator enemy3_anim;
     private ValueAnimator enemy4_anim;
     private ValueAnimator enemy5_anim;
+    private ValueAnimator[] all_bonus_anim=new ValueAnimator[NUM_OF_COL];
     private ValueAnimator bonus1_anim;
     private ValueAnimator bonus2_anim;
     private ValueAnimator bonus3_anim;
@@ -140,6 +142,20 @@ public class GameActivity extends AppCompatActivity {
             enemies[i].setTranslationY(-130f);
             bonus_staff[i].setTranslationY(-260f);
         }
+
+        //aminations arrays
+//
+//        enemies_anim[0]=enemy1_anim;
+//        enemies_anim[1]=enemy2_anim;
+//        enemies_anim[2]=enemy3_anim;
+//        enemies_anim[3]=enemy4_anim;
+//        enemies_anim[4]=enemy5_anim;
+//
+//        all_bonus_anim[0]=bonus1_anim;
+//        all_bonus_anim[1]=bonus2_anim;
+//        all_bonus_anim[2]=bonus3_anim;
+//        all_bonus_anim[3]=bonus4_anim;
+//        all_bonus_anim[4]=bonus5_anim;
 
 
         //get screenHeight
@@ -423,6 +439,11 @@ public class GameActivity extends AppCompatActivity {
         enemy3_anim.pause();
         enemy4_anim.pause();
         enemy5_anim.pause();
+        bonus1_anim.pause();
+        bonus2_anim.pause();
+        bonus3_anim.pause();
+        bonus4_anim.pause();
+        bonus5_anim.pause();
         findViewById(R.id.move_left).setEnabled(false);
         findViewById(R.id.move_right).setEnabled(false);
         mpBackground.pause();
@@ -434,7 +455,12 @@ public class GameActivity extends AppCompatActivity {
         enemy2_anim.resume();
         enemy3_anim.resume();
         enemy4_anim.resume();
-        enemy5_anim.resume();
+        bonus1_anim.resume();
+        bonus2_anim.resume();
+        bonus3_anim.resume();
+        bonus4_anim.resume();
+        bonus5_anim.resume();
+
         findViewById(R.id.move_left).setEnabled(true);
         findViewById(R.id.move_right).setEnabled(true);
         mpBackground.start();
@@ -474,6 +500,11 @@ public class GameActivity extends AppCompatActivity {
         enemy3_anim.pause();
         enemy4_anim.pause();
         enemy5_anim.pause();
+        bonus1_anim.pause();
+        bonus2_anim.pause();
+        bonus3_anim.pause();
+        bonus4_anim.pause();
+        bonus5_anim.pause();
         mpBackground.pause();
     }
 
