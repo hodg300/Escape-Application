@@ -31,7 +31,7 @@ public class EndActivity extends AppCompatActivity {
     }
 
     public void cliclToRestart(View view) {
-        Intent gameActivityIntent=new Intent(EndActivity.this,GameActivity.class);
+        Intent gameActivityIntent=new Intent(EndActivity.this,StartActivity.class);
         startActivity(gameActivityIntent);
         finish();
     }

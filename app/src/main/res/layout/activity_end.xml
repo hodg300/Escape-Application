@@ -21,7 +21,7 @@
         android:textSize="30dp"/>
     <TextView
         android:id="@+id/btn_restart"
-        android:text="Restart Game"
+        android:text="New Game"
         android:textColor="@android:color/white"
         android:textStyle="bold"
         android:fontFamily="casual"

@@ -13,6 +13,10 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Build;
@@ -44,7 +48,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity implements SensorEventListener {
     private int NUM_OF_COL = 5;
     public final String CHECK_BOX = "check_box";
     private final String SCORE = "score";
@@ -83,10 +87,17 @@ public class GameActivity extends AppCompatActivity {
     private ValueAnimator bonus4_anim;
     private ValueAnimator bonus5_anim;
     private int screenHeight;
+    private int screenwidth;
     private int score=0;
     private TextView scoreView;
     private MediaPlayer mpBackground;
 
+    //sensor
+    private SensorManager sensorManager;
+    private Sensor accelerometer;
+    private long lastUpdate;
+    public int x = 360;
+    private boolean isSensor;
 
 
     @Override
@@ -145,20 +156,6 @@ public class GameActivity extends AppCompatActivity {
             bonus_staff[i].setTranslationY(-260f);
         }
 
-        //aminations arrays
-//
-//        enemies_anim[0]=enemy1_anim;
-//        enemies_anim[1]=enemy2_anim;
-//        enemies_anim[2]=enemy3_anim;
-//        enemies_anim[3]=enemy4_anim;
-//        enemies_anim[4]=enemy5_anim;
-//
-//        all_bonus_anim[0]=bonus1_anim;
-//        all_bonus_anim[1]=bonus2_anim;
-//        all_bonus_anim[2]=bonus3_anim;
-//        all_bonus_anim[3]=bonus4_anim;
-//        all_bonus_anim[4]=bonus5_anim;
-
 
         //get screenHeight
         WindowManager wm=getWindowManager();
@@ -166,11 +163,13 @@ public class GameActivity extends AppCompatActivity {
         Point size=new Point();
         disp.getSize(size);
         screenHeight=size.y;
+        screenwidth=size.x;
 
         //check box :tue or false ?
         Intent intent=getIntent();
 
         if(!(intent.getBooleanExtra(CHECK_BOX,false))) {
+            isSensor=false;
             //move right
             btnRight.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -192,8 +191,10 @@ public class GameActivity extends AppCompatActivity {
             });
 
         }else{
-
-
+            isSensor=true;
+            sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+            accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+            lastUpdate = System.currentTimeMillis();
             //
             //
             //Motion Sensors
@@ -492,6 +493,9 @@ public class GameActivity extends AppCompatActivity {
         mpBackground.pause();
         findViewById(R.id.move_left).setEnabled(false);
         findViewById(R.id.move_right).setEnabled(false);
+        if(isSensor) {
+            sensorManager.unregisterListener(this);
+        }
     }
 
     @Override
@@ -499,6 +503,10 @@ public class GameActivity extends AppCompatActivity {
         super.onResume();
         if(!findViewById(R.id.btn_pause).isEnabled()) {
             mpBackground.start();
+        }
+        if(isSensor) {
+            sensorManager.registerListener(this, accelerometer,
+                    SensorManager.SENSOR_DELAY_GAME);
         }
     }
 
@@ -522,6 +530,26 @@ public class GameActivity extends AppCompatActivity {
     //disable back press
     @Override
     public void onBackPressed() {
+
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+            x -= (int) event.values[0];
+
+//            player.setX(event.values[0]);
+//            if(player.getX()>=0
+//                    && player.getX()<(getResources().getDisplayMetrics().widthPixels * (NUM_OF_COL - 1) / NUM_OF_COL)) {
+            if(x>=0 && x<screenwidth-player.getWidth())
+                player.setX(x);
+//            }
+
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
     }
 }
