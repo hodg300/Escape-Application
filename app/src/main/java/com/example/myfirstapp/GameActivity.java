@@ -53,7 +53,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     public final String CHECK_BOX = "check_box";
     private final String SCORE = "score";
     private final String TEXT_SCORE = "SCORE: ";
-    private final int SPEED=3000;
+    private int speed;
     private final static int MAX_VOLUME = 100;
     private View player;
     private View[] enemies = new View[NUM_OF_COL];
@@ -95,7 +95,6 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     //sensor
     private SensorManager sensorManager;
     private Sensor accelerometer;
-    private long lastUpdate;
     public int x = 360;
     private boolean isSensor;
 
@@ -170,6 +169,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
         if(!(intent.getBooleanExtra(CHECK_BOX,false))) {
             isSensor=false;
+            speed=3000;
             //move right
             btnRight.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -192,9 +192,10 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
         }else{
             isSensor=true;
+            speed=5000;
             sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
             accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-            lastUpdate = System.currentTimeMillis();
+
             //
             //
             //Motion Sensors
@@ -202,7 +203,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
 //      create bonus animations----------------------------------------------------------
         bonus1_anim = ValueAnimator.ofInt(-260, screenHeight + 400);
-        bonus1_anim.setDuration(SPEED).setRepeatCount(Animation.INFINITE);
+        bonus1_anim.setDuration(speed).setRepeatCount(Animation.INFINITE);
         bonus1_anim.setStartDelay(10000);
         bonus1_anim.start();
         bonus1_anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -213,14 +214,13 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
                     if (isCollision(coin1, player)) {
                         score += 500;
                         coin1.setY(-130);
-                        scoreView.setTextColor(Color.GREEN);
                         updatedAnimation.start();
                     }
                 }
             });
 
         bonus2_anim = ValueAnimator.ofInt(-260, screenHeight + 400);
-        bonus2_anim.setDuration(SPEED).setRepeatCount(Animation.INFINITE);
+        bonus2_anim.setDuration(speed).setRepeatCount(Animation.INFINITE);
         bonus2_anim.setStartDelay(22000);
         bonus2_anim.start();
         bonus2_anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -231,14 +231,13 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
                 if (isCollision(coin2, player)) {
                     score += 500;
                     coin2.setY(-130);
-                    scoreView.setTextColor(Color.GREEN);
                     updatedAnimation.start();
                 }
             }
         });
 
         bonus3_anim = ValueAnimator.ofInt(-260, screenHeight + 400);
-        bonus3_anim.setDuration(SPEED).setRepeatCount(Animation.INFINITE);
+        bonus3_anim.setDuration(speed).setRepeatCount(Animation.INFINITE);
         bonus3_anim.setStartDelay(10000);
         bonus3_anim.start();
         bonus3_anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -249,14 +248,13 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
                 if (isCollision(coin3, player)) {
                     score += 500;
                     coin3.setY(-130);
-                    scoreView.setTextColor(Color.GREEN);
                     updatedAnimation.start();
                 }
             }
         });
 
         bonus4_anim = ValueAnimator.ofInt(-260, screenHeight + 400);
-        bonus4_anim.setDuration(SPEED).setRepeatCount(Animation.INFINITE);
+        bonus4_anim.setDuration(speed).setRepeatCount(Animation.INFINITE);
         bonus4_anim.setStartDelay(17000);
         bonus4_anim.start();
         bonus4_anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -267,14 +265,13 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
                 if (isCollision(coin4, player)) {
                     score += 500;
                     coin4.setY(-130);
-                    scoreView.setTextColor(Color.GREEN);
                     updatedAnimation.start();
                 }
             }
         });
 
         bonus5_anim = ValueAnimator.ofInt(-260, screenHeight + 400);
-        bonus5_anim.setDuration(SPEED).setRepeatCount(Animation.INFINITE);
+        bonus5_anim.setDuration(speed).setRepeatCount(Animation.INFINITE);
         bonus5_anim.setStartDelay(12000);
         bonus5_anim.start();
         bonus5_anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -285,7 +282,6 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
                 if (isCollision(coin5, player)) {
                     score += 500;
                     coin5.setY(-130);
-                    scoreView.setTextColor(Color.GREEN);
                     updatedAnimation.start();
                 }
             }
@@ -296,7 +292,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         
 //        create animation------------------------------------------------------------------
         enemy1_anim = ValueAnimator.ofInt(-130,screenHeight+400);
-        enemy1_anim.setDuration(SPEED).setRepeatCount(Animation.INFINITE);
+        enemy1_anim.setDuration(speed).setRepeatCount(Animation.INFINITE);
         enemy1_anim.setStartDelay(200);
         enemy1_anim.start();
         enemy1_anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -315,7 +311,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
             }
         });
         enemy2_anim = ValueAnimator.ofInt(-130,screenHeight +400);
-        enemy2_anim.setDuration(SPEED).setRepeatCount(Animation.INFINITE);
+        enemy2_anim.setDuration(speed).setRepeatCount(Animation.INFINITE);
         enemy2_anim.setStartDelay(2200);
         enemy2_anim.start();
         enemy2_anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -335,7 +331,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         });
 
         enemy3_anim = ValueAnimator.ofInt(-130,screenHeight +400);
-        enemy3_anim.setDuration(SPEED).setRepeatCount(Animation.INFINITE);
+        enemy3_anim.setDuration(speed).setRepeatCount(Animation.INFINITE);
         enemy3_anim.setStartDelay(1100);
         enemy3_anim.start();
         enemy3_anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -355,7 +351,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
 
         enemy4_anim = ValueAnimator.ofInt(-130,screenHeight +400);
-        enemy4_anim.setDuration(SPEED).setRepeatCount(Animation.INFINITE);
+        enemy4_anim.setDuration(speed).setRepeatCount(Animation.INFINITE);
         enemy4_anim.setStartDelay(1500);
         enemy4_anim.start();
         enemy4_anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -376,7 +372,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
 
         enemy5_anim = ValueAnimator.ofInt(-130,screenHeight +400);
-        enemy5_anim.setDuration(SPEED).setRepeatCount(Animation.INFINITE);
+        enemy5_anim.setDuration(speed).setRepeatCount(Animation.INFINITE);
         enemy5_anim.setStartDelay(1300);
         enemy5_anim.start();
         enemy5_anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
