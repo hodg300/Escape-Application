@@ -756,10 +756,13 @@ id barrier
 id beginning
 id blocking
 id bottom
+id btn_high_scores
 id btn_pause
+id btn_quit
 id btn_restart
 id btn_resume
 id btn_startGame
+id btn_start_menu
 id btn_stop
 id buttonPanel
 id center_vertical
@@ -885,6 +888,7 @@ id tag_screen_reader_focusable
 id tag_transition_group
 id tag_unhandled_key_event_manager
 id tag_unhandled_key_listeners
+id test
 id text
 id text2
 id textSpacerNoButtons
@@ -946,6 +950,7 @@ layout abc_tooltip
 layout activity_end
 layout activity_game
 layout activity_main
+layout activity_score
 layout custom_dialog
 layout notification_action
 layout notification_action_tombstone
