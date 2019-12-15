@@ -15,58 +15,66 @@
 11-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:5:22-63
 12
 13    <application
-13-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:6:5-29:19
+13-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:7:5-35:19
 14        android:allowBackup="true"
-14-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:7:9-35
+14-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:8:9-35
 15        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 15-->[androidx.core:core:1.1.0] C:\Users\Hod\.gradle\caches\transforms-2\files-2.1\e9dab9c67c1ee3668e0bbf86c6d8cbd8\core-1.1.0\AndroidManifest.xml:24:18-86
 16        android:debuggable="true"
 17        android:icon="@mipmap/ic_launcher"
-17-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:8:9-43
+17-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:9:9-43
 18        android:label="@string/app_name"
-18-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:9:9-41
+18-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:10:9-41
 19        android:roundIcon="@mipmap/ic_launcher_round"
-19-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:10:9-54
+19-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:11:9-54
 20        android:supportsRtl="true"
-20-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:11:9-35
+20-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:12:9-35
 21        android:testOnly="true"
 22        android:theme="@style/AppTheme" >
-22-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:12:9-40
+22-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:13:9-40
 23        <activity
 23-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:14:9-16:92
-24            android:name="com.example.myfirstapp.EndActivity"
-24-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:14:19-46
+24            android:name="com.example.myfirstapp.ScoreActivity"
+24-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:14:19-48
 25            android:label="@string/app_name"
 25-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:15:13-45
 26            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
 26-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:16:13-80
 27        <activity
-27-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:17:9-19:82
-28            android:name="com.example.myfirstapp.GameActivity"
-28-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:17:19-47
+27-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:17:9-20:83
+28            android:name="com.example.myfirstapp.EndActivity"
+28-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:18:13-40
 29            android:label="@string/app_name"
-29-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:18:13-45
+29-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:19:13-45
 30            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
-30-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:19:13-80
+30-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:20:13-80
 31        <activity
-31-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:20:9-28:20
-32            android:name="com.example.myfirstapp.StartActivity"
-32-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:20:19-48
+31-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:21:9-24:83
+32            android:name="com.example.myfirstapp.GameActivity"
+32-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:22:13-41
 33            android:label="@string/app_name"
-33-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:21:13-45
-34            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
-34-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:22:13-80
-35            <intent-filter>
-35-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:23:13-27:29
-36                <action android:name="android.intent.action.MAIN" />
-36-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:24:17-69
-36-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:24:25-66
-37
-38                <category android:name="android.intent.category.LAUNCHER" />
-38-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:26:17-77
-38-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:26:27-74
-39            </intent-filter>
-40        </activity>
-41    </application>
-42
-43</manifest>
+33-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:23:13-45
+34            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+34-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:24:13-80
+35        <activity
+35-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:25:9-34:20
+36            android:name="com.example.myfirstapp.StartActivity"
+36-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:26:13-42
+37            android:label="@string/app_name"
+37-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:27:13-45
+38            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
+38-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:28:13-80
+39            <intent-filter>
+39-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:29:13-33:29
+40                <action android:name="android.intent.action.MAIN" />
+40-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:30:17-69
+40-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:30:25-66
+41
+42                <category android:name="android.intent.category.LAUNCHER" />
+42-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:32:17-77
+42-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:32:27-74
+43            </intent-filter>
+44        </activity>
+45    </application>
+46
+47</manifest>

@@ -4,9 +4,11 @@ import android.location.Location;
 
 import androidx.annotation.NonNull;
 
+import java.util.Comparator;
+
 public class Player {
     private String name;
-    private int rating;
+    private int rating=1;
     private int score;
     private Location location;
 
@@ -15,12 +17,13 @@ public class Player {
     }
     public Player(int score){
         this.score=score;
+
     }
-    public Player(String name,int rating,int score,Location location){
+    public Player(String name,Location location,int score){
         this.name=name;
-        this.rating=rating;
-        this.score=score;
         this.location=location;
+        this.score=score;
+
     }
 
     public Location getLocation() {
@@ -55,9 +58,13 @@ public class Player {
         this.score = score;
     }
 
-    @NonNull
+
+
     @Override
     public String toString() {
-        return "Rating " + (this.rating) + " Name " + this.name + " Location " + this.location + " Score " +this.score + "\n";
+        return "#" + (this.rating++) + " " + this.name + " " + this.location + " " +this.score + "\n";
     }
+
+
+
 }

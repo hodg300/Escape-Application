@@ -53,6 +53,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     public final String CHECK_BOX = "check_box";
     private final String SCORE = "score";
     private final String TEXT_SCORE = "SCORE: ";
+    private final String NAME="name";
     private int speed;
     private final static int MAX_VOLUME = 100;
     private View player;
