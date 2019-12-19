@@ -21,6 +21,8 @@ public class StartActivity extends AppCompatActivity {
     private ImageView startGame;
     public final String CHECK_BOX = "check_box";
     public final String NAME = "name";
+    private int count=0;
+    private String userName;
 
 
 
@@ -35,24 +37,29 @@ public class StartActivity extends AppCompatActivity {
         checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isCheckBox=true;
+                count++;
+                if(count%2 !=0) {
+                    isCheckBox = true;
+                }else{
+                    isCheckBox=false;
+                }
             }
         });
 
         startGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                userName = editName.getText().toString();
+                if(userName.matches("")) {
+                    Toast.makeText(StartActivity.this,
+                            "Enter your name", Toast.LENGTH_LONG).show();
+                }else{
                     Intent startActivityIntent = new Intent(StartActivity.this, GameActivity.class);
                     startActivityIntent.putExtra(CHECK_BOX, isCheckBox);
-                if(editName.getText().toString() ==""){
-                    startActivityIntent.putExtra(NAME,"Player");
-                }else{
-                    startActivityIntent.putExtra(NAME,editName.getText().toString());
-                }
+                    startActivityIntent.putExtra(NAME, editName.getText().toString());
                     startActivity(startActivityIntent);
                     finish();
-
+                }
             }
         });
 }
