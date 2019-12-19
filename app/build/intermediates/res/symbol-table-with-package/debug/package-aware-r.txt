@@ -787,6 +787,7 @@ id dialog_button
 id dimensions
 id direct
 id disableHome
+id edit_name
 id edit_query
 id end
 id enemy1
@@ -814,7 +815,15 @@ id life_status1
 id life_status2
 id life_status3
 id line1
+id line10
+id line2
 id line3
+id line4
+id line5
+id line6
+id line7
+id line8
+id line9
 id linear1
 id linear2
 id linear3
@@ -888,7 +897,6 @@ id tag_screen_reader_focusable
 id tag_transition_group
 id tag_unhandled_key_event_manager
 id tag_unhandled_key_listeners
-id test
 id text
 id text2
 id textSpacerNoButtons

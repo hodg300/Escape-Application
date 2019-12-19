@@ -30,7 +30,7 @@ public class EndActivity extends AppCompatActivity {
     private final String NAME="name";
     private ArrayList<Player> players_list;
     private Location location;
-
+    public final String CHECK_BOX = "check_box";
 
 
     @Override
@@ -51,10 +51,14 @@ public class EndActivity extends AppCompatActivity {
             }
         });
 
+
         findViewById(R.id.btn_restart).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent EndActivityIntent=new Intent(EndActivity.this,GameActivity.class);
+                Intent intent= getIntent();
+                boolean check_box= intent.getBooleanExtra(CHECK_BOX,false);
+                EndActivityIntent.putExtra(CHECK_BOX,check_box);
                 startActivity(EndActivityIntent);
                 finish();
             }
@@ -79,25 +83,43 @@ public class EndActivity extends AppCompatActivity {
         });
 
         loadData();
-        topTen(intent.getIntExtra(SCORE,0));
+        topTen(intent.getStringExtra(NAME),intent.getIntExtra(SCORE,0));
         saveData();
 
 
     }
 
-    private void topTen(int score){
+    private void topTen(String name,int score){
 
             if(players_list.size()<10 ) {
-                players_list.add(new Player(score));
+                findPlace(name,score);
+
+
             }else{
-                findWhoToClear();
+                if(score >= players_list.get(players_list.size()-1).getScore()) {
+                    players_list.remove(players_list.size() - 1);
+                    findPlace(name,score);
+                }
             }
 
     }
 
-    private void findWhoToClear() {
-
+    private void findPlace(String name,int score) {
+        if(players_list.size()==0){
+            players_list.add(new Player(name,score));
+        }else {
+            for (Player p : players_list) {
+                if (score > p.getScore()) {
+                    players_list.add(players_list.indexOf(p), new Player(name,score));
+                    break;
+                }
+            }
+            if(score < players_list.get(players_list.size()-1).getScore()){
+                players_list.add(players_list.size(),new Player(name,score));
+            }
+        }
     }
+
 
     private void saveData(){
         SharedPreferences sharedPref = getSharedPreferences(SHARE_PREFS,MODE_PRIVATE);
@@ -119,4 +141,20 @@ public class EndActivity extends AppCompatActivity {
         }
     }
 
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent setIntent = new Intent(Intent.ACTION_MAIN);
+        setIntent.addCategory(Intent.CATEGORY_HOME);
+        setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(setIntent);
+    }
 }

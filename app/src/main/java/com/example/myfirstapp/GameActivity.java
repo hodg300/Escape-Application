@@ -167,7 +167,6 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
 
         Intent intent=getIntent();
-
         if(!(intent.getBooleanExtra(CHECK_BOX,false))) {
             isSensor=false;
             speed=3000;
@@ -226,8 +225,11 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
             this.life--;
                 if (life == 0) {
                     life_status1.setVisibility(View.INVISIBLE);
+                    Intent intent=getIntent();
                     Intent gameActivityIntent = new Intent(GameActivity.this, EndActivity.class);
                     gameActivityIntent.putExtra(SCORE,score);
+                    gameActivityIntent.putExtra(CHECK_BOX,intent.getBooleanExtra(CHECK_BOX,false));
+                    gameActivityIntent.putExtra(NAME,intent.getStringExtra(NAME));
                     startActivity(gameActivityIntent);
                     finish();
                 } else if (life == 1) {
@@ -247,8 +249,8 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         e.getLocationOnScreen(enemy_locate);
         p.getLocationOnScreen(player_locate);
 
-        Rect rect1=new Rect(enemy_locate[0],enemy_locate[1],(int)(enemy_locate[0]+ e.getWidth()),(int)(enemy_locate[1]+e.getHeight()));
-        Rect rect2=new Rect(player_locate[0],player_locate[1],(int)(player_locate[0]+ p.getWidth()),(int)(player_locate[1]+p.getHeight()));
+        Rect rect1=new Rect(enemy_locate[0]+50,enemy_locate[1],(int)(enemy_locate[0]+ e.getWidth()-50),(int)(enemy_locate[1]+e.getHeight()));
+        Rect rect2=new Rect(player_locate[0]+50,player_locate[1],(int)(player_locate[0]+ p.getWidth()-50),(int)(player_locate[1]+p.getHeight()));
 
         return Rect.intersects(rect1,rect2);
     }
@@ -289,8 +291,11 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
     public void clickToStop(View view) {
         onStop();
+//        Intent intent=getIntent();
         Intent gameActivityIntent = new Intent(GameActivity.this, EndActivity.class);
         gameActivityIntent.putExtra(SCORE,score);
+        gameActivityIntent.putExtra(CHECK_BOX,getIntent().getBooleanExtra(CHECK_BOX,false));
+        gameActivityIntent.putExtra(NAME,getIntent().getStringExtra(NAME));
         startActivity(gameActivityIntent);
         finish();
     }
@@ -315,7 +320,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         }
         if(isSensor) {
             sensorManager.registerListener(this, accelerometer,
-                    SensorManager.SENSOR_DELAY_GAME);
+                    SensorManager.SENSOR_DELAY_FASTEST);
         }
     }
 

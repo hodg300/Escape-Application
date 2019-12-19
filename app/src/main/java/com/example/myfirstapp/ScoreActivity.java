@@ -12,36 +12,65 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.w3c.dom.Text;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class ScoreActivity extends AppCompatActivity {
     public static final String SHARE_PREFS = "sharedPrefs";
     public static final String TEXT = "text";
-    private int count=1;
+    private int count =1;
     private ArrayList<Player> players_list;
+    private TextView line1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
         players_list = new ArrayList<>();
+        updateViews();
+
+    }
+
+    private void updateViews() {
         SharedPreferences sharedPref = getSharedPreferences(SHARE_PREFS, MODE_PRIVATE);
-        TextView t = (TextView) findViewById(R.id.test);
+        line1 = (TextView) findViewById(R.id.line1);
         Gson gson = new Gson();
         String json = sharedPref.getString(TEXT, null);
         Type type = new TypeToken<ArrayList<Player>>() {
         }.getType();
         players_list = gson.fromJson(json, type);
-        for(Player p:players_list){
-            t.setText("#" + (count) + " " + p.getName() + " " + p.getLocation()+ " " +p.getScore()+ "\n");
+//        for(Player p:players_list){
+//            t.setText(p.toString());
+//            count++;
+//        }
+        StringBuilder builder = new StringBuilder();
+        for (Player details : players_list) {
+            builder.append("#" + count + "     "+ details + "\n");
             count++;
         }
-        t.setText(players_list.toString());
+
+        line1.setText(builder.toString());
+//        line1.setText(players_list.toString());
         if (players_list == null) {
             players_list = new ArrayList<>();
-//        }
+
 
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        finish();
     }
 }

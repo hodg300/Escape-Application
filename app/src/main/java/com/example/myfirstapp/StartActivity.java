@@ -30,6 +30,7 @@ public class StartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         startGame=findViewById(R.id.btn_startGame);
         editName=findViewById(R.id.edit_name);
+
         checkBox=(CheckBox) findViewById(R.id.check_btn);
         checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,8 +45,12 @@ public class StartActivity extends AppCompatActivity {
 
                     Intent startActivityIntent = new Intent(StartActivity.this, GameActivity.class);
                     startActivityIntent.putExtra(CHECK_BOX, isCheckBox);
+                if(editName.getText().toString() ==""){
+                    startActivityIntent.putExtra(NAME,"Player");
+                }else{
+                    startActivityIntent.putExtra(NAME,editName.getText().toString());
+                }
                     startActivity(startActivityIntent);
-
                     finish();
 
             }
