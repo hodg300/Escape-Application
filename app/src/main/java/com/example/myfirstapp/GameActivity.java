@@ -32,6 +32,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -75,13 +76,11 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     private ImageView btnLeft;
     private ImageView btnRight;
     private int life = 3;
-    private ValueAnimator[] enemies_anim=new ValueAnimator[NUM_OF_COL];
     private ValueAnimator enemy1_anim;
     private ValueAnimator enemy2_anim;
     private ValueAnimator enemy3_anim;
     private ValueAnimator enemy4_anim;
     private ValueAnimator enemy5_anim;
-    private ValueAnimator[] all_bonus_anim=new ValueAnimator[NUM_OF_COL];
     private ValueAnimator bonus1_anim;
     private ValueAnimator bonus2_anim;
     private ValueAnimator bonus3_anim;
@@ -96,7 +95,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     //sensor
     private SensorManager sensorManager;
     private Sensor accelerometer;
-    public int x = 360;
+    static int x = 360;
     private boolean isSensor;
 
 
@@ -167,6 +166,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
 
         Intent intent=getIntent();
+        //-------------------------convert to animation
         if(!(intent.getBooleanExtra(CHECK_BOX,false))) {
             isSensor=false;
             speed=3000;
@@ -179,6 +179,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
                     scoreView.setTextColor(Color.WHITE);
                 }
             });
+
 
             //move left
             btnLeft.setOnClickListener(new View.OnClickListener() {
@@ -195,6 +196,9 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
             speed=5000;
             sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
             accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+//            sensorManager.registerListener(this, accelerometer,
+//                    SensorManager.SENSOR_DELAY_FASTEST);
+            sensorManager.unregisterListener(this);
         }
 
 //      create bonus animations and create enemies animation
@@ -291,7 +295,6 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
     public void clickToStop(View view) {
         onStop();
-//        Intent intent=getIntent();
         Intent gameActivityIntent = new Intent(GameActivity.this, EndActivity.class);
         gameActivityIntent.putExtra(SCORE,score);
         gameActivityIntent.putExtra(CHECK_BOX,getIntent().getBooleanExtra(CHECK_BOX,false));
@@ -307,9 +310,12 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         mpBackground.pause();
         findViewById(R.id.move_left).setEnabled(false);
         findViewById(R.id.move_right).setEnabled(false);
-        if(isSensor) {
+        if (isSensor) {
             sensorManager.unregisterListener(this);
         }
+
+
+
     }
 
     @Override
@@ -338,6 +344,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         bonus4_anim.pause();
         bonus5_anim.pause();
         mpBackground.pause();
+
     }
 
 
@@ -351,21 +358,20 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             x -= (int) event.values[0];
-
-//            player.setX(event.values[0]);
-//            if(player.getX()>=0
-//                    && player.getX()<(getResources().getDisplayMetrics().widthPixels * (NUM_OF_COL - 1) / NUM_OF_COL)) {
-            if(x>=0 && x<screenwidth-player.getWidth())
+            if (x >= 0 && x < screenwidth - player.getWidth())
                 player.setX(x);
-//            }
+            Log.d("hod", "onPause: imm heeeeereeeee");
+
 
         }
     }
+
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
     }
+
 
 
     public void bonusAnimate(){
