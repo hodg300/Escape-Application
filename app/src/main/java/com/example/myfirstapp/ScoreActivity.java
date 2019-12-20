@@ -43,10 +43,8 @@ public class ScoreActivity extends AppCompatActivity {
         Type type = new TypeToken<ArrayList<Player>>() {
         }.getType();
         players_list = gson.fromJson(json, type);
-//        for(Player p:players_list){
-//            t.setText(p.toString());
-//            count++;
-//        }
+
+
         StringBuilder builder = new StringBuilder();
         for (Player details : players_list) {
             builder.append("#" + count + "     "+ details + "\n");
@@ -54,24 +52,21 @@ public class ScoreActivity extends AppCompatActivity {
         }
 
         line1.setText(builder.toString());
-//        line1.setText(players_list.toString());
         if (players_list == null) {
             players_list = new ArrayList<>();
-
-
         }
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
+        finish();
 
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        finish();
+
     }
 }

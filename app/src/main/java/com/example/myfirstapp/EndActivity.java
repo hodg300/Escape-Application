@@ -47,6 +47,8 @@ public class EndActivity extends AppCompatActivity {
     public final String CHECK_BOX = "check_box";
     private FusedLocationProviderClient client;
     private LocationManager locationManager;
+    private String lattitude;
+    private String lonitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +65,14 @@ public class EndActivity extends AppCompatActivity {
                     "Enter your name", Toast.LENGTH_LONG).show();
             return;
         }
-        userLocation = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);
+        Location location = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);
+        if(location!=null){
+            double lat=location.getLatitude();
+            double lon=location.getLongitude();
+            lattitude=String.valueOf(lat);
+            lonitude=String.valueOf(lon);
+        }
+        Log.d("checkkkk", "onCreate: " +lattitude + "  " +lonitude);
 
 
         players_list=new ArrayList<>();
@@ -112,10 +121,9 @@ public class EndActivity extends AppCompatActivity {
         });
 
         loadData();
-//        Log.d("hoddsasdasd", "onCreate: " + userLocation.getLatitude() + " " + userLocation.getLongitude());
-        topTen(intent.getStringExtra(NAME),userLocation,intent.getIntExtra(SCORE,0));
+        topTen(intent.getStringExtra(NAME),location,intent.getIntExtra(SCORE,0));
         saveData();
-
+        Log.d("hoddd", "topTen: " +players_list.size());
 
     }
 
@@ -161,7 +169,12 @@ public class EndActivity extends AppCompatActivity {
                     break;
                 }
             }
+
+            //maybe have problems!!!!!
             if(score < players_list.get(players_list.size()-1).getScore()){
+                players_list.add(players_list.size(),new Player(name,location,score));
+            }
+            if(score == players_list.get(players_list.size()-1).getScore()){
                 players_list.add(players_list.size(),new Player(name,location,score));
             }
         }
