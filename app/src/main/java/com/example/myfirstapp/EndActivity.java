@@ -88,6 +88,7 @@ public class EndActivity extends AppCompatActivity {
                 Intent intent= getIntent();
                 boolean check_box= intent.getBooleanExtra(CHECK_BOX,false);
                 EndActivityIntent.putExtra(CHECK_BOX,check_box);
+                EndActivityIntent.putExtra(NAME,getIntent().getStringExtra(NAME));
                 startActivity(EndActivityIntent);
                 finish();
             }
