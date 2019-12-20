@@ -10,99 +10,99 @@
 9        android:targetSdkVersion="28" />
 9-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml
 10
-11    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-11-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:4:5-80
-11-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:4:22-78
-12    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-12-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:5:5-78
-12-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:5:22-76
-13    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-13-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:6:5-80
-13-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:6:22-78
-14
-15    <uses-feature
-15-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:42:5-44:34
-16        android:glEsVersion="0x00020000"
-16-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:43:9-41
-17        android:required="true" />
-17-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:44:9-32
-18    <!-- Include required permissions for Google Maps API to run. -->
-19    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-19-->[com.google.android.gms:play-services-maps:16.1.0] C:\Users\Hod\.gradle\caches\transforms-2\files-2.1\c9d9811307193ce1305c27e9444d0d10\jetified-play-services-maps-16.1.0\AndroidManifest.xml:23:5-79
-19-->[com.google.android.gms:play-services-maps:16.1.0] C:\Users\Hod\.gradle\caches\transforms-2\files-2.1\c9d9811307193ce1305c27e9444d0d10\jetified-play-services-maps-16.1.0\AndroidManifest.xml:23:22-76
-20    <uses-permission android:name="android.permission.INTERNET" />
-20-->[com.google.android.gms:play-services-maps:16.1.0] C:\Users\Hod\.gradle\caches\transforms-2\files-2.1\c9d9811307193ce1305c27e9444d0d10\jetified-play-services-maps-16.1.0\AndroidManifest.xml:24:5-67
-20-->[com.google.android.gms:play-services-maps:16.1.0] C:\Users\Hod\.gradle\caches\transforms-2\files-2.1\c9d9811307193ce1305c27e9444d0d10\jetified-play-services-maps-16.1.0\AndroidManifest.xml:24:22-64
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:4:5-66
+11-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:4:22-64
+12    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+12-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:5:5-80
+12-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:5:22-78
+13    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+13-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:6:5-78
+13-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:6:22-76
+14    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+14-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:7:5-80
+14-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:7:22-78
+15
+16    <uses-feature
+16-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:43:5-45:34
+17        android:glEsVersion="0x00020000"
+17-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:44:9-41
+18        android:required="true" />
+18-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:45:9-32
+19    <!-- Include required permissions for Google Maps API to run. -->
+20    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+20-->[com.google.android.gms:play-services-maps:16.1.0] C:\Users\Hod\.gradle\caches\transforms-2\files-2.1\c9d9811307193ce1305c27e9444d0d10\jetified-play-services-maps-16.1.0\AndroidManifest.xml:23:5-79
+20-->[com.google.android.gms:play-services-maps:16.1.0] C:\Users\Hod\.gradle\caches\transforms-2\files-2.1\c9d9811307193ce1305c27e9444d0d10\jetified-play-services-maps-16.1.0\AndroidManifest.xml:23:22-76
 21
 22    <application
-22-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:7:5-40:19
+22-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:8:5-41:19
 23        android:allowBackup="true"
-23-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:8:9-35
+23-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:9:9-35
 24        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 24-->[androidx.core:core:1.1.0] C:\Users\Hod\.gradle\caches\transforms-2\files-2.1\e9dab9c67c1ee3668e0bbf86c6d8cbd8\core-1.1.0\AndroidManifest.xml:24:18-86
 25        android:debuggable="true"
 26        android:icon="@mipmap/ic_launcher"
-26-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:9:9-43
+26-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:10:9-43
 27        android:label="@string/app_name"
-27-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:10:9-41
+27-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:11:9-41
 28        android:roundIcon="@mipmap/ic_launcher_round"
-28-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:11:9-54
+28-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:12:9-54
 29        android:supportsRtl="true"
-29-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:12:9-35
+29-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:13:9-35
 30        android:testOnly="true"
 31        android:theme="@style/AppTheme" >
-31-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:13:9-40
+31-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:14:9-40
 32        <activity
-32-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:14:9-16:92
+32-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:15:9-17:92
 33            android:name="com.example.myfirstapp.ScoreActivity"
-33-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:14:19-48
+33-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:15:19-48
 34            android:label="@string/app_name"
-34-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:15:13-45
+34-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:16:13-45
 35            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
-35-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:16:13-80
+35-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:17:13-80
 36        <activity
-36-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:17:9-20:83
+36-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:18:9-21:83
 37            android:name="com.example.myfirstapp.EndActivity"
-37-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:18:13-40
+37-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:19:13-40
 38            android:label="@string/app_name"
-38-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:19:13-45
+38-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:20:13-45
 39            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
-39-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:20:13-80
+39-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:21:13-80
 40        <activity
-40-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:21:9-24:83
+40-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:22:9-25:83
 41            android:name="com.example.myfirstapp.GameActivity"
-41-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:22:13-41
+41-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:23:13-41
 42            android:label="@string/app_name"
-42-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:23:13-45
+42-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:24:13-45
 43            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
-43-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:24:13-80
+43-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:25:13-80
 44        <activity
-44-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:25:9-34:20
+44-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:26:9-35:20
 45            android:name="com.example.myfirstapp.StartActivity"
-45-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:26:13-42
+45-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:27:13-42
 46            android:label="@string/app_name"
-46-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:27:13-45
+46-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:28:13-45
 47            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
-47-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:28:13-80
+47-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:29:13-80
 48            <intent-filter>
-48-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:29:13-33:29
+48-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:30:13-34:29
 49                <action android:name="android.intent.action.MAIN" />
-49-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:30:17-69
-49-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:30:25-66
+49-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:31:17-69
+49-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:31:25-66
 50
 51                <category android:name="android.intent.category.LAUNCHER" />
-51-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:32:17-77
-51-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:32:27-74
+51-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:33:17-77
+51-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:33:27-74
 52            </intent-filter>
 53        </activity>
 54
 55        <!-- Maps Android api -->
 56        <meta-data
-56-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:37:9-39:70
+56-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:38:9-40:70
 57            android:name="com.google.android.geo.API_KEY"
-57-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:38:13-58
+57-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:39:13-58
 58            android:value="AIzaSyA-JidP9zo0PefASmjLpDUQB6huCNPUdIY" />
-58-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:39:13-68
+58-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:40:13-68
 59        <!-- Needs to be explicitly declared on P+ -->
 60        <uses-library
 60-->[com.google.android.gms:play-services-maps:16.1.0] C:\Users\Hod\.gradle\caches\transforms-2\files-2.1\c9d9811307193ce1305c27e9444d0d10\jetified-play-services-maps-16.1.0\AndroidManifest.xml:33:9-35:40
