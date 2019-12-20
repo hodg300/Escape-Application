@@ -39,6 +39,7 @@ public class ScoreActivity extends AppCompatActivity {
         line1 = (TextView) findViewById(R.id.line1);
         Gson gson = new Gson();
         String json = sharedPref.getString(TEXT, null);
+        Log.d("json", "updateViews: " + json);
         Type type = new TypeToken<ArrayList<Player>>() {
         }.getType();
         players_list = gson.fromJson(json, type);

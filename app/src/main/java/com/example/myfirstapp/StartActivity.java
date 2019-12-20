@@ -1,9 +1,12 @@
 package com.example.myfirstapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +26,7 @@ public class StartActivity extends AppCompatActivity {
     public final String NAME = "name";
     private int count=0;
     private String userName;
+    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
 
 
 
@@ -32,6 +36,8 @@ public class StartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         startGame=findViewById(R.id.btn_startGame);
         editName=findViewById(R.id.edit_name);
+
+        requestPermission();
 
         checkBox=(CheckBox) findViewById(R.id.check_btn);
         checkBox.setOnClickListener(new View.OnClickListener() {
@@ -63,6 +69,16 @@ public class StartActivity extends AppCompatActivity {
             }
         });
 }
-
+    private void requestPermission() {
+        if ( Build.VERSION.SDK_INT >= 23){
+            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) !=
+                    PackageManager.PERMISSION_GRANTED  ){
+                requestPermissions(new String[]{
+                                android.Manifest.permission.ACCESS_FINE_LOCATION},
+                        REQUEST_CODE_ASK_PERMISSIONS);
+                return ;
+            }
+        }
+    }
 
 }

@@ -4,21 +4,16 @@ import android.location.Location;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+
 import java.util.Comparator;
 
 public class Player {
     private String name;
-    private int rating;
-    private int score;
     private Location location;
+    private int score;
 
-    public Player(){
 
-    }
-    public Player(String name,int score){
-        this.name=name;
-        this.score=score;
-    }
     public Player(String name,Location location,int score){
         this.name=name;
         this.location=location;
@@ -28,10 +23,6 @@ public class Player {
 
     public Location getLocation() {
         return location;
-    }
-
-    public int getRating() {
-        return rating;
     }
 
     public int getScore() {
@@ -50,10 +41,6 @@ public class Player {
         this.name = name;
     }
 
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
-
     public void setScore(int score) {
         this.score = score;
     }
@@ -62,7 +49,7 @@ public class Player {
 
     @Override
     public String toString() {
-        return this.name + " " + this.location + " " +this.score + "\n";
+        return this.name + " " + this.location.getLatitude() + " " + this.location.getLongitude()  + " " +this.score + "\n";
     }
 
 
