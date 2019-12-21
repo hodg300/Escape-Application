@@ -84,7 +84,7 @@ public class MapFragment extends Fragment implements
         MarkerOptions markerOptions=new MarkerOptions();
         markerOptions.position(latLng);
         markerOptions.title("User Current Position");
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
         currentUserLocationMarker=mGoogleMap.addMarker(markerOptions);
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mGoogleMap.animateCamera(CameraUpdateFactory.zoomBy(16));

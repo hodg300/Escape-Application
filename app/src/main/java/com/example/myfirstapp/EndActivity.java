@@ -174,8 +174,8 @@ public class EndActivity extends AppCompatActivity {
             if(score < players_list.get(players_list.size()-1).getScore()){
                 players_list.add(players_list.size(),new Player(name,location,score));
             }
-            if(score == players_list.get(players_list.size()-1).getScore()){
-                players_list.add(players_list.size(),new Player(name,location,score));
+            else if(score == players_list.get(players_list.size()-1).getScore()){
+                players_list.add(players_list.size()-1,new Player(name,location,score));
             }
         }
 
