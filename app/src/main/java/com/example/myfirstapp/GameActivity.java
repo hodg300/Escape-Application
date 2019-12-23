@@ -170,6 +170,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         if(!(intent.getBooleanExtra(CHECK_BOX,false))) {
             isSensor=false;
             speed=3000;
+            Log.d("button", "onCreate: immm hereeee");
             //move right
             btnRight.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -196,9 +197,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
             speed=5000;
             sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
             accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-//            sensorManager.registerListener(this, accelerometer,
-//                    SensorManager.SENSOR_DELAY_FASTEST);
-            sensorManager.unregisterListener(this);
+            sensorManager.registerListener(this,accelerometer,SensorManager.SENSOR_DELAY_FASTEST);
         }
 
 //      create bonus animations and create enemies animation
@@ -273,7 +272,9 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         findViewById(R.id.move_left).setEnabled(false);
         findViewById(R.id.move_right).setEnabled(false);
         mpBackground.pause();
-
+        if (isSensor) {
+            sensorManager.unregisterListener(this);
+        }
     }
 
     public void clickToResume(View view) {
@@ -290,7 +291,10 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         findViewById(R.id.move_left).setEnabled(true);
         findViewById(R.id.move_right).setEnabled(true);
         mpBackground.start();
-
+        if(isSensor) {
+            sensorManager.registerListener(this, accelerometer,
+                    SensorManager.SENSOR_DELAY_FASTEST);
+        }
     }
 
     public void clickToStop(View view) {
@@ -314,8 +318,6 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
             sensorManager.unregisterListener(this);
         }
 
-
-
     }
 
     @Override
@@ -324,10 +326,10 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         if(!findViewById(R.id.btn_pause).isEnabled()) {
             mpBackground.start();
         }
-        if(isSensor) {
-            sensorManager.registerListener(this, accelerometer,
-                    SensorManager.SENSOR_DELAY_FASTEST);
-        }
+//        if(isSensor) {
+//            sensorManager.registerListener(this, accelerometer,
+//                    SensorManager.SENSOR_DELAY_FASTEST);
+//        }
     }
 
     @Override
@@ -351,6 +353,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     //disable back press
     @Override
     public void onBackPressed() {
+        clickToPause(findViewById(R.id.btn_pause));
 
     }
 
@@ -358,11 +361,15 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             x -= (int) event.values[0];
-            if (x >= 0 && x < screenwidth - player.getWidth())
+            if (x >= 0 && x < screenwidth - player.getWidth()) {
                 player.setX(x);
-            Log.d("hod", "onPause: imm heeeeereeeee");
-
-
+            }
+            else if(x<0){
+                x=0;
+            }else if(x>screenwidth - player.getWidth()){
+                x=screenwidth - player.getWidth();
+            }
+            Log.d("test", "onSensorChanged: " +x);
         }
     }
 

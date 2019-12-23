@@ -37,7 +37,7 @@ public class StartActivity extends AppCompatActivity {
         startGame=findViewById(R.id.btn_startGame);
         editName=findViewById(R.id.edit_name);
 
-        requestPermission();
+//        requestPermission();
 
         checkBox=(CheckBox) findViewById(R.id.check_btn);
         checkBox.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +76,8 @@ public class StartActivity extends AppCompatActivity {
                 requestPermissions(new String[]{
                                 android.Manifest.permission.ACCESS_FINE_LOCATION},
                         REQUEST_CODE_ASK_PERMISSIONS);
-                return ;
+                finish();
+//                return ;
             }
         }
     }

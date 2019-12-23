@@ -36,11 +36,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapFragment extends Fragment implements
         OnMapReadyCallback,
         LocationListener{
-    GoogleMap mGoogleMap;
-    MapView mMapView;
-    View mView;
-    Location lastLocation;
-    Marker currentUserLocationMarker;
+    private GoogleMap mGoogleMap;
+    private MapView mMapView;
+    private View mView;
+    private Location lastLocation;
+    private Marker currentUserLocationMarker;
 
 
 

@@ -11,14 +11,14 @@ import java.util.Comparator;
 public class Player {
     private String name;
     private double lattitude;
-    private double longttude;
+    private double longitude;
     private int score;
 
 
     public Player(String name,Location location,int score){
         this.name=name;
         this.lattitude=location.getLatitude();
-        this.longttude=location.getLongitude();
+        this.longitude=location.getLongitude();
         this.score=score;
 
     }
@@ -46,7 +46,7 @@ public class Player {
 
     @Override
     public String toString() {
-        return this.name + " " + (float)this.lattitude + " " + (float)this.longttude + " " +this.score + "\n";
+        return this.name + " " + (float)this.lattitude + " " + (float)this.longitude + " " +this.score + "\n";
     }
 
 

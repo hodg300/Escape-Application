@@ -123,7 +123,6 @@ public class EndActivity extends AppCompatActivity {
         loadData();
         topTen(intent.getStringExtra(NAME),location,intent.getIntExtra(SCORE,0));
         saveData();
-        Log.d("hoddd", "topTen: " +players_list.size());
 
     }
 
