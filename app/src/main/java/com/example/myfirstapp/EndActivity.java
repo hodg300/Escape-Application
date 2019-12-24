@@ -47,8 +47,7 @@ public class EndActivity extends AppCompatActivity {
     public final String CHECK_BOX = "check_box";
     private FusedLocationProviderClient client;
     private LocationManager locationManager;
-    private String lattitude;
-    private String lonitude;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,16 +64,8 @@ public class EndActivity extends AppCompatActivity {
                     "Enter your name", Toast.LENGTH_LONG).show();
             return;
         }
-        Location location = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);
-        if(location!=null){
-            double lat=location.getLatitude();
-            double lon=location.getLongitude();
-            lattitude=String.valueOf(lat);
-            lonitude=String.valueOf(lon);
-        }
 
-
-
+        //create list of players
         players_list=new ArrayList<>();
         scoreView=findViewById(R.id.your_score);
         Intent intent=getIntent();
@@ -120,7 +111,10 @@ public class EndActivity extends AppCompatActivity {
             }
         });
 
+
+
         loadData();
+        Location location = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);
         topTen(intent.getStringExtra(NAME),location,intent.getIntExtra(SCORE,0));
         saveData();
 

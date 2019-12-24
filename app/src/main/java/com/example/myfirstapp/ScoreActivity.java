@@ -53,7 +53,7 @@ public class ScoreActivity extends AppCompatActivity {
 //        ScrollView scrollView=(ScrollView)findViewById(R.id.scroll_view);
 //        TextView[] arrTextView=new TextView[NUM_OF_TEXT_VIEW];
 
-        for (final Player details : players_list) {
+        for (Player details : players_list) {
 //            TextView textView=new TextView(this);
             builder.append("#" + count + "     "+ details + "\n");
 //            textView.setText(builder.toString());
