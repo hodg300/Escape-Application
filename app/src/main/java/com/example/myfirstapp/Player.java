@@ -2,17 +2,14 @@ package com.example.myfirstapp;
 
 import android.location.Location;
 
-import androidx.annotation.NonNull;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-
-import java.util.Comparator;
 
 public class Player {
     private String name;
     private double lattitude;
     private double longitude;
     private int score;
+    private Location location;
 
 
     public Player(String name,Location location,int score){
@@ -20,6 +17,7 @@ public class Player {
         this.lattitude=location.getLatitude();
         this.longitude=location.getLongitude();
         this.score=score;
+        this.location=location;
 
     }
 
@@ -28,19 +26,19 @@ public class Player {
     public int getScore() {
         return score;
     }
-
     public String getName() {
         return name;
     }
-
-
     public void setName(String name) {
         this.name = name;
     }
-
     public void setScore(int score) {
         this.score = score;
     }
+    public Location getLocation(){
+        return location;
+    }
+
 
 
 

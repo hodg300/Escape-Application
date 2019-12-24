@@ -72,7 +72,7 @@ public class EndActivity extends AppCompatActivity {
             lattitude=String.valueOf(lat);
             lonitude=String.valueOf(lon);
         }
-        Log.d("checkkkk", "onCreate: " +lattitude + "  " +lonitude);
+
 
 
         players_list=new ArrayList<>();

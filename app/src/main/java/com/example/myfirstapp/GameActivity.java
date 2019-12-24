@@ -326,10 +326,6 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         if(!findViewById(R.id.btn_pause).isEnabled()) {
             mpBackground.start();
         }
-//        if(isSensor) {
-//            sensorManager.registerListener(this, accelerometer,
-//                    SensorManager.SENSOR_DELAY_FASTEST);
-//        }
     }
 
     @Override
@@ -369,7 +365,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
             }else if(x>screenwidth - player.getWidth()){
                 x=screenwidth - player.getWidth();
             }
-            Log.d("test", "onSensorChanged: " +x);
+
         }
     }
 

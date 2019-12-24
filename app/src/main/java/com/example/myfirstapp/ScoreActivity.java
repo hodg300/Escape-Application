@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -15,6 +17,7 @@ import com.google.gson.reflect.TypeToken;
 import org.w3c.dom.Text;
 
 import java.lang.reflect.Type;
+import java.nio.file.spi.FileTypeDetector;
 import java.util.ArrayList;
 
 public class ScoreActivity extends AppCompatActivity {
@@ -23,6 +26,7 @@ public class ScoreActivity extends AppCompatActivity {
     private int count =1;
     private ArrayList<Player> players_list;
     private TextView line1;
+    public final int NUM_OF_TEXT_VIEW=10;
 
 
     @Override
@@ -46,8 +50,21 @@ public class ScoreActivity extends AppCompatActivity {
 
 
         StringBuilder builder = new StringBuilder();
-        for (Player details : players_list) {
+//        ScrollView scrollView=(ScrollView)findViewById(R.id.scroll_view);
+//        TextView[] arrTextView=new TextView[NUM_OF_TEXT_VIEW];
+
+        for (final Player details : players_list) {
+//            TextView textView=new TextView(this);
             builder.append("#" + count + "     "+ details + "\n");
+//            textView.setText(builder.toString());
+//            scrollView.addView(textView);
+//            textView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    MapFragment mapFragment=new MapFragment();
+//                    mapFragment.onLocationChanged(details.getLocation());
+//                }
+//            });
             count++;
         }
 
