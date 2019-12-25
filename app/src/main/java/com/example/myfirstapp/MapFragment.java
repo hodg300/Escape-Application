@@ -18,9 +18,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 
-public class MapFragment extends Fragment implements
-        OnMapReadyCallback,
-        LocationListener{
+public class MapFragment extends Fragment implements OnMapReadyCallback, LocationListener{
     private GoogleMap mGoogleMap;
     private MapView mMapView;
     private View mView;

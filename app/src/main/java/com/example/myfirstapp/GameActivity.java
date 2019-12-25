@@ -3,10 +3,6 @@ package com.example.myfirstapp;
 
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.solver.widgets.Rectangle;
-
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
@@ -17,46 +13,27 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.media.Image;
 import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.Message;
-import android.os.VibrationEffect;
-import android.os.Vibrator;
+import android.os.PowerManager;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.GridLayout;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+import android.os.PowerManager;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
 
 public class GameActivity extends AppCompatActivity implements SensorEventListener {
-    private int NUM_OF_COL = 5;
+    private final int NUM_OF_COL = 5;
     public final String CHECK_BOX = "check_box";
     private final String SCORE = "score";
     private final String TEXT_SCORE = "SCORE: ";
     private final String NAME="name";
-    private int speed;
     private final static int MAX_VOLUME = 100;
+    private int speed;
     private View player;
     private View[] enemies = new View[NUM_OF_COL];
     private View enemy1;
@@ -92,6 +69,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     private TextView scoreView;
     private MediaPlayer mpBackground;
 
+
     //sensor
     private SensorManager sensorManager;
     private Sensor accelerometer;
@@ -112,7 +90,69 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         mpBackground.setVolume(volume, volume);
         mpBackground.start();
 
-        //initial views
+
+        initialViews();
+
+
+        //get screenHeight
+        WindowManager wm=getWindowManager();
+        Display disp= wm.getDefaultDisplay();
+        Point size=new Point();
+        disp.getSize(size);
+        screenHeight=size.y;
+        screenwidth=size.x;
+
+
+        //make always screen light
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+
+
+        //-------------------------convert to animation
+        if(!(getIntent().getBooleanExtra(CHECK_BOX,false))) {
+            isSensor=false;
+            speed=3000;
+            //move right
+            btnRight.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (player.getX() < (getResources().getDisplayMetrics().widthPixels * (NUM_OF_COL - 1) / NUM_OF_COL))
+                        player.setX(player.getX() + getResources().getDisplayMetrics().widthPixels / NUM_OF_COL);
+                    scoreView.setTextColor(Color.WHITE);
+                }
+            });
+
+
+            //move left
+            btnLeft.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (player.getX() >= (getResources().getDisplayMetrics().widthPixels * 1 / NUM_OF_COL))
+                        player.setX(player.getX() - getResources().getDisplayMetrics().widthPixels / NUM_OF_COL);
+                    scoreView.setTextColor(Color.WHITE);
+                }
+            });
+
+        }else{//Motion Sensors
+            isSensor=true;
+            speed=5000;
+            sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+            accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+            sensorManager.registerListener(this,accelerometer,SensorManager.SENSOR_DELAY_FASTEST);
+        }
+
+        //create bonus animations and create enemies animation
+        bonusAnimate();
+        enemiesAnimate();
+
+    }
+
+
+
+    ///-----------------------Method--------------------------------------
+
+
+    private void initialViews(){ //initial views
         player = (View) findViewById(R.id.player);
         enemy1 = (View) findViewById(R.id.enemy1);
         enemy2 = (View) findViewById(R.id.enemy2);
@@ -154,61 +194,8 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
             enemies[i].setTranslationY(-130f);
             bonus_staff[i].setTranslationY(-260f);
         }
-
-
-        //get screenHeight
-        WindowManager wm=getWindowManager();
-        Display disp= wm.getDefaultDisplay();
-        Point size=new Point();
-        disp.getSize(size);
-        screenHeight=size.y;
-        screenwidth=size.x;
-
-
-        Intent intent=getIntent();
-        //-------------------------convert to animation
-        if(!(intent.getBooleanExtra(CHECK_BOX,false))) {
-            isSensor=false;
-            speed=3000;
-            Log.d("button", "onCreate: immm hereeee");
-            //move right
-            btnRight.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (player.getX() < (getResources().getDisplayMetrics().widthPixels * (NUM_OF_COL - 1) / NUM_OF_COL))
-                        player.setX(player.getX() + getResources().getDisplayMetrics().widthPixels / NUM_OF_COL);
-                    scoreView.setTextColor(Color.WHITE);
-                }
-            });
-
-
-            //move left
-            btnLeft.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (player.getX() >= (getResources().getDisplayMetrics().widthPixels * 1 / NUM_OF_COL))
-                        player.setX(player.getX() - getResources().getDisplayMetrics().widthPixels / NUM_OF_COL);
-                    scoreView.setTextColor(Color.WHITE);
-                }
-            });
-
-        }else{//Motion Sensors
-            isSensor=true;
-            speed=5000;
-            sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-            accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-            sensorManager.registerListener(this,accelerometer,SensorManager.SENSOR_DELAY_FASTEST);
-        }
-
-//      create bonus animations and create enemies animation
-        bonusAnimate();
-        enemiesAnimate();
-
     }
 
-
-
-    ///-----------------------Method--------------------------------------
 
     private synchronized void addScore(View enemy,ValueAnimator updatedAnimation){
         if(enemy.getY()>player.getY()+player.getHeight()){
@@ -222,6 +209,8 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
             updatedAnimation.start();
         }
     }
+
+
 
     private synchronized  void hitCheck() {
 
@@ -344,6 +333,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         mpBackground.pause();
 
     }
+
 
 
     //disable back press
@@ -566,4 +556,5 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
     }
 }
+
 
