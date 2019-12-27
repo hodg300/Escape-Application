@@ -27,36 +27,29 @@
         android:layout_below="@id/title"
         android:weightSum="2">
         <ScrollView
-            android:id="@+id/scroll_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/line1"
+            android:layout_weight="0.75">
+            <LinearLayout
+                android:id="@+id/score_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:textStyle="bold"
-                android:layout_marginLeft="5dp"
-                android:textSize="16dp"
-                android:fontFamily="casual"
-                android:layout_weight="1"
-                android:textColor="@android:color/white"
-                android:layout_centerInParent="true"/>
-        </ScrollView>
+                android:layout_weight="0.75"
+                android:orientation="vertical"/>
 
+        </ScrollView>
 
 
 
         <fragment
             android:id="@+id/fragment_place"
-            android:layout_weight="1"
-            android:name="com.example.myfirstapp.MapFragment"
+            android:layout_weight="1.25"
+            android:name="com.google.android.gms.maps.MapFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/line1"/>
+            android:layout_below="@id/line1"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="10dp" />
     </LinearLayout>
 
 

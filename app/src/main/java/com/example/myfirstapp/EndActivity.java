@@ -2,7 +2,9 @@ package com.example.myfirstapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
 import android.content.Context;
@@ -11,34 +13,20 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
-import android.util.*;
-import android.widget.Toast;
-
-import com.google.android.gms.dynamic.SupportFragmentWrapper;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
-import org.w3c.dom.Text;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class EndActivity extends AppCompatActivity {
-    public static final String SHARE_PREFS = "sharedPrefs";
-    public static final String TEXT = "text";
+    public final String SHARE_PREFS = "sharedPrefs";
+    public final String TEXT = "text";
+    public final String CURRENT_PLAYER="currentPlayer";
     private TextView scoreView;
     private final String SCORE = "score";
     private final String NAME = "name";
@@ -49,28 +37,49 @@ public class EndActivity extends AppCompatActivity {
     private LocationManager locationManager;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end);
 
-        //get current location of player
+        //create list of players
+        players_list=new ArrayList<>();
+        Intent intent=getIntent();
+
+
+        getScoreFromGameActivity();
+        listenerOfBtns();
+        getLocation();//add lcurrent location to userLocation
+        loadPlayersData();
+        topTenHighScore(intent.getStringExtra(NAME),userLocation,intent.getIntExtra(SCORE,0));
+        savePlayersData();
+
+    }
+
+
+
+    private void getLocation(){
         client = LocationServices.getFusedLocationProviderClient(this);
-        fetchLastLocation();
+        //fetchLastLocation();
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(EndActivity.this,
-                    "Enter your name", Toast.LENGTH_LONG).show();
+
             return;
         }
+        userLocation = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);
+    }
 
-        //create list of players
-        players_list=new ArrayList<>();
+    private void getScoreFromGameActivity() {
+        //catch intent from GameActivity
         scoreView=findViewById(R.id.your_score);
         Intent intent=getIntent();
         scoreView.setText("YOUR SCORE : " + intent.getIntExtra(SCORE,0));
+    }
 
+    private void listenerOfBtns() {
         findViewById(R.id.btn_start_menu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,36 +115,16 @@ public class EndActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent EndActivityIntent=new Intent(EndActivity.this,ScoreActivity.class);
+                double[] latLng={userLocation.getLatitude(),userLocation.getLongitude()};
+                EndActivityIntent.putExtra(CURRENT_PLAYER,latLng);
                 startActivity(EndActivityIntent);
 
             }
         });
-
-
-
-        loadData();
-        Location location = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);
-        topTen(intent.getStringExtra(NAME),location,intent.getIntExtra(SCORE,0));
-        saveData();
-
     }
 
 
-
-    private void fetchLastLocation() {
-        Task<Location> task=client.getLastLocation();
-        task.addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if(location !=null){
-                    userLocation=location;
-                }
-            }
-        });
-    }
-
-
-    private void topTen(String name,Location location,int score){
+    private void topTenHighScore(String name,Location location,int score){
 
             if(players_list.size()<10 ) {
                 findPlace(name,location,score);
@@ -163,7 +152,7 @@ public class EndActivity extends AppCompatActivity {
                 }
             }
 
-            //maybe have problems!!!!!
+
             if(score < players_list.get(players_list.size()-1).getScore()){
                 players_list.add(players_list.size(),new Player(name,location,score));
             }
@@ -175,7 +164,7 @@ public class EndActivity extends AppCompatActivity {
     }
 
 
-    private void saveData(){
+    private void savePlayersData(){
         SharedPreferences sharedPref = getSharedPreferences(SHARE_PREFS,MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         Gson gson = new Gson();
@@ -184,7 +173,7 @@ public class EndActivity extends AppCompatActivity {
         editor.apply();
     }
 
-    private void loadData(){
+    private void loadPlayersData(){
         SharedPreferences sharedPref = getSharedPreferences(SHARE_PREFS,MODE_PRIVATE);
         Gson gson = new Gson();
         String json=sharedPref.getString(TEXT,null);
@@ -204,12 +193,15 @@ public class EndActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent setIntent = new Intent(Intent.ACTION_MAIN);
-        setIntent.addCategory(Intent.CATEGORY_HOME);
-        setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(setIntent);
+        Intent EndActivityIntent=new Intent(EndActivity.this,StartActivity.class);
+        startActivity(EndActivityIntent);
     }
 
 

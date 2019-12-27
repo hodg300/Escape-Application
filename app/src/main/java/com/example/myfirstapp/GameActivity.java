@@ -4,7 +4,6 @@ package com.example.myfirstapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.animation.ValueAnimator;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
@@ -15,15 +14,14 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.PowerManager;
-import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.os.PowerManager;
+import android.widget.Toast;
 
 
 public class GameActivity extends AppCompatActivity implements SensorEventListener {
@@ -33,20 +31,23 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     private final String TEXT_SCORE = "SCORE: ";
     private final String NAME="name";
     private final static int MAX_VOLUME = 100;
+    private final float volume = (float) (1 - (Math.log(MAX_VOLUME - 5) / Math.log(MAX_VOLUME)));
+    private final int BONUS_SCORE=500;
     private int speed;
+    private RelativeLayout relativeLayout;
     private View player;
-    private View[] enemies = new View[NUM_OF_COL];
     private View enemy1;
     private View enemy2;
     private View enemy3;
     private View enemy4;
     private View enemy5;
-    private View[] bonus_staff = new View[NUM_OF_COL];
+    private View[] enemies = {enemy1,enemy2,enemy3,enemy4,enemy5};
     private View coin1;
     private View coin2;
     private View coin3;
     private View coin4;
     private View coin5;
+    private View[] bonus_staff = {coin1,coin2,coin3,coin4,coin5};
     private ImageView life_status1;
     private ImageView life_status2;
     private ImageView life_status3;
@@ -58,16 +59,19 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     private ValueAnimator enemy3_anim;
     private ValueAnimator enemy4_anim;
     private ValueAnimator enemy5_anim;
+    private ValueAnimator[] enemyArr={enemy1_anim,enemy2_anim,enemy3_anim,enemy4_anim,enemy5_anim};
     private ValueAnimator bonus1_anim;
     private ValueAnimator bonus2_anim;
     private ValueAnimator bonus3_anim;
     private ValueAnimator bonus4_anim;
     private ValueAnimator bonus5_anim;
+    private ValueAnimator[] bonusArr={bonus1_anim,bonus2_anim,bonus3_anim,bonus4_anim,bonus5_anim};
     private int screenHeight;
     private int screenwidth;
     private int score=0;
     private TextView scoreView;
     private MediaPlayer mpBackground;
+    private MediaPlayer coinSound;
 
 
     //sensor
@@ -82,11 +86,11 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-
+        Toast.makeText(GameActivity.this,
+                "Get away from the asteroids", Toast.LENGTH_LONG).show();
         //MediaPlayer mpBackground
         mpBackground = MediaPlayer.create(getApplicationContext(),R.raw.starwars);
         mpBackground.setLooping(true);
-        final float volume = (float) (1 - (Math.log(MAX_VOLUME - 5) / Math.log(MAX_VOLUME)));
         mpBackground.setVolume(volume, volume);
         mpBackground.start();
 
@@ -103,13 +107,17 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         screenwidth=size.x;
 
 
+
+
         //make always screen light
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
 
 
+
+        Intent intent=getIntent();
         //-------------------------convert to animation
-        if(!(getIntent().getBooleanExtra(CHECK_BOX,false))) {
+        if(!(intent.getBooleanExtra(CHECK_BOX,false))) {
             isSensor=false;
             speed=3000;
             //move right
@@ -134,6 +142,8 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
             });
 
         }else{//Motion Sensors
+            btnLeft.setVisibility(View.INVISIBLE);
+            btnRight.setVisibility(View.INVISIBLE);
             isSensor=true;
             speed=5000;
             sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -153,6 +163,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
 
     private void initialViews(){ //initial views
+        relativeLayout=(RelativeLayout)findViewById(R.id.rl);
         player = (View) findViewById(R.id.player);
         enemy1 = (View) findViewById(R.id.enemy1);
         enemy2 = (View) findViewById(R.id.enemy2);
@@ -196,9 +207,53 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         }
     }
 
+    private void changeBackgroundAndMoreSpeed(){
+        if(score>5000 && score<10000){
+            relativeLayout.setBackground(getResources().getDrawable(R.drawable.level2));
+            Toast.makeText(GameActivity.this,
+                    "Level 2", Toast.LENGTH_LONG).show();
+            if(isSensor){
+                speed=4500;
+                setSpeedOnAnimation(speed);
+            }else{
+                speed=2500;
+                setSpeedOnAnimation(speed);
+            }
+        }else if(score>=20000){
+            relativeLayout.setBackground(getResources().getDrawable(R.drawable.level3));
+            Toast.makeText(GameActivity.this,
+                    "Level 3", Toast.LENGTH_LONG).show();
+            if(isSensor){
+                speed=4000;
+                setSpeedOnAnimation(speed);
+            }else{
+                speed=2000;
+                setSpeedOnAnimation(speed);
+            }
+        }else if(score>=30000){
+            relativeLayout.setBackground(getResources().getDrawable(R.drawable.level4));
+            Toast.makeText(GameActivity.this,
+                    "Level 4", Toast.LENGTH_LONG).show();
+            if(isSensor){
+                speed=3500;
+                setSpeedOnAnimation(speed);
+            }else{
+                speed=1500;
+                setSpeedOnAnimation(speed);
+            }
+        }
+    }
+
+    private void setSpeedOnAnimation(int speedAnimate){
+        for(int i=0;i<NUM_OF_COL;i++){
+            enemyArr[i].setDuration(speed).setRepeatCount(Animation.INFINITE);
+            bonusArr[i].setDuration(speed).setRepeatCount(Animation.INFINITE);
+        }
+    }
 
     private synchronized void addScore(View enemy,ValueAnimator updatedAnimation){
         if(enemy.getY()>player.getY()+player.getHeight()){
+            changeBackgroundAndMoreSpeed();
             score +=100;
             if(score<9999) {
                 scoreView.setText(TEXT_SCORE + score);
@@ -248,16 +303,10 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void clickToPause(View view) {
-        enemy1_anim.pause();
-        enemy2_anim.pause();
-        enemy3_anim.pause();
-        enemy4_anim.pause();
-        enemy5_anim.pause();
-        bonus1_anim.pause();
-        bonus2_anim.pause();
-        bonus3_anim.pause();
-        bonus4_anim.pause();
-        bonus5_anim.pause();
+        for(int i=0;i<NUM_OF_COL;i++){
+            enemyArr[i].pause();
+            bonusArr[i].pause();
+        }
         findViewById(R.id.move_left).setEnabled(false);
         findViewById(R.id.move_right).setEnabled(false);
         mpBackground.pause();
@@ -267,15 +316,10 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void clickToResume(View view) {
-        enemy1_anim.resume();
-        enemy2_anim.resume();
-        enemy3_anim.resume();
-        enemy4_anim.resume();
-        bonus1_anim.resume();
-        bonus2_anim.resume();
-        bonus3_anim.resume();
-        bonus4_anim.resume();
-        bonus5_anim.resume();
+        for(int i=0;i<NUM_OF_COL;i++){
+            enemyArr[i].resume();
+            bonusArr[i].resume();
+        }
 
         findViewById(R.id.move_left).setEnabled(true);
         findViewById(R.id.move_right).setEnabled(true);
@@ -320,16 +364,11 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     @Override
     protected void onStop() {
         super.onStop();
-        enemy1_anim.pause();
-        enemy2_anim.pause();
-        enemy3_anim.pause();
-        enemy4_anim.pause();
-        enemy5_anim.pause();
-        bonus1_anim.pause();
-        bonus2_anim.pause();
-        bonus3_anim.pause();
-        bonus4_anim.pause();
-        bonus5_anim.pause();
+        for(int i=0;i<NUM_OF_COL;i++){
+            enemyArr[i].pause();
+            bonusArr[i].pause();
+        }
+
         mpBackground.pause();
 
     }
@@ -350,7 +389,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
             if (x >= 0 && x < screenwidth - player.getWidth()) {
                 player.setX(x);
             }
-            else if(x<0){
+            else if(x<0 ){
                 x=0;
             }else if(x>screenwidth - player.getWidth()){
                 x=screenwidth - player.getWidth();
@@ -366,87 +405,93 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     }
 
 
+    //maybe cause to problem because app stuck when i get coin
+    private void makeCoinSound(){
+        coinSound = MediaPlayer.create(getApplicationContext(),R.raw.coinsound);
+        coinSound.setLooping(false);
+        coinSound.start();
+    }
 
     public void bonusAnimate(){
-        bonus1_anim = ValueAnimator.ofInt(-260, screenHeight + 400);
-        bonus1_anim.setDuration(speed).setRepeatCount(Animation.INFINITE);
-        bonus1_anim.setStartDelay(10000);
-        bonus1_anim.start();
-        bonus1_anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        bonusArr[0] = ValueAnimator.ofInt(-260, screenHeight + 400);
+        bonusArr[0].setDuration(speed).setRepeatCount(Animation.INFINITE);
+        bonusArr[0].setStartDelay(10000);
+        bonusArr[0].start();
+        bonusArr[0].addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator updatedAnimation) {
                 int animatedValue = (int) updatedAnimation.getAnimatedValue();
                 coin1.setTranslationY(animatedValue);
                 if (isCollision(coin1, player)) {
-                    score += 500;
+                    score += BONUS_SCORE;
                     coin1.setY(-130);
                     updatedAnimation.start();
                 }
             }
         });
 
-        bonus2_anim = ValueAnimator.ofInt(-260, screenHeight + 400);
-        bonus2_anim.setDuration(speed).setRepeatCount(Animation.INFINITE);
-        bonus2_anim.setStartDelay(22000);
-        bonus2_anim.start();
-        bonus2_anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        bonusArr[1] = ValueAnimator.ofInt(-260, screenHeight + 400);
+        bonusArr[1].setDuration(speed).setRepeatCount(Animation.INFINITE);
+        bonusArr[1].setStartDelay(22000);
+        bonusArr[1].start();
+        bonusArr[1].addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator updatedAnimation) {
                 int animatedValue = (int) updatedAnimation.getAnimatedValue();
                 coin2.setTranslationY(animatedValue);
                 if (isCollision(coin2, player)) {
-                    score += 500;
+                    score += BONUS_SCORE;
                     coin2.setY(-130);
                     updatedAnimation.start();
                 }
             }
         });
 
-        bonus3_anim = ValueAnimator.ofInt(-260, screenHeight + 400);
-        bonus3_anim.setDuration(speed).setRepeatCount(Animation.INFINITE);
-        bonus3_anim.setStartDelay(10000);
-        bonus3_anim.start();
-        bonus3_anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        bonusArr[2] = ValueAnimator.ofInt(-260, screenHeight + 400);
+        bonusArr[2].setDuration(speed).setRepeatCount(Animation.INFINITE);
+        bonusArr[2].setStartDelay(10000);
+        bonusArr[2].start();
+        bonusArr[2].addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator updatedAnimation) {
                 int animatedValue = (int) updatedAnimation.getAnimatedValue();
                 coin3.setTranslationY(animatedValue);
                 if (isCollision(coin3, player)) {
-                    score += 500;
+                    score += BONUS_SCORE;
                     coin3.setY(-130);
                     updatedAnimation.start();
                 }
             }
         });
 
-        bonus4_anim = ValueAnimator.ofInt(-260, screenHeight + 400);
-        bonus4_anim.setDuration(speed).setRepeatCount(Animation.INFINITE);
-        bonus4_anim.setStartDelay(17000);
-        bonus4_anim.start();
-        bonus4_anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        bonusArr[3] = ValueAnimator.ofInt(-260, screenHeight + 400);
+        bonusArr[3].setDuration(speed).setRepeatCount(Animation.INFINITE);
+        bonusArr[3].setStartDelay(17000);
+        bonusArr[3].start();
+        bonusArr[3].addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator updatedAnimation) {
                 int animatedValue = (int) updatedAnimation.getAnimatedValue();
                 coin4.setTranslationY(animatedValue);
                 if (isCollision(coin4, player)) {
-                    score += 500;
+                    score += BONUS_SCORE;
                     coin4.setY(-130);
                     updatedAnimation.start();
                 }
             }
         });
 
-        bonus5_anim = ValueAnimator.ofInt(-260, screenHeight + 400);
-        bonus5_anim.setDuration(speed).setRepeatCount(Animation.INFINITE);
-        bonus5_anim.setStartDelay(12000);
-        bonus5_anim.start();
-        bonus5_anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        bonusArr[4] = ValueAnimator.ofInt(-260, screenHeight + 400);
+        bonusArr[4].setDuration(speed).setRepeatCount(Animation.INFINITE);
+        bonusArr[4].setStartDelay(12000);
+        bonusArr[4].start();
+        bonusArr[4].addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator updatedAnimation) {
                 int animatedValue = (int) updatedAnimation.getAnimatedValue();
                 coin5.setTranslationY(animatedValue);
                 if (isCollision(coin5, player)) {
-                    score += 500;
+                    score += BONUS_SCORE;
                     coin5.setY(-130);
                     updatedAnimation.start();
                 }
@@ -455,11 +500,11 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     }
 
     private void enemiesAnimate() {
-        enemy1_anim = ValueAnimator.ofInt(-130,screenHeight+400);
-        enemy1_anim.setDuration(speed).setRepeatCount(Animation.INFINITE);
-        enemy1_anim.setStartDelay(200);
-        enemy1_anim.start();
-        enemy1_anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        enemyArr[0] = ValueAnimator.ofInt(-130,screenHeight+400);
+        enemyArr[0].setDuration(speed).setRepeatCount(Animation.INFINITE);
+        enemyArr[0].setStartDelay(200);
+        enemyArr[0].start();
+        enemyArr[0].addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator updatedAnimation) {
 
@@ -474,11 +519,11 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
             }
         });
-        enemy2_anim = ValueAnimator.ofInt(-130,screenHeight +400);
-        enemy2_anim.setDuration(speed).setRepeatCount(Animation.INFINITE);
-        enemy2_anim.setStartDelay(2200);
-        enemy2_anim.start();
-        enemy2_anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        enemyArr[1] = ValueAnimator.ofInt(-130,screenHeight +400);
+        enemyArr[1].setDuration(speed).setRepeatCount(Animation.INFINITE);
+        enemyArr[1].setStartDelay(2200);
+        enemyArr[1].start();
+        enemyArr[1].addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator updatedAnimation) {
 
@@ -494,11 +539,11 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
             }
         });
 
-        enemy3_anim = ValueAnimator.ofInt(-130,screenHeight +400);
-        enemy3_anim.setDuration(speed).setRepeatCount(Animation.INFINITE);
-        enemy3_anim.setStartDelay(1100);
-        enemy3_anim.start();
-        enemy3_anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        enemyArr[2] = ValueAnimator.ofInt(-130,screenHeight +400);
+        enemyArr[2].setDuration(speed).setRepeatCount(Animation.INFINITE);
+        enemyArr[2].setStartDelay(1100);
+        enemyArr[2].start();
+        enemyArr[2].addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator updatedAnimation) {
 
@@ -514,11 +559,11 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         });
 
 
-        enemy4_anim = ValueAnimator.ofInt(-130,screenHeight +400);
-        enemy4_anim.setDuration(speed).setRepeatCount(Animation.INFINITE);
-        enemy4_anim.setStartDelay(1500);
-        enemy4_anim.start();
-        enemy4_anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        enemyArr[3] = ValueAnimator.ofInt(-130,screenHeight +400);
+        enemyArr[3].setDuration(speed).setRepeatCount(Animation.INFINITE);
+        enemyArr[3].setStartDelay(1500);
+        enemyArr[3].start();
+        enemyArr[3].addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator updatedAnimation) {
 
@@ -535,11 +580,11 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
 
 
-        enemy5_anim = ValueAnimator.ofInt(-130,screenHeight +400);
-        enemy5_anim.setDuration(speed).setRepeatCount(Animation.INFINITE);
-        enemy5_anim.setStartDelay(1300);
-        enemy5_anim.start();
-        enemy5_anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        enemyArr[4] = ValueAnimator.ofInt(-130,screenHeight +400);
+        enemyArr[4].setDuration(speed).setRepeatCount(Animation.INFINITE);
+        enemyArr[4].setStartDelay(1300);
+        enemyArr[4].start();
+        enemyArr[4].addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator updatedAnimation) {
 

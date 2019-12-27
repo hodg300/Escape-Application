@@ -1,8 +1,16 @@
 package com.example.myfirstapp;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
+
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,66 +20,66 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 
-public class MapFragment extends Fragment implements OnMapReadyCallback, LocationListener{
-    private GoogleMap mGoogleMap;
-    private MapView mMapView;
-    private View mView;
-    private Location lastLocation;
-    private Marker currentUserLocationMarker;
+public class MapFragment extends Fragment/* implements OnMapReadyCallback, LocationListener*/{
+    private double longitude;
+    private double latitude;
 
 
+    public MapFragment(double latitude,double longitude) {
+        this.latitude=latitude;
+        this.longitude=longitude;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mView= inflater.inflate(R.layout.fragment_map, container, false);
-        return mView;
+        View rootView = inflater.inflate(R.layout.fragment_map, container, false);
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);  //use SuppoprtMapFragment for using in fragment instead of activity  MapFragment = activity   SupportMapFragment = fragment
+        mapFragment.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap mMap) {
+                mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
+                mMap.clear(); //clear old markers
+
+                CameraPosition googlePlex = CameraPosition.builder()
+                        .target(new LatLng(latitude,longitude))
+                        .zoom(16)
+                        .bearing(0)
+                        .tilt(45)
+                        .build();
+
+                mMap.animateCamera(CameraUpdateFactory.newCameraPosition(googlePlex), 1000, null);
+
+                mMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(latitude,longitude))
+                        .title("Spider Man")
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+                Log.d("testlocation", "onMapReady: " + latitude + "     " + longitude);
+            }
+        });
+
+
+        return rootView;
     }
 
-    @Override
-    public void onViewCreated(View view,Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        mMapView=(MapView)mView.findViewById(R.id.map);
-        if(mMapView!=null){
-            mMapView.onCreate(null);
-            mMapView.onResume();
-            mMapView.getMapAsync(this);
-        }
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-
-    mGoogleMap=googleMap;
-    mGoogleMap.setMyLocationEnabled(true);
-
-    }
-
-
-
-    @Override
-    public void onLocationChanged(Location location) {
-        lastLocation=location;
-        if(currentUserLocationMarker !=null){
-            currentUserLocationMarker.remove();
-        }
-        MapsInitializer.initialize(getContext());
-        LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
-        MarkerOptions markerOptions=new MarkerOptions();
-        markerOptions.position(latLng);
-        markerOptions.title("User Current Position");
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-        currentUserLocationMarker=mGoogleMap.addMarker(markerOptions);
-        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mGoogleMap.animateCamera(CameraUpdateFactory.zoomBy(16));
-
-    }
-
+//    private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId) {
+//        Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
+//        vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
+//        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+//        Canvas canvas = new Canvas(bitmap);
+//        vectorDrawable.draw(canvas);
+//        return BitmapDescriptorFactory.fromBitmap(bitmap);
+//    }
 }

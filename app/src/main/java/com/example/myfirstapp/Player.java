@@ -39,12 +39,17 @@ public class Player {
         return location;
     }
 
+    public double getLattitude() {
+        return lattitude;
+    }
 
-
+    public double getLongitude() {
+        return longitude;
+    }
 
     @Override
     public String toString() {
-        return this.name + " " + (float)this.lattitude + " " + (float)this.longitude + " " +this.score + "\n";
+        return String.format("Name: %s Lat: %.2f Lng: %.2f Score: %d",this.name,this.lattitude,this.longitude,this.score);
     }
 
 

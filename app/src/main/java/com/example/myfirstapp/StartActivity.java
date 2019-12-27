@@ -20,17 +20,16 @@ import android.widget.Toast;
 
 
 public class StartActivity extends AppCompatActivity {
-    private CheckBox checkBox;
-    private boolean isCheckBox=false;
-    private EditText editName;
-    private ImageView startGame;
     public final String CHECK_BOX = "check_box";
     public final String NAME = "name";
-    private int count=0;
+    private final int REQUEST_CODE_ASK_PERMISSIONS = 123;
+    private CheckBox checkBox;
+    private EditText editName;
+    private ImageView startGame;
     private String userName;
-    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
-
-
+    private int count=0;
+    private boolean isCheckBox=false;
+    private final int LIMIT_LENGTH_OF_NAME=8;
 
 
     @Override
@@ -80,6 +79,7 @@ public class StartActivity extends AppCompatActivity {
 
 }
 
+
     private void requestLocationPermission() {
             ActivityCompat.requestPermissions(this,
                     new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_ASK_PERMISSIONS);
@@ -101,7 +101,6 @@ public class StartActivity extends AppCompatActivity {
 
         if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             buildAlertMessageNoGps();
-
         }
     }
 
