@@ -5470,31 +5470,34 @@ public final class R {
     public static final int ic_mtrl_chip_checked_circle=0x7f070089;
     public static final int ic_mtrl_chip_close_circle=0x7f07008a;
     public static final int left=0x7f07008b;
-    public static final int like=0x7f07008c;
-    public static final int mtrl_snackbar_background=0x7f07008d;
-    public static final int mtrl_tabs_default_indicator=0x7f07008e;
-    public static final int navigation_empty_icon=0x7f07008f;
-    public static final int notification_action_background=0x7f070090;
-    public static final int notification_bg=0x7f070091;
-    public static final int notification_bg_low=0x7f070092;
-    public static final int notification_bg_low_normal=0x7f070093;
-    public static final int notification_bg_low_pressed=0x7f070094;
-    public static final int notification_bg_normal=0x7f070095;
-    public static final int notification_bg_normal_pressed=0x7f070096;
-    public static final int notification_icon_background=0x7f070097;
-    public static final int notification_template_icon_bg=0x7f070098;
-    public static final int notification_template_icon_low_bg=0x7f070099;
-    public static final int notification_tile_bg=0x7f07009a;
-    public static final int notify_panel_notification_icon_bg=0x7f07009b;
-    public static final int pause=0x7f07009c;
-    public static final int resume=0x7f07009d;
-    public static final int right=0x7f07009e;
-    public static final int space_photo=0x7f07009f;
-    public static final int spaceship=0x7f0700a0;
-    public static final int start=0x7f0700a1;
-    public static final int stop=0x7f0700a2;
-    public static final int tooltip_frame_dark=0x7f0700a3;
-    public static final int tooltip_frame_light=0x7f0700a4;
+    public static final int level2=0x7f07008c;
+    public static final int level3=0x7f07008d;
+    public static final int level4=0x7f07008e;
+    public static final int like=0x7f07008f;
+    public static final int mtrl_snackbar_background=0x7f070090;
+    public static final int mtrl_tabs_default_indicator=0x7f070091;
+    public static final int navigation_empty_icon=0x7f070092;
+    public static final int notification_action_background=0x7f070093;
+    public static final int notification_bg=0x7f070094;
+    public static final int notification_bg_low=0x7f070095;
+    public static final int notification_bg_low_normal=0x7f070096;
+    public static final int notification_bg_low_pressed=0x7f070097;
+    public static final int notification_bg_normal=0x7f070098;
+    public static final int notification_bg_normal_pressed=0x7f070099;
+    public static final int notification_icon_background=0x7f07009a;
+    public static final int notification_template_icon_bg=0x7f07009b;
+    public static final int notification_template_icon_low_bg=0x7f07009c;
+    public static final int notification_tile_bg=0x7f07009d;
+    public static final int notify_panel_notification_icon_bg=0x7f07009e;
+    public static final int pause=0x7f07009f;
+    public static final int resume=0x7f0700a0;
+    public static final int right=0x7f0700a1;
+    public static final int space_photo=0x7f0700a2;
+    public static final int spaceship=0x7f0700a3;
+    public static final int start=0x7f0700a4;
+    public static final int stop=0x7f0700a5;
+    public static final int tooltip_frame_dark=0x7f0700a6;
+    public static final int tooltip_frame_light=0x7f0700a7;
   }
   public static final class id {
     public static final int ALT=0x7f080000;
@@ -5706,13 +5709,13 @@ public final class R {
     public static final int save_image_matrix=0x7f0800ce;
     public static final int save_non_transition_alpha=0x7f0800cf;
     public static final int save_scale_type=0x7f0800d0;
-    public static final int score_view=0x7f0800d1;
-    public static final int screen=0x7f0800d2;
-    public static final int scroll=0x7f0800d3;
-    public static final int scrollIndicatorDown=0x7f0800d4;
-    public static final int scrollIndicatorUp=0x7f0800d5;
-    public static final int scrollView=0x7f0800d6;
-    public static final int scroll_view=0x7f0800d7;
+    public static final int score_container=0x7f0800d1;
+    public static final int score_view=0x7f0800d2;
+    public static final int screen=0x7f0800d3;
+    public static final int scroll=0x7f0800d4;
+    public static final int scrollIndicatorDown=0x7f0800d5;
+    public static final int scrollIndicatorUp=0x7f0800d6;
+    public static final int scrollView=0x7f0800d7;
     public static final int scrollable=0x7f0800d8;
     public static final int search_badge=0x7f0800d9;
     public static final int search_bar=0x7f0800da;
@@ -5900,7 +5903,8 @@ public final class R {
     public static final int ic_launcher_round=0x7f0c0002;
   }
   public static final class raw {
-    public static final int starwars=0x7f0d0000;
+    public static final int coinsound=0x7f0d0000;
+    public static final int starwars=0x7f0d0001;
   }
   public static final class string {
     public static final int abc_action_bar_home_description=0x7f0e0000;

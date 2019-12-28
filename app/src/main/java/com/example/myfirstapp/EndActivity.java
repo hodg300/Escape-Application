@@ -62,11 +62,9 @@ public class EndActivity extends AppCompatActivity {
 
     private void getLocation(){
         client = LocationServices.getFusedLocationProviderClient(this);
-        //fetchLastLocation();
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
             return;
         }
         userLocation = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);

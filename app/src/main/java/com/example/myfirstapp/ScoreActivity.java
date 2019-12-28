@@ -108,7 +108,6 @@ public class ScoreActivity extends AppCompatActivity {
         textView.setGravity(LinearLayout.TEXT_ALIGNMENT_CENTER);
         textView.setTextColor(Color.WHITE);
         textView.setPadding(5,20,5,5);
-        textView.setFontFeatureSettings("casual");
         textView.setTextSize(17);
         textView.setLayoutParams(llp);
         linearLayout.addView(textView);

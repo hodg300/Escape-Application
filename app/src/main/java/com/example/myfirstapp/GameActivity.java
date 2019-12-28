@@ -14,6 +14,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
@@ -25,6 +26,8 @@ import android.widget.Toast;
 
 
 public class GameActivity extends AppCompatActivity implements SensorEventListener {
+    private static final int ADD_SCORE_FROM_ENEMY = 1;
+    private final int BONUS_SCORE=5;
     private final int NUM_OF_COL = 5;
     public final String CHECK_BOX = "check_box";
     private final String SCORE = "score";
@@ -32,7 +35,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     private final String NAME="name";
     private final static int MAX_VOLUME = 100;
     private final float volume = (float) (1 - (Math.log(MAX_VOLUME - 5) / Math.log(MAX_VOLUME)));
-    private final int BONUS_SCORE=500;
+
     private int speed;
     private RelativeLayout relativeLayout;
     private View player;
@@ -87,12 +90,9 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         setContentView(R.layout.activity_game);
 
         Toast.makeText(GameActivity.this,
-                "Get away from the asteroids", Toast.LENGTH_LONG).show();
+                "Get away from the asteroids", Toast.LENGTH_SHORT).show();
         //MediaPlayer mpBackground
-        mpBackground = MediaPlayer.create(getApplicationContext(),R.raw.starwars);
-        mpBackground.setLooping(true);
-        mpBackground.setVolume(volume, volume);
-        mpBackground.start();
+        startMusicBackground();
 
 
         initialViews();
@@ -207,11 +207,19 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         }
     }
 
+    private void startMusicBackground(){
+        mpBackground = MediaPlayer.create(getApplicationContext(),R.raw.starwars);
+        mpBackground.setLooping(true);
+        mpBackground.setVolume(volume, volume);
+        mpBackground.start();
+    }
+
     private void changeBackgroundAndMoreSpeed(){
-        if(score>5000 && score<10000){
+        if(score>=50 && score <=65){
             relativeLayout.setBackground(getResources().getDrawable(R.drawable.level2));
             Toast.makeText(GameActivity.this,
-                    "Level 2", Toast.LENGTH_LONG).show();
+                    "Level 2", Toast.LENGTH_SHORT).show();
+            Log.d("speedtest", "changeBackgroundAndMoreSpeed: " + speed);
             if(isSensor){
                 speed=4500;
                 setSpeedOnAnimation(speed);
@@ -219,10 +227,11 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
                 speed=2500;
                 setSpeedOnAnimation(speed);
             }
-        }else if(score>=20000){
+        }else if(score>=150 && score<=165){
             relativeLayout.setBackground(getResources().getDrawable(R.drawable.level3));
             Toast.makeText(GameActivity.this,
-                    "Level 3", Toast.LENGTH_LONG).show();
+                    "Level 3", Toast.LENGTH_SHORT).show();
+            Log.d("speedtest", "changeBackgroundAndMoreSpeed: " + speed);
             if(isSensor){
                 speed=4000;
                 setSpeedOnAnimation(speed);
@@ -230,10 +239,10 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
                 speed=2000;
                 setSpeedOnAnimation(speed);
             }
-        }else if(score>=30000){
+        }else if(score>=300 && score <=315){
             relativeLayout.setBackground(getResources().getDrawable(R.drawable.level4));
             Toast.makeText(GameActivity.this,
-                    "Level 4", Toast.LENGTH_LONG).show();
+                    "Final level", Toast.LENGTH_SHORT).show();
             if(isSensor){
                 speed=3500;
                 setSpeedOnAnimation(speed);
@@ -244,6 +253,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         }
     }
 
+    //update speed animation
     private void setSpeedOnAnimation(int speedAnimate){
         for(int i=0;i<NUM_OF_COL;i++){
             enemyArr[i].setDuration(speed).setRepeatCount(Animation.INFINITE);
@@ -254,19 +264,19 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     private synchronized void addScore(View enemy,ValueAnimator updatedAnimation){
         if(enemy.getY()>player.getY()+player.getHeight()){
             changeBackgroundAndMoreSpeed();
-            score +=100;
-            if(score<9999) {
-                scoreView.setText(TEXT_SCORE + score);
-            }else{
-                scoreView.setText(TEXT_SCORE +score);
-                scoreView.setTextSize(20);
-            }
+            score +=ADD_SCORE_FROM_ENEMY;
+            scoreView.setText(TEXT_SCORE + score);
             updatedAnimation.start();
         }
     }
+    private synchronized void addBonusScore(){
+
+        score += BONUS_SCORE;
+        scoreView.setText(TEXT_SCORE + score +" +5");
+    }
 
 
-
+//check collision and update hearts--------------------------
     private synchronized  void hitCheck() {
 
             this.life--;
@@ -301,7 +311,8 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
         return Rect.intersects(rect1,rect2);
     }
-
+//-----------------------------------
+// click on buttons method-------------
     public void clickToPause(View view) {
         for(int i=0;i<NUM_OF_COL;i++){
             enemyArr[i].pause();
@@ -339,6 +350,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         startActivity(gameActivityIntent);
         finish();
     }
+//---------------------------------
 
 
     @Override
@@ -359,6 +371,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         if(!findViewById(R.id.btn_pause).isEnabled()) {
             mpBackground.start();
         }
+        changeBackgroundAndMoreSpeed();
     }
 
     @Override
@@ -423,7 +436,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
                 int animatedValue = (int) updatedAnimation.getAnimatedValue();
                 coin1.setTranslationY(animatedValue);
                 if (isCollision(coin1, player)) {
-                    score += BONUS_SCORE;
+                    addBonusScore();
                     coin1.setY(-130);
                     updatedAnimation.start();
                 }
@@ -440,7 +453,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
                 int animatedValue = (int) updatedAnimation.getAnimatedValue();
                 coin2.setTranslationY(animatedValue);
                 if (isCollision(coin2, player)) {
-                    score += BONUS_SCORE;
+                    addBonusScore();
                     coin2.setY(-130);
                     updatedAnimation.start();
                 }
@@ -457,7 +470,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
                 int animatedValue = (int) updatedAnimation.getAnimatedValue();
                 coin3.setTranslationY(animatedValue);
                 if (isCollision(coin3, player)) {
-                    score += BONUS_SCORE;
+                    addBonusScore();
                     coin3.setY(-130);
                     updatedAnimation.start();
                 }
@@ -474,7 +487,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
                 int animatedValue = (int) updatedAnimation.getAnimatedValue();
                 coin4.setTranslationY(animatedValue);
                 if (isCollision(coin4, player)) {
-                    score += BONUS_SCORE;
+                    addBonusScore();
                     coin4.setY(-130);
                     updatedAnimation.start();
                 }
@@ -491,7 +504,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
                 int animatedValue = (int) updatedAnimation.getAnimatedValue();
                 coin5.setTranslationY(animatedValue);
                 if (isCollision(coin5, player)) {
-                    score += BONUS_SCORE;
+                    addBonusScore();
                     coin5.setY(-130);
                     updatedAnimation.start();
                 }

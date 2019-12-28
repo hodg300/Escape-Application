@@ -1118,6 +1118,9 @@ drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
 drawable left
+drawable level2
+drawable level3
+drawable level4
 drawable like
 drawable mtrl_snackbar_background
 drawable mtrl_tabs_default_indicator
@@ -1352,13 +1355,13 @@ id satellite
 id save_image_matrix
 id save_non_transition_alpha
 id save_scale_type
+id score_container
 id score_view
 id screen
 id scroll
 id scrollIndicatorDown
 id scrollIndicatorUp
 id scrollView
-id scroll_view
 id scrollable
 id search_badge
 id search_bar
@@ -1536,6 +1539,7 @@ layout support_simple_spinner_dropdown_item
 mipmap ic_launcher
 mipmap ic_launcher_foreground
 mipmap ic_launcher_round
+raw coinsound
 raw starwars
 string abc_action_bar_home_description
 string abc_action_bar_up_description
