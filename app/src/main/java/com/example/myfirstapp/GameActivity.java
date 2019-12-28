@@ -16,6 +16,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -116,7 +117,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
 
         Intent intent=getIntent();
-        //-------------------------convert to animation
+        //play with buttons
         if(!(intent.getBooleanExtra(CHECK_BOX,false))) {
             isSensor=false;
             speed=3000;
@@ -141,7 +142,8 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
                 }
             });
 
-        }else{//Motion Sensors
+        }else{//play with Motion Sensors
+
             btnLeft.setVisibility(View.INVISIBLE);
             btnRight.setVisibility(View.INVISIBLE);
             isSensor=true;
@@ -219,7 +221,6 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
             relativeLayout.setBackground(getResources().getDrawable(R.drawable.level2));
             Toast.makeText(GameActivity.this,
                     "Level 2", Toast.LENGTH_SHORT).show();
-            Log.d("speedtest", "changeBackgroundAndMoreSpeed: " + speed);
             if(isSensor){
                 speed=4500;
                 setSpeedOnAnimation(speed);
@@ -231,7 +232,6 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
             relativeLayout.setBackground(getResources().getDrawable(R.drawable.level3));
             Toast.makeText(GameActivity.this,
                     "Level 3", Toast.LENGTH_SHORT).show();
-            Log.d("speedtest", "changeBackgroundAndMoreSpeed: " + speed);
             if(isSensor){
                 speed=4000;
                 setSpeedOnAnimation(speed);

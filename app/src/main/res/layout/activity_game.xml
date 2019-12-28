@@ -10,6 +10,8 @@
     android:paddingBottom="10dp"
     >
 
+
+
     <ImageView
         android:id="@+id/life_status1"
         android:layout_width="24dp"
@@ -138,6 +140,8 @@
             android:layout_above="@id/move_left"
             android:layout_weight="1"
             >
+
+
             <ImageView
                 android:id="@+id/enemy3"
                 android:layout_width="match_parent"
