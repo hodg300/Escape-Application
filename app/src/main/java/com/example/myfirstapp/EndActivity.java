@@ -14,28 +14,31 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 public class EndActivity extends AppCompatActivity {
     public final String SHARE_PREFS = "sharedPrefs";
     public final String TEXT = "text";
-    public final String CURRENT_PLAYER="currentPlayer";
+    public final String CURRENT_PLAYER = "currentPlayer";
     private TextView scoreView;
     private final String SCORE = "score";
     private final String NAME = "name";
     private ArrayList<Player> players_list;
     private Location userLocation;
     public final String CHECK_BOX = "check_box";
-    private FusedLocationProviderClient client;
     private LocationManager locationManager;
-
 
 
 
@@ -45,29 +48,48 @@ public class EndActivity extends AppCompatActivity {
         setContentView(R.layout.activity_end);
 
         //create list of players
-        players_list=new ArrayList<>();
-        Intent intent=getIntent();
+        players_list = new ArrayList<>();
+        Intent intent = getIntent();
+        getLocation();//add current location to userLocation
+        if (userLocation != null) {
+            loadPlayersData();
+            topTenHighScore(intent.getStringExtra(NAME), userLocation, intent.getIntExtra(SCORE, 0));
+            savePlayersData();
 
-
+        }
         getScoreFromGameActivity();
         listenerOfBtns();
-        getLocation();//add lcurrent location to userLocation
-        loadPlayersData();
-        topTenHighScore(intent.getStringExtra(NAME),userLocation,intent.getIntExtra(SCORE,0));
-        savePlayersData();
 
     }
 
 
-
-    private void getLocation(){
-        client = LocationServices.getFusedLocationProviderClient(this);
+    private void getLocation() {
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            userLocation=getLastKnownLocation();
         }
-        userLocation = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);
+    }
+
+    private Location getLastKnownLocation() {
+        locationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
+        List<String> providers = locationManager.getProviders(true);
+        Location bestLocation=null;
+        for (String provider : providers) {
+            if (ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                Location l = locationManager.getLastKnownLocation(provider);
+                if (l == null) {
+                    continue;
+                }
+                if (bestLocation == null || l.getAccuracy() < bestLocation.getAccuracy()) {
+                    // Found best last known location: %s", l);
+                    bestLocation = l;
+                }
+            }
+
+        }
+        return bestLocation;
     }
 
     private void getScoreFromGameActivity() {

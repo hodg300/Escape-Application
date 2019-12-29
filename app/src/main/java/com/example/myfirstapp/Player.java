@@ -6,7 +6,7 @@ import android.location.Location;
 
 public class Player {
     private String name;
-    private double lattitude;
+    private double latitude;
     private double longitude;
     private int score;
     private Location location;
@@ -14,7 +14,7 @@ public class Player {
 
     public Player(String name,Location location,int score){
         this.name=name;
-        this.lattitude=location.getLatitude();
+        this.latitude=location.getLatitude();
         this.longitude=location.getLongitude();
         this.score=score;
         this.location=location;
@@ -39,8 +39,8 @@ public class Player {
         return location;
     }
 
-    public double getLattitude() {
-        return lattitude;
+    public double getLatitude() {
+        return latitude;
     }
 
     public double getLongitude() {
@@ -49,7 +49,7 @@ public class Player {
 
     @Override
     public String toString() {
-        return String.format("Name: %s Lat: %.2f Lng: %.2f Score: %d",this.name,this.lattitude,this.longitude,this.score);
+        return String.format("Name: %s Lat: %.2f Lng: %.2f Score: %d",this.name,this.latitude,this.longitude,this.score);
     }
 
 

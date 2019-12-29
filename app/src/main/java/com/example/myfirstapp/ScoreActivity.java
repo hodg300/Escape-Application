@@ -92,7 +92,7 @@ public class ScoreActivity extends AppCompatActivity {
            textView.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View v) {
-                   showPlayerOnMap(player.getLattitude(),player.getLongitude());
+                   showPlayerOnMap(player.getLatitude(),player.getLongitude());
                }
            });
 

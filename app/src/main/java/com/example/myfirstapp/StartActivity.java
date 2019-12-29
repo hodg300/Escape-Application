@@ -29,8 +29,7 @@ public class StartActivity extends AppCompatActivity {
     private String userName;
     private int count=0;
     private boolean isCheckBox=false;
-    private final int LIMIT_LENGTH_OF_NAME=8;
-
+    private boolean isProviderEnabled;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +58,8 @@ public class StartActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     if (ContextCompat.checkSelfPermission(StartActivity.this,
-                            Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                            Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                    && isProviderEnabled) {
                         userName = editName.getText().toString();
                         if (userName.matches("")) {
                             Toast.makeText(StartActivity.this,
@@ -71,7 +71,11 @@ public class StartActivity extends AppCompatActivity {
                             startActivity(startActivityIntent);
                             finish();
                         }
-                    } else {
+                    }if(!isProviderEnabled){
+                        statusCheck();
+                    }
+                    if(!(ContextCompat.checkSelfPermission(StartActivity.this,
+                            Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)) {
                         requestLocationPermission();
                     }
                 }
@@ -101,7 +105,10 @@ public class StartActivity extends AppCompatActivity {
 
         if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             buildAlertMessageNoGps();
+        }else{
+            isProviderEnabled=true;
         }
+
     }
 
     private void buildAlertMessageNoGps() {
@@ -110,16 +117,21 @@ public class StartActivity extends AppCompatActivity {
                 .setCancelable(false)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
+                        isProviderEnabled=true;
                         startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
+                        isProviderEnabled=false;
                         dialog.cancel();
+
                     }
                 });
         final AlertDialog alert = builder.create();
         alert.show();
+
     }
 }
 
