@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -53,6 +54,9 @@ public class ScoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
         players_list = new ArrayList<>();
+
+        Toast.makeText(ScoreActivity.this,
+                "Click on a player to show his location", Toast.LENGTH_LONG).show();
         updateViews();
 
     }
@@ -60,8 +64,8 @@ public class ScoreActivity extends AppCompatActivity {
     private void updateViews() {
 
         //show current player on fragment
-        double[] playerLocat=getIntent().getExtras().getDoubleArray(CURRENT_PLAYER);
-        addFragment(new MapFragment(playerLocat[0],playerLocat[1]),true,"one");
+//        double[] playerLocat=getIntent().getExtras().getDoubleArray(CURRENT_PLAYER);
+//        addFragment(new MapFragment(playerLocat[0],playerLocat[1]),true,"one");
 
 
         //read from json

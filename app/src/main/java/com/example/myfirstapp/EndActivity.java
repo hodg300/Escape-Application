@@ -18,7 +18,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.gson.Gson;
@@ -27,8 +31,10 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class EndActivity extends AppCompatActivity {
+    private final int REQUEST_FINE_LOCATION=1234;
     public final String SHARE_PREFS = "sharedPrefs";
     public final String TEXT = "text";
     public final String CURRENT_PLAYER = "currentPlayer";
@@ -39,7 +45,9 @@ public class EndActivity extends AppCompatActivity {
     private Location userLocation;
     public final String CHECK_BOX = "check_box";
     private LocationManager locationManager;
-
+    private FusedLocationProviderClient mFusedLocationClient;
+    private double lat;
+    private double lng;
 
 
     @Override
@@ -51,12 +59,12 @@ public class EndActivity extends AppCompatActivity {
         players_list = new ArrayList<>();
         Intent intent = getIntent();
         getLocation();//add current location to userLocation
-        if (userLocation != null) {
+//        if (userLocation != null) {
             loadPlayersData();
             topTenHighScore(intent.getStringExtra(NAME), userLocation, intent.getIntExtra(SCORE, 0));
             savePlayersData();
 
-        }
+//        }
         getScoreFromGameActivity();
         listenerOfBtns();
 
@@ -65,14 +73,17 @@ public class EndActivity extends AppCompatActivity {
 
     private void getLocation() {
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            userLocation=getLastKnownLocation();
+                userLocation=getLastKnownLocation();
+        }else{
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_FINE_LOCATION);
+
         }
     }
 
     private Location getLastKnownLocation() {
-        locationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
         List<String> providers = locationManager.getProviders(true);
         Location bestLocation=null;
         for (String provider : providers) {
@@ -135,8 +146,8 @@ public class EndActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent EndActivityIntent=new Intent(EndActivity.this,ScoreActivity.class);
-                double[] latLng={userLocation.getLatitude(),userLocation.getLongitude()};
-                EndActivityIntent.putExtra(CURRENT_PLAYER,latLng);
+//                double[] latLng={userLocation.getLatitude(),userLocation.getLongitude()};
+//                EndActivityIntent.putExtra(CURRENT_PLAYER,latLng);
                 startActivity(EndActivityIntent);
 
             }

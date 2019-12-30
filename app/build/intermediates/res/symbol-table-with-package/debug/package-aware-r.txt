@@ -1140,6 +1140,7 @@ drawable notify_panel_notification_icon_bg
 drawable pause
 drawable resume
 drawable right
+drawable rotate
 drawable space_photo
 drawable spaceship
 drawable start
@@ -1282,6 +1283,7 @@ id filled
 id fixed
 id forever
 id fragment_place
+id game_over_view
 id ghost_view
 id gone
 id group_divider
