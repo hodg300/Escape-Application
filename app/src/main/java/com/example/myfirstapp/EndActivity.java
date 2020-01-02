@@ -18,6 +18,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -45,91 +46,92 @@ public class EndActivity extends AppCompatActivity {
     private ArrayList<Player> players_list;
     private Location userLocation;
     public final String CHECK_BOX = "check_box";
-    private LocationManager locationManager;
     private FusedLocationProviderClient mFusedLocationClient;
-    private double lat;
-    private double lng;
-//    private LocationCallback locationCallback;
-//    private LocationRequest locationRequest;
+    private LocationCallback locationCallback;
+    private LocationRequest mLocationRequest;
+    private static int count=0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end);
 
-
-
-//        locationCallback = new LocationCallback() {
-//            @Override
-//            public void onLocationResult(LocationResult locationResult) {
-//                if (locationResult == null) {
-//                    return;
-//                }
-//                for (Location location : locationResult.getLocations()) {
-//                    userLocation=location;
-//                }
-//            };
-//        };
-
-
         //create list of players
         players_list = new ArrayList<>();
-        Intent intent = getIntent();
+
         getLocation();//add current location to userLocation
-
-        loadPlayersData();
-        topTenHighScore(intent.getStringExtra(NAME), userLocation, intent.getIntExtra(SCORE, 0));
-        savePlayersData();
-
         getScoreFromGameActivity();
         listenerOfBtns();
 
+        if(count>1){
+            Intent intent = getIntent();
+            loadPlayersData();
+            topTenHighScore(intent.getStringExtra(NAME), userLocation, intent.getIntExtra(SCORE, 0));
+            savePlayersData();
+        }
+
+
     }
 
+    private void callBack(){
+        mLocationRequest = LocationRequest.create();
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setInterval(100);
+        mLocationRequest.setFastestInterval(100);
+
+        locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                if (locationResult == null) {
+                    return;
+                }
+                for (Location location : locationResult.getLocations()) {
+                    userLocation=location;
+                }
+                Intent intent = getIntent();
+                loadPlayersData();
+                topTenHighScore(intent.getStringExtra(NAME), userLocation, intent.getIntExtra(SCORE, 0));
+                savePlayersData();
+                count++;
+                if (mFusedLocationClient != null) {
+                    mFusedLocationClient.removeLocationUpdates(locationCallback);
+                }
+            };
+        };
+    }
 
     private void getLocation() {
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                    userLocation=getLastKnownLocation();
-//                if(mFusedLocationClient.getLastLocation().getResult() != null) {
-//                    userLocation = mFusedLocationClient.getLastLocation().getResult();
-//                }else{
-//                    mFusedLocationClient.requestLocationUpdates(new LocationRequest(),locationCallback, Looper.getMainLooper());
-//                }
+            mFusedLocationClient.getLastLocation()
+                    .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location location) {
+                            if (location != null) {
+                                userLocation=location;
+                                Log.d("hod", "onSuccess: ommm hereeee");
+                                count++;
+                                return;
+                            }
+                        }
+                    });
+            callBack();
+            mFusedLocationClient.requestLocationUpdates(mLocationRequest,locationCallback,Looper.getMainLooper());
         }else{
             ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_FINE_LOCATION);
 
         }
     }
 
-    private Location getLastKnownLocation() {
-        List<String> providers = locationManager.getProviders(true);
-        Location bestLocation=null;
-        for (String provider : providers) {
-            if (ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                    && ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                Location l = locationManager.getLastKnownLocation(provider);
-                if (l == null) {
-                    continue;
-                }
-                if (bestLocation == null || l.getAccuracy() < bestLocation.getAccuracy()) {
-                    // Found best last known location: %s", l);
-                    bestLocation = l;
-                }
-            }
-
-        }
-        return bestLocation;
-    }
 
     private void getScoreFromGameActivity() {
         //catch intent from GameActivity
         scoreView=findViewById(R.id.your_score);
         Intent intent=getIntent();
-        scoreView.setText("YOUR SCORE : " + intent.getIntExtra(SCORE,0));
+        scoreView.setText("YOUR SCORE IS: " + intent.getIntExtra(SCORE,0));
     }
 
     private void listenerOfBtns() {
@@ -164,16 +166,20 @@ public class EndActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.btn_high_scores).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent EndActivityIntent=new Intent(EndActivity.this,ScoreActivity.class);
+            findViewById(R.id.btn_high_scores).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(userLocation !=null) {
+                        Intent EndActivityIntent = new Intent(EndActivity.this, ScoreActivity.class);
 //                double[] latLng={userLocation.getLatitude(),userLocation.getLongitude()};
 //                EndActivityIntent.putExtra(CURRENT_PLAYER,latLng);
-                startActivity(EndActivityIntent);
+                        startActivity(EndActivityIntent);
+                    }else{
+                        Toast.makeText(EndActivity.this, "Wait a few seconds to find your location", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
 
-            }
-        });
     }
 
 

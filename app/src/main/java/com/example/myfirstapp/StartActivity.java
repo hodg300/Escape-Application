@@ -22,6 +22,7 @@ import android.widget.Toast;
 public class StartActivity extends AppCompatActivity {
     public final String CHECK_BOX = "check_box";
     public final String NAME = "name";
+    public final String LOCATION="location";
     private final int REQUEST_CODE_ASK_PERMISSIONS = 123;
     private CheckBox checkBox;
     private EditText editName;
@@ -35,9 +36,11 @@ public class StartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //init views
         startGame=findViewById(R.id.btn_startGame);
         editName=findViewById(R.id.edit_name);
-        statusCheck();
+
+        checkStatus();
         requestLocationPermission();
 
 
@@ -72,7 +75,7 @@ public class StartActivity extends AppCompatActivity {
                             finish();
                         }
                     }if(!isProviderEnabled){
-                        statusCheck();
+                        checkStatus();
                     }
                     if(!(ContextCompat.checkSelfPermission(StartActivity.this,
                             Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)) {
@@ -100,7 +103,7 @@ public class StartActivity extends AppCompatActivity {
         }
     }
 
-    public void statusCheck() {
+    public void checkStatus() {
         final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
