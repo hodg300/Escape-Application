@@ -86,7 +86,8 @@ public class ScoreActivity extends AppCompatActivity {
         for (final Player player : players_list) {
             //create dynamically textView inside linearLayout
             TextView textView=new TextView(this);
-            textView.setText("\t\t#" + (count++) + " " + player.toString());
+            textView.setText("#" + (count++) + " " + player.toString());
+            textView.setGravity(0);
             if(count%2 ==0){
                 textView.setBackgroundColor(Color.BLUE);
             }

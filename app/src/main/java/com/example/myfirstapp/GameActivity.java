@@ -36,7 +36,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     private final String NAME="name";
     private final static int MAX_VOLUME = 100;
     private final float volume = (float) (1 - (Math.log(MAX_VOLUME - 5) / Math.log(MAX_VOLUME)));
-
+    private int countOfPressedBack=0;
     private int speed;
     private RelativeLayout relativeLayout;
     private View player;
@@ -372,6 +372,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
             mpBackground.start();
         }
         changeBackgroundAndMoreSpeed();
+        countOfPressedBack=0;
     }
 
     @Override
@@ -388,10 +389,19 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
 
 
-    //disable back press
     @Override
     public void onBackPressed() {
-        clickToPause(findViewById(R.id.btn_pause));
+        if(countOfPressedBack==0) {
+            clickToPause(findViewById(R.id.btn_pause));
+            Toast.makeText(GameActivity.this,
+                    "Press again to exit", Toast.LENGTH_SHORT).show();
+            countOfPressedBack++;
+        }else{
+            Intent startMain = new Intent(Intent.ACTION_MAIN);
+            startMain.addCategory(Intent.CATEGORY_HOME);
+            startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(startMain);
+        }
 
     }
 

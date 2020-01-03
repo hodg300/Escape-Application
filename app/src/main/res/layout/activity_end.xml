@@ -24,6 +24,7 @@
         android:layout_marginTop="40dp"
         android:layout_centerHorizontal="true"
         android:text="YOUR SCORE IS :"
+        android:gravity="center"
         android:textStyle="bold"
         android:fontFamily="casual"
         android:layout_below="@id/game_over_view"

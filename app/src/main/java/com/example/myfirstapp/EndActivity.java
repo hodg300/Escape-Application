@@ -49,7 +49,7 @@ public class EndActivity extends AppCompatActivity {
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationCallback locationCallback;
     private LocationRequest mLocationRequest;
-
+    private boolean isSuccess=false;
 
 
     @Override
@@ -62,14 +62,16 @@ public class EndActivity extends AppCompatActivity {
 
         getLocation();//add current location to userLocation
         getScoreFromGameActivity();
-        listenerOfBtns();
-
         if(players_list.size()>=1){
             Intent intent = getIntent();
             loadPlayersData();
             topTenHighScore(intent.getStringExtra(NAME), userLocation, intent.getIntExtra(SCORE, 0));
             savePlayersData();
+            listenerOfBtns();
         }
+
+
+
 
 
 
@@ -95,6 +97,7 @@ public class EndActivity extends AppCompatActivity {
                 loadPlayersData();
                 topTenHighScore(intent.getStringExtra(NAME), userLocation, intent.getIntExtra(SCORE, 0));
                 savePlayersData();
+                listenerOfBtns();
                 if (mFusedLocationClient != null) {
                     mFusedLocationClient.removeLocationUpdates(locationCallback);
                 }
@@ -114,12 +117,14 @@ public class EndActivity extends AppCompatActivity {
                             if (location != null) {
                                 userLocation=location;
                                 Log.d("resultsuccess", "onSuccess: ommm hereeee");
-                                return;
+                                isSuccess=true;
                             }
                         }
                     });
-            callBack();
-            mFusedLocationClient.requestLocationUpdates(mLocationRequest,locationCallback,Looper.getMainLooper());
+            if(isSuccess==false) {
+                callBack();
+                mFusedLocationClient.requestLocationUpdates(mLocationRequest, locationCallback, Looper.getMainLooper());
+            }
         }else{
             ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_FINE_LOCATION);
 
@@ -131,7 +136,7 @@ public class EndActivity extends AppCompatActivity {
         //catch intent from GameActivity
         scoreView=findViewById(R.id.your_score);
         Intent intent=getIntent();
-        scoreView.setText("YOUR SCORE IS: " + intent.getIntExtra(SCORE,0));
+        scoreView.setText("YOUR SCORE IS:\n" + intent.getIntExtra(SCORE,0));
     }
 
     private void listenerOfBtns() {
@@ -171,8 +176,6 @@ public class EndActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     if(userLocation !=null) {
                         Intent EndActivityIntent = new Intent(EndActivity.this, ScoreActivity.class);
-//                double[] latLng={userLocation.getLatitude(),userLocation.getLongitude()};
-//                EndActivityIntent.putExtra(CURRENT_PLAYER,latLng);
                         startActivity(EndActivityIntent);
                     }else{
                         Toast.makeText(EndActivity.this, "Wait a few seconds to find your location", Toast.LENGTH_SHORT).show();
