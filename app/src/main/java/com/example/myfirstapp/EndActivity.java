@@ -39,7 +39,6 @@ public class EndActivity extends AppCompatActivity {
     private final int REQUEST_FINE_LOCATION=1234;
     public final String SHARE_PREFS = "sharedPrefs";
     public final String TEXT = "text";
-    public final String CURRENT_PLAYER = "currentPlayer";
     private TextView scoreView;
     private final String SCORE = "score";
     private final String NAME = "name";
@@ -70,11 +69,6 @@ public class EndActivity extends AppCompatActivity {
             listenerOfBtns();
         }
 
-
-
-
-
-
     }
 
     private void callBack(){
@@ -92,7 +86,6 @@ public class EndActivity extends AppCompatActivity {
                 for (Location location : locationResult.getLocations()) {
                     userLocation=location;
                 }
-                Log.d("resultCallBack", "onSuccess: ommm hereeee");
                 Intent intent = getIntent();
                 loadPlayersData();
                 topTenHighScore(intent.getStringExtra(NAME), userLocation, intent.getIntExtra(SCORE, 0));
@@ -116,7 +109,6 @@ public class EndActivity extends AppCompatActivity {
                         public void onSuccess(Location location) {
                             if (location != null) {
                                 userLocation=location;
-                                Log.d("resultsuccess", "onSuccess: ommm hereeee");
                                 isSuccess=true;
                             }
                         }
