@@ -49,7 +49,7 @@ public class EndActivity extends AppCompatActivity {
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationCallback locationCallback;
     private LocationRequest mLocationRequest;
-    private static int count=0;
+
 
 
     @Override
@@ -64,12 +64,13 @@ public class EndActivity extends AppCompatActivity {
         getScoreFromGameActivity();
         listenerOfBtns();
 
-        if(count>1){
+        if(players_list.size()>=1){
             Intent intent = getIntent();
             loadPlayersData();
             topTenHighScore(intent.getStringExtra(NAME), userLocation, intent.getIntExtra(SCORE, 0));
             savePlayersData();
         }
+
 
 
     }
@@ -89,11 +90,11 @@ public class EndActivity extends AppCompatActivity {
                 for (Location location : locationResult.getLocations()) {
                     userLocation=location;
                 }
+                Log.d("resultCallBack", "onSuccess: ommm hereeee");
                 Intent intent = getIntent();
                 loadPlayersData();
                 topTenHighScore(intent.getStringExtra(NAME), userLocation, intent.getIntExtra(SCORE, 0));
                 savePlayersData();
-                count++;
                 if (mFusedLocationClient != null) {
                     mFusedLocationClient.removeLocationUpdates(locationCallback);
                 }
@@ -112,8 +113,7 @@ public class EndActivity extends AppCompatActivity {
                         public void onSuccess(Location location) {
                             if (location != null) {
                                 userLocation=location;
-                                Log.d("hod", "onSuccess: ommm hereeee");
-                                count++;
+                                Log.d("resultsuccess", "onSuccess: ommm hereeee");
                                 return;
                             }
                         }
