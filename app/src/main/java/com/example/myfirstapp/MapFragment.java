@@ -3,8 +3,6 @@ package com.example.myfirstapp;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,9 +37,7 @@ public class MapFragment extends Fragment{
             @Override
             public void onMapReady(GoogleMap mMap) {
                 mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-
                 mMap.clear(); //clear old markers
-
                 CameraPosition googlePlex = CameraPosition.builder()
                         .target(new LatLng(latitude,longitude))
                         .zoom(16)
@@ -53,13 +49,10 @@ public class MapFragment extends Fragment{
 
                 mMap.addMarker(new MarkerOptions()
                         .position(new LatLng(latitude,longitude))
-                        .title("Spider Man")
+                        .title("User Location")
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
-                Log.d("testlocation", "onMapReady: " + latitude + "     " + longitude);
             }
         });
-
-
         return rootView;
     }
 

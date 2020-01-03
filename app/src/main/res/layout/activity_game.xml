@@ -55,7 +55,6 @@
         android:layout_width="50dp"
         android:layout_height="40dp"
         android:layout_marginTop="3dp"
-        android:onClick="clickToStop"
         android:layout_alignParentRight="true"/>
     <ImageView
         android:id="@+id/btn_pause"
@@ -63,7 +62,6 @@
         android:layout_width="50dp"
         android:layout_height="40dp"
         android:layout_marginTop="3dp"
-        android:onClick="clickToPause"
         android:layout_toLeftOf="@id/btn_stop"/>
     <ImageView
         android:id="@+id/btn_resume"
@@ -71,8 +69,7 @@
         android:layout_width="50dp"
         android:layout_height="40dp"
         android:layout_marginTop="3dp"
-        android:layout_toLeftOf="@id/btn_pause"
-        android:onClick="clickToResume"/>
+        android:layout_toLeftOf="@id/btn_pause"/>
 
 
     <LinearLayout

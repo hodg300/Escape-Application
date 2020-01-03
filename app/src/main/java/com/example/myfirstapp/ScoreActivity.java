@@ -4,44 +4,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
-import org.w3c.dom.Text;
-
 import java.lang.reflect.Type;
-import java.nio.file.spi.FileTypeDetector;
 import java.util.ArrayList;
 
 public class ScoreActivity extends AppCompatActivity {
     public final String SHARE_PREFS = "sharedPrefs";
     public final String TEXT = "text";
-    public final String CURRENT_PLAYER="currentPlayer";
     private int count =1;
     private ArrayList<Player> players_list;
     private ArrayList<TextView> textViews;
@@ -62,11 +40,6 @@ public class ScoreActivity extends AppCompatActivity {
     }
 
     private void updateViews() {
-
-        //show current player on fragment
-//        double[] playerLocat=getIntent().getExtras().getDoubleArray(CURRENT_PLAYER);
-//        addFragment(new MapFragment(playerLocat[0],playerLocat[1]),true,"one");
-
 
         //read from json
         SharedPreferences sharedPref = getSharedPreferences(SHARE_PREFS, MODE_PRIVATE);
@@ -95,9 +68,7 @@ public class ScoreActivity extends AppCompatActivity {
 
             placeTextViewOnLayout(textView);
 
-
-            //during i click on someone textview i want to see a  specific player that i was clicked in my map
-           textView.setOnClickListener(new View.OnClickListener() {
+            textView.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View v) {
                    showPlayerOnMap(player.getLatitude(),player.getLongitude());

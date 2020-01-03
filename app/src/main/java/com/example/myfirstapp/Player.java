@@ -2,8 +2,6 @@ package com.example.myfirstapp;
 
 import android.location.Location;
 
-
-
 public class Player {
     private String name;
     private double latitude;
@@ -21,8 +19,6 @@ public class Player {
 
     }
 
-
-
     public int getScore() {
         return score;
     }
@@ -32,17 +28,9 @@ public class Player {
     public void setName(String name) {
         this.name = name;
     }
-    public void setScore(int score) {
-        this.score = score;
-    }
-    public Location getLocation(){
-        return location;
-    }
-
     public double getLatitude() {
         return latitude;
     }
-
     public double getLongitude() {
         return longitude;
     }
@@ -51,7 +39,4 @@ public class Player {
     public String toString() {
         return String.format("Name: %s Lat: %.2f Lng: %.2f Score: %d",this.name,this.latitude,this.longitude,this.score);
     }
-
-
-
 }

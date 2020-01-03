@@ -22,7 +22,6 @@ import android.widget.Toast;
 public class StartActivity extends AppCompatActivity {
     public final String CHECK_BOX = "check_box";
     public final String NAME = "name";
-    public final String LOCATION="location";
     private final int REQUEST_CODE_ASK_PERMISSIONS = 123;
     private CheckBox checkBox;
     private EditText editName;
@@ -36,14 +35,20 @@ public class StartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //init views
-        startGame=findViewById(R.id.btn_startGame);
-        editName=findViewById(R.id.edit_name);
 
+        initViews();
         checkStatus();
         requestLocationPermission();
+        checkBoxListener();
+        onClickStartGameButton();
 
+}
 
+    private void initViews(){
+        startGame=findViewById(R.id.btn_startGame);
+        editName=findViewById(R.id.edit_name);
+    }
+    private void checkBoxListener(){
         checkBox=(CheckBox) findViewById(R.id.check_btn);
         checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,36 +61,35 @@ public class StartActivity extends AppCompatActivity {
                 }
             }
         });
-
-            startGame.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (ContextCompat.checkSelfPermission(StartActivity.this,
-                            Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                    && isProviderEnabled) {
-                        userName = editName.getText().toString();
-                        if (userName.matches("")) {
-                            Toast.makeText(StartActivity.this,
-                                    "Enter your name", Toast.LENGTH_LONG).show();
-                        } else {
-                            Intent startActivityIntent = new Intent(StartActivity.this, GameActivity.class);
-                            startActivityIntent.putExtra(CHECK_BOX, isCheckBox);
-                            startActivityIntent.putExtra(NAME, editName.getText().toString());
-                            startActivity(startActivityIntent);
-                            finish();
-                        }
-                    }if(!isProviderEnabled){
-                        checkStatus();
+    }
+    private void onClickStartGameButton(){
+        startGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ContextCompat.checkSelfPermission(StartActivity.this,
+                        Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                        && isProviderEnabled) {
+                    userName = editName.getText().toString();
+                    if (userName.matches("")) {
+                        Toast.makeText(StartActivity.this,
+                                "Enter your name", Toast.LENGTH_LONG).show();
+                    } else {
+                        Intent startActivityIntent = new Intent(StartActivity.this, GameActivity.class);
+                        startActivityIntent.putExtra(CHECK_BOX, isCheckBox);
+                        startActivityIntent.putExtra(NAME, editName.getText().toString());
+                        startActivity(startActivityIntent);
+                        finish();
                     }
-                    if(!(ContextCompat.checkSelfPermission(StartActivity.this,
-                            Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)) {
-                        requestLocationPermission();
-                    }
+                }if(!isProviderEnabled){
+                    checkStatus();
                 }
-            });
-
-}
-
+                if(!(ContextCompat.checkSelfPermission(StartActivity.this,
+                        Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)) {
+                    requestLocationPermission();
+                }
+            }
+        });
+    }
 
     private void requestLocationPermission() {
             ActivityCompat.requestPermissions(this,
