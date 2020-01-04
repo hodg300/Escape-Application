@@ -28,6 +28,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     private static final int ADD_SCORE_FROM_ENEMY = 1;
     private final int BONUS_SCORE=5;
     private final int NUM_OF_COL = 5;
+    private final String GPS_ON="gps";
     public final String CHECK_BOX = "check_box";
     private final String SCORE = "score";
     private final String TEXT_SCORE = "SCORE: ";
@@ -41,8 +42,6 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     private View[] enemies;
     private View[] bonus_staff;
     private ImageView[] life_status;
-    private ImageView life_status2;
-    private ImageView life_status3;
     private ImageView btnLeft;
     private ImageView btnRight;
     private int life = 3;
@@ -58,9 +57,9 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     private Sensor accelerometer;
     static int x = 360;
     private boolean isSensor;
-    private boolean level2=true;
-    private boolean level3=true;
-    private boolean level4=true;
+//    private boolean level2=true;
+//    private boolean level3=true;
+//    private boolean level4=true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +69,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
                 "Get away from the asteroids", Toast.LENGTH_SHORT).show();
         //MediaPlayer mpBackground
         startMusicBackground();
-
+        sendStatusGpsToEndActivity();
         initialViews();
         screenHeightAndWidth();
         enemyArr=new ValueAnimator[5];
@@ -87,6 +86,9 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
     }
 
+    private void sendStatusGpsToEndActivity() {
+
+    }
 
 
     ///-----------------------Method--------------------------------------
@@ -258,12 +260,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
             this.life--;
                 if (life == 0) {
                     life_status[0].setVisibility(View.INVISIBLE);
-                    Intent intent=getIntent();
-                    Intent gameActivityIntent = new Intent(GameActivity.this, EndActivity.class);
-                    gameActivityIntent.putExtra(SCORE,score);
-                    gameActivityIntent.putExtra(CHECK_BOX,intent.getBooleanExtra(CHECK_BOX,false));
-                    gameActivityIntent.putExtra(NAME,intent.getStringExtra(NAME));
-                    startActivity(gameActivityIntent);
+                    sendIntent();
                     finish();
                 } else if (life == 1) {
                     life_status[1].setVisibility(View.INVISIBLE);
@@ -289,7 +286,15 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     }
 //-----------------------------------
 
-
+    private void sendIntent(){
+        Intent intent=getIntent();
+        Intent gameActivityIntent = new Intent(GameActivity.this, EndActivity.class);
+        gameActivityIntent.putExtra(SCORE,score);
+        gameActivityIntent.putExtra(CHECK_BOX,intent.getBooleanExtra(CHECK_BOX,false));
+        gameActivityIntent.putExtra(NAME,intent.getStringExtra(NAME));
+//        gameActivityIntent.putExtra(GPS_ON,intent.getBooleanExtra(GPS_ON,false));
+        startActivity(gameActivityIntent);
+    }
     private void onClickResumeOrPauseOrStop(){
 
         //resume
@@ -324,11 +329,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
             @Override
             public void onClick(View v) {
                 onStop();
-                Intent gameActivityIntent = new Intent(GameActivity.this, EndActivity.class);
-                gameActivityIntent.putExtra(SCORE,score);
-                gameActivityIntent.putExtra(CHECK_BOX,getIntent().getBooleanExtra(CHECK_BOX,false));
-                gameActivityIntent.putExtra(NAME,getIntent().getStringExtra(NAME));
-                startActivity(gameActivityIntent);
+                sendIntent();
                 finish();
             }
         });

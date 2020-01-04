@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 public class StartActivity extends AppCompatActivity {
     public final String CHECK_BOX = "check_box";
+    private final String GPS_ON="gps";
     public final String NAME = "name";
     private final int REQUEST_CODE_ASK_PERMISSIONS = 123;
     private CheckBox checkBox;
@@ -29,7 +30,7 @@ public class StartActivity extends AppCompatActivity {
     private String userName;
     private int count=0;
     private boolean isCheckBox=false;
-    private boolean isProviderEnabled;
+    private boolean isProviderEnabled=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,10 +78,12 @@ public class StartActivity extends AppCompatActivity {
                         Intent startActivityIntent = new Intent(StartActivity.this, GameActivity.class);
                         startActivityIntent.putExtra(CHECK_BOX, isCheckBox);
                         startActivityIntent.putExtra(NAME, editName.getText().toString());
+                        startActivityIntent.putExtra(GPS_ON,isProviderEnabled);
                         startActivity(startActivityIntent);
                         finish();
                     }
-                }if(!isProviderEnabled){
+                }
+                if(!isProviderEnabled){
                     checkStatus();
                 }
                 if(!(ContextCompat.checkSelfPermission(StartActivity.this,

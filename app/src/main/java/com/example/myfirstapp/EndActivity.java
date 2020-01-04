@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Looper;
 import android.view.View;
@@ -28,16 +29,20 @@ public class EndActivity extends AppCompatActivity {
     private final int REQUEST_FINE_LOCATION=1234;
     public final String SHARE_PREFS = "sharedPrefs";
     public final String TEXT = "text";
+    public final String GPS_ON="gps";
     private TextView scoreView;
     private final String SCORE = "score";
     private final String NAME = "name";
     private ArrayList<Player> players_list;
     private Location userLocation;
+    private double lat;
+    private double lng;
     public final String CHECK_BOX = "check_box";
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationCallback locationCallback;
     private LocationRequest mLocationRequest;
     private boolean isDone=false;
+//    private LocationManager locationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +63,7 @@ public class EndActivity extends AppCompatActivity {
             savePlayersData();//save player_list to json
         }
 
+
     }
 
 
@@ -72,17 +78,14 @@ public class EndActivity extends AppCompatActivity {
                         public void onSuccess(Location location) {
                             if (location != null) {
                                 userLocation=location;
-
                                 return;
                             }
                         }
                     });
                 callBack();
                 mFusedLocationClient.requestLocationUpdates(mLocationRequest, locationCallback, Looper.getMainLooper());
-
         }else{
             ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_FINE_LOCATION);
-
         }
     }
 

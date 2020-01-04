@@ -18,6 +18,14 @@ public class Player {
         this.location=location;
 
     }
+    public Player(String name,double lat,double lng,int score){
+        this.name=name;
+        this.latitude=lat;
+        this.longitude=lng;
+        this.score=score;
+
+
+    }
 
     public int getScore() {
         return score;
