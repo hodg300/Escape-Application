@@ -58,8 +58,9 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     private Sensor accelerometer;
     static int x = 360;
     private boolean isSensor;
-
-
+    private boolean level2=true;
+    private boolean level3=true;
+    private boolean level4=true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -182,58 +183,63 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         mpBackground.start();
     }
 
-    private void changeBackgroundAndMoreSpeed(){
-        if(score==0) {
-            Toast.makeText(GameActivity.this,
-                    "Level 1", Toast.LENGTH_SHORT).show();
-        }
-        else if(score>=50 && score <=55){
-            relativeLayout.setBackground(getResources().getDrawable(R.drawable.level2));
-            Toast.makeText(GameActivity.this,
-                    "Level 2", Toast.LENGTH_SHORT).show();
-            if(isSensor){
-                speed=4500;
-                setSpeedOnAnimation(speed);
-            }else{
-                speed=2500;
-                setSpeedOnAnimation(speed);
-            }
-        }else if(score>=150 && score<=155){
-            relativeLayout.setBackground(getResources().getDrawable(R.drawable.level3));
-            Toast.makeText(GameActivity.this,
-                    "Level 3", Toast.LENGTH_SHORT).show();
-            if(isSensor){
-                speed=4000;
-                setSpeedOnAnimation(speed);
-            }else{
-                speed=2000;
-                setSpeedOnAnimation(speed);
-            }
-        }else if(score>=300 && score <=305){
-            relativeLayout.setBackground(getResources().getDrawable(R.drawable.level4));
-            Toast.makeText(GameActivity.this,
-                    "Final level", Toast.LENGTH_SHORT).show();
-            if(isSensor){
-                speed=3500;
-                setSpeedOnAnimation(speed);
-            }else{
-                speed=1500;
-                setSpeedOnAnimation(speed);
-            }
-        }
-    }
-
-    //update speed animation
-    private void setSpeedOnAnimation(int speedAnimate){
-        for(int i=0;i<NUM_OF_COL;i++){
-            enemyArr[i].setDuration(speed).setRepeatCount(Animation.INFINITE);
-            bonusArr[i].setDuration(speed).setRepeatCount(Animation.INFINITE);
-        }
-    }
+    //make problem with switch between level---------------------------------------------
+//    private void changeBackgroundAndMoreSpeed(){
+//        if(score==0) {
+//            Toast.makeText(GameActivity.this,
+//                    "Level 1", Toast.LENGTH_LONG).show();
+//        }
+//        else if(score>=50 && score <=55 &&level2){
+//            level2=false;
+//            relativeLayout.setBackground(getResources().getDrawable(R.drawable.level2));
+//            Toast.makeText(GameActivity.this,
+//                    "Level 2", Toast.LENGTH_LONG).show();
+//            if(isSensor){
+//                speed=4500;
+//                setSpeedOnAnimation(speed);
+//            }else{
+//                speed=2500;
+//                setSpeedOnAnimation(speed);
+//            }
+//        }else if(score>=150 && score<=155 && level3){
+//            level3=false;
+//            relativeLayout.setBackground(getResources().getDrawable(R.drawable.level3));
+//            Toast.makeText(GameActivity.this,
+//                    "Level 3", Toast.LENGTH_LONG).show();
+//            if(isSensor){
+//                speed=4000;
+//                setSpeedOnAnimation(speed);
+//            }else{
+//                speed=2000;
+//                setSpeedOnAnimation(speed);
+//            }
+//        }else if(score>=300 && score <=310 && level4){
+//            level4=false;
+//            relativeLayout.setBackground(getResources().getDrawable(R.drawable.level4));
+//            Toast.makeText(GameActivity.this,
+//                    "Final level", Toast.LENGTH_LONG).show();
+//            if(isSensor){
+//                speed=3500;
+//                setSpeedOnAnimation(speed);
+//            }else{
+//                speed=1500;
+//                setSpeedOnAnimation(speed);
+//            }
+//        }
+//    }
+//
+//    //update speed animation
+//    private void setSpeedOnAnimation(int speedAnimate){
+//        for(int i=0;i<NUM_OF_COL;i++){
+//            enemyArr[i].setDuration(speed).setRepeatCount(Animation.INFINITE);
+//            bonusArr[i].setDuration(speed).setRepeatCount(Animation.INFINITE);
+//        }
+//    }
+    //-----------------------------------------------------------------
 
     private synchronized void addScore(View enemy,ValueAnimator updatedAnimation){
         if(enemy.getY()>player.getY()+player.getHeight()){
-            changeBackgroundAndMoreSpeed();
+//            changeBackgroundAndMoreSpeed();
             score +=ADD_SCORE_FROM_ENEMY;
             scoreView.setText(TEXT_SCORE + score);
             updatedAnimation.start();
@@ -352,7 +358,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         if(!findViewById(R.id.btn_pause).isEnabled()) {
             mpBackground.start();
         }
-        changeBackgroundAndMoreSpeed();
+//        changeBackgroundAndMoreSpeed();
         countOfPressedBack=0;
     }
 
@@ -516,6 +522,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
             }
         });
+
         enemyArr[1] = ValueAnimator.ofInt(-130,screenHeight +400);
         enemyArr[1].setDuration(speed).setRepeatCount(Animation.INFINITE);
         enemyArr[1].setStartDelay(2200);

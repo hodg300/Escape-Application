@@ -37,8 +37,7 @@ public class EndActivity extends AppCompatActivity {
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationCallback locationCallback;
     private LocationRequest mLocationRequest;
-    private boolean isSuccess=false;
-
+    private boolean isDone=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +49,13 @@ public class EndActivity extends AppCompatActivity {
 
         getLocation();//add current location to userLocation
         getScoreFromGameActivity();
+        listenerOfButtons();//listen to buttons
+
         if(players_list.size()>=1){
             Intent intent = getIntent();
             loadPlayersData();//load player_list from json
             topTenHighScore(intent.getStringExtra(NAME), userLocation, intent.getIntExtra(SCORE, 0));
             savePlayersData();//save player_list to json
-            listenerOfButtons();//listen to buttons
         }
 
     }
@@ -72,14 +72,14 @@ public class EndActivity extends AppCompatActivity {
                         public void onSuccess(Location location) {
                             if (location != null) {
                                 userLocation=location;
-                                isSuccess=true;
+
+                                return;
                             }
                         }
                     });
-            if(isSuccess==false) {
                 callBack();
                 mFusedLocationClient.requestLocationUpdates(mLocationRequest, locationCallback, Looper.getMainLooper());
-            }
+
         }else{
             ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_FINE_LOCATION);
 
@@ -103,11 +103,11 @@ public class EndActivity extends AppCompatActivity {
                 for (Location location : locationResult.getLocations()) {
                     userLocation=location;
                 }
+                listenerOfButtons();
                 Intent intent = getIntent();
                 loadPlayersData();
                 topTenHighScore(intent.getStringExtra(NAME), userLocation, intent.getIntExtra(SCORE, 0));
                 savePlayersData();
-                listenerOfButtons();
                 if (mFusedLocationClient != null) {
                     mFusedLocationClient.removeLocationUpdates(locationCallback);
                 }
@@ -157,7 +157,7 @@ public class EndActivity extends AppCompatActivity {
             findViewById(R.id.btn_high_scores).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(userLocation !=null) {
+                    if(userLocation !=null && isDone) {
                         Intent EndActivityIntent = new Intent(EndActivity.this, ScoreActivity.class);
                         startActivity(EndActivityIntent);
                     }else{
@@ -208,6 +208,7 @@ public class EndActivity extends AppCompatActivity {
         String json=gson.toJson(players_list);
         editor.putString(TEXT,json);
         editor.apply();
+        isDone=true;
     }
 
     //load data with json

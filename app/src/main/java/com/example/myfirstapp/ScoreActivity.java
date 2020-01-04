@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -59,10 +60,10 @@ public class ScoreActivity extends AppCompatActivity {
         for (final Player player : players_list) {
             //create dynamically textView inside linearLayout
             TextView textView=new TextView(this);
+            textView.setGravity(Gravity.VERTICAL_GRAVITY_MASK);
             textView.setText("#" + (count++) + " " + player.toString());
-            textView.setGravity(0);
             if(count%2 ==0){
-                textView.setBackgroundColor(Color.BLUE);
+                textView.setBackgroundColor(R.drawable.level4);
             }
             textViews.add(players_list.indexOf(player),textView);
 

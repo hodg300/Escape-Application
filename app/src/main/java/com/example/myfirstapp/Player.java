@@ -37,6 +37,6 @@ public class Player {
 
     @Override
     public String toString() {
-        return String.format("Name: %s Lat: %.2f Lng: %.2f Score: %d",this.name,this.latitude,this.longitude,this.score);
+        return String.format("Name: %-8s Lat: %.2f Lng: %.2f Score: %-4d\n",this.name,this.latitude,this.longitude,this.score);
     }
 }
