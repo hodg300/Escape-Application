@@ -292,7 +292,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         gameActivityIntent.putExtra(SCORE,score);
         gameActivityIntent.putExtra(CHECK_BOX,intent.getBooleanExtra(CHECK_BOX,false));
         gameActivityIntent.putExtra(NAME,intent.getStringExtra(NAME));
-//        gameActivityIntent.putExtra(GPS_ON,intent.getBooleanExtra(GPS_ON,false));
+        gameActivityIntent.putExtra(GPS_ON,intent.getBooleanExtra(GPS_ON,false));
         startActivity(gameActivityIntent);
     }
     private void onClickResumeOrPauseOrStop(){

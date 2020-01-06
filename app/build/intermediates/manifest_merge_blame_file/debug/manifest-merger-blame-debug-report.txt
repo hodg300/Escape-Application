@@ -55,82 +55,83 @@
 30-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:14:9-54
 31        android:supportsRtl="true"
 31-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:15:9-35
-32        android:theme="@style/AppTheme" >
-32-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:16:9-40
-33        <activity
-33-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:17:9-19:92
-34            android:name="com.example.myfirstapp.ScoreActivity"
-34-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:17:19-48
-35            android:label="@string/app_name"
-35-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:18:13-45
-36            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
-36-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:19:13-80
-37        <activity
-37-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:20:9-23:83
-38            android:name="com.example.myfirstapp.EndActivity"
-38-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:21:13-40
-39            android:label="@string/app_name"
-39-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:22:13-45
-40            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
-40-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:23:13-80
-41        <activity
-41-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:24:9-27:83
-42            android:name="com.example.myfirstapp.GameActivity"
-42-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:25:13-41
-43            android:label="@string/app_name"
-43-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:26:13-45
-44            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
-44-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:27:13-80
-45        <activity
-45-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:28:9-37:20
-46            android:name="com.example.myfirstapp.StartActivity"
-46-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:29:13-42
-47            android:label="@string/app_name"
-47-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:30:13-45
-48            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
-48-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:31:13-80
-49            <intent-filter>
-49-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:32:13-36:29
-50                <action android:name="android.intent.action.MAIN" />
-50-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:33:17-69
-50-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:33:25-66
-51
-52                <category android:name="android.intent.category.LAUNCHER" />
-52-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:35:17-77
-52-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:35:27-74
-53            </intent-filter>
-54        </activity>
-55
-56        <!-- Maps Android api -->
-57        <meta-data
-57-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:40:9-42:70
-58            android:name="com.google.android.geo.API_KEY"
-58-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:41:13-58
-59            android:value="AIzaSyA-JidP9zo0PefASmjLpDUQB6huCNPUdIY" />
-59-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:42:13-68
-60        <!-- Needs to be explicitly declared on P+ -->
-61        <uses-library
-61-->[com.google.android.gms:play-services-maps:16.1.0] C:\Users\Hod\.gradle\caches\transforms-2\files-2.1\c9d9811307193ce1305c27e9444d0d10\jetified-play-services-maps-16.1.0\AndroidManifest.xml:33:9-35:40
-62            android:name="org.apache.http.legacy"
-62-->[com.google.android.gms:play-services-maps:16.1.0] C:\Users\Hod\.gradle\caches\transforms-2\files-2.1\c9d9811307193ce1305c27e9444d0d10\jetified-play-services-maps-16.1.0\AndroidManifest.xml:34:13-50
-63            android:required="false" />
-63-->[com.google.android.gms:play-services-maps:16.1.0] C:\Users\Hod\.gradle\caches\transforms-2\files-2.1\c9d9811307193ce1305c27e9444d0d10\jetified-play-services-maps-16.1.0\AndroidManifest.xml:35:13-37
-64
-65        <activity
-65-->[com.google.android.gms:play-services-base:16.0.1] C:\Users\Hod\.gradle\caches\transforms-2\files-2.1\3ba6c3a0cec8a79bb9e4f579286c14ff\jetified-play-services-base-16.0.1\AndroidManifest.xml:23:9-26:75
-66            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-66-->[com.google.android.gms:play-services-base:16.0.1] C:\Users\Hod\.gradle\caches\transforms-2\files-2.1\3ba6c3a0cec8a79bb9e4f579286c14ff\jetified-play-services-base-16.0.1\AndroidManifest.xml:24:13-79
-67            android:exported="false"
-67-->[com.google.android.gms:play-services-base:16.0.1] C:\Users\Hod\.gradle\caches\transforms-2\files-2.1\3ba6c3a0cec8a79bb9e4f579286c14ff\jetified-play-services-base-16.0.1\AndroidManifest.xml:25:13-37
-68            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-68-->[com.google.android.gms:play-services-base:16.0.1] C:\Users\Hod\.gradle\caches\transforms-2\files-2.1\3ba6c3a0cec8a79bb9e4f579286c14ff\jetified-play-services-base-16.0.1\AndroidManifest.xml:26:13-72
-69
-70        <meta-data
-70-->[com.google.android.gms:play-services-basement:16.0.1] C:\Users\Hod\.gradle\caches\transforms-2\files-2.1\7d3cfa25e4e0595e82ec838762cb7102\jetified-play-services-basement-16.0.1\AndroidManifest.xml:23:9-25:69
-71            android:name="com.google.android.gms.version"
-71-->[com.google.android.gms:play-services-basement:16.0.1] C:\Users\Hod\.gradle\caches\transforms-2\files-2.1\7d3cfa25e4e0595e82ec838762cb7102\jetified-play-services-basement-16.0.1\AndroidManifest.xml:24:13-58
-72            android:value="@integer/google_play_services_version" />
-72-->[com.google.android.gms:play-services-basement:16.0.1] C:\Users\Hod\.gradle\caches\transforms-2\files-2.1\7d3cfa25e4e0595e82ec838762cb7102\jetified-play-services-basement-16.0.1\AndroidManifest.xml:25:13-66
-73    </application>
-74
-75</manifest>
+32        android:testOnly="true"
+33        android:theme="@style/AppTheme" >
+33-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:16:9-40
+34        <activity
+34-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:17:9-19:92
+35            android:name="com.example.myfirstapp.ScoreActivity"
+35-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:17:19-48
+36            android:label="@string/app_name"
+36-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:18:13-45
+37            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+37-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:19:13-80
+38        <activity
+38-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:20:9-23:83
+39            android:name="com.example.myfirstapp.EndActivity"
+39-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:21:13-40
+40            android:label="@string/app_name"
+40-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:22:13-45
+41            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+41-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:23:13-80
+42        <activity
+42-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:24:9-27:83
+43            android:name="com.example.myfirstapp.GameActivity"
+43-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:25:13-41
+44            android:label="@string/app_name"
+44-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:26:13-45
+45            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+45-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:27:13-80
+46        <activity
+46-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:28:9-37:20
+47            android:name="com.example.myfirstapp.StartActivity"
+47-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:29:13-42
+48            android:label="@string/app_name"
+48-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:30:13-45
+49            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
+49-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:31:13-80
+50            <intent-filter>
+50-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:32:13-36:29
+51                <action android:name="android.intent.action.MAIN" />
+51-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:33:17-69
+51-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:33:25-66
+52
+53                <category android:name="android.intent.category.LAUNCHER" />
+53-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:35:17-77
+53-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:35:27-74
+54            </intent-filter>
+55        </activity>
+56
+57        <!-- Maps Android api -->
+58        <meta-data
+58-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:40:9-42:70
+59            android:name="com.google.android.geo.API_KEY"
+59-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:41:13-58
+60            android:value="AIzaSyA-JidP9zo0PefASmjLpDUQB6huCNPUdIY" />
+60-->C:\Users\Hod\AndroidStudioProjects\MyFirstApp2\application\app\src\main\AndroidManifest.xml:42:13-68
+61        <!-- Needs to be explicitly declared on P+ -->
+62        <uses-library
+62-->[com.google.android.gms:play-services-maps:16.1.0] C:\Users\Hod\.gradle\caches\transforms-2\files-2.1\c9d9811307193ce1305c27e9444d0d10\jetified-play-services-maps-16.1.0\AndroidManifest.xml:33:9-35:40
+63            android:name="org.apache.http.legacy"
+63-->[com.google.android.gms:play-services-maps:16.1.0] C:\Users\Hod\.gradle\caches\transforms-2\files-2.1\c9d9811307193ce1305c27e9444d0d10\jetified-play-services-maps-16.1.0\AndroidManifest.xml:34:13-50
+64            android:required="false" />
+64-->[com.google.android.gms:play-services-maps:16.1.0] C:\Users\Hod\.gradle\caches\transforms-2\files-2.1\c9d9811307193ce1305c27e9444d0d10\jetified-play-services-maps-16.1.0\AndroidManifest.xml:35:13-37
+65
+66        <activity
+66-->[com.google.android.gms:play-services-base:16.0.1] C:\Users\Hod\.gradle\caches\transforms-2\files-2.1\3ba6c3a0cec8a79bb9e4f579286c14ff\jetified-play-services-base-16.0.1\AndroidManifest.xml:23:9-26:75
+67            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+67-->[com.google.android.gms:play-services-base:16.0.1] C:\Users\Hod\.gradle\caches\transforms-2\files-2.1\3ba6c3a0cec8a79bb9e4f579286c14ff\jetified-play-services-base-16.0.1\AndroidManifest.xml:24:13-79
+68            android:exported="false"
+68-->[com.google.android.gms:play-services-base:16.0.1] C:\Users\Hod\.gradle\caches\transforms-2\files-2.1\3ba6c3a0cec8a79bb9e4f579286c14ff\jetified-play-services-base-16.0.1\AndroidManifest.xml:25:13-37
+69            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+69-->[com.google.android.gms:play-services-base:16.0.1] C:\Users\Hod\.gradle\caches\transforms-2\files-2.1\3ba6c3a0cec8a79bb9e4f579286c14ff\jetified-play-services-base-16.0.1\AndroidManifest.xml:26:13-72
+70
+71        <meta-data
+71-->[com.google.android.gms:play-services-basement:16.0.1] C:\Users\Hod\.gradle\caches\transforms-2\files-2.1\7d3cfa25e4e0595e82ec838762cb7102\jetified-play-services-basement-16.0.1\AndroidManifest.xml:23:9-25:69
+72            android:name="com.google.android.gms.version"
+72-->[com.google.android.gms:play-services-basement:16.0.1] C:\Users\Hod\.gradle\caches\transforms-2\files-2.1\7d3cfa25e4e0595e82ec838762cb7102\jetified-play-services-basement-16.0.1\AndroidManifest.xml:24:13-58
+73            android:value="@integer/google_play_services_version" />
+73-->[com.google.android.gms:play-services-basement:16.0.1] C:\Users\Hod\.gradle\caches\transforms-2\files-2.1\7d3cfa25e4e0595e82ec838762cb7102\jetified-play-services-basement-16.0.1\AndroidManifest.xml:25:13-66
+74    </application>
+75
+76</manifest>

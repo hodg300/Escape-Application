@@ -69,7 +69,7 @@ public class StartActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (ContextCompat.checkSelfPermission(StartActivity.this,
                         Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                        && isProviderEnabled) {
+                        /*&& isProviderEnabled*/) {
                     userName = editName.getText().toString();
                     if (userName.matches("")) {
                         Toast.makeText(StartActivity.this,
@@ -83,9 +83,9 @@ public class StartActivity extends AppCompatActivity {
                         finish();
                     }
                 }
-                if(!isProviderEnabled){
-                    checkStatus();
-                }
+//                if(!isProviderEnabled){
+//                    checkStatus();
+//                }
                 if(!(ContextCompat.checkSelfPermission(StartActivity.this,
                         Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)) {
                     requestLocationPermission();
