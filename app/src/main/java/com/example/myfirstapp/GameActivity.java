@@ -57,9 +57,9 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     private Sensor accelerometer;
     static int x = 360;
     private boolean isSensor;
-//    private boolean level2=true;
-//    private boolean level3=true;
-//    private boolean level4=true;
+    private boolean level2=true;
+    private boolean level3=true;
+    private boolean level4=true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -185,13 +185,13 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         mpBackground.start();
     }
 
-    //make problem with switch between level---------------------------------------------
+//    //make problem with switch between level---------------------------------------------
 //    private void changeBackgroundAndMoreSpeed(){
 //        if(score==0) {
 //            Toast.makeText(GameActivity.this,
 //                    "Level 1", Toast.LENGTH_LONG).show();
 //        }
-//        else if(score>=50 && score <=55 &&level2){
+//        else if(score>=50 && score <=60 &&level2){
 //            level2=false;
 //            relativeLayout.setBackground(getResources().getDrawable(R.drawable.level2));
 //            Toast.makeText(GameActivity.this,
@@ -203,7 +203,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 //                speed=2500;
 //                setSpeedOnAnimation(speed);
 //            }
-//        }else if(score>=150 && score<=155 && level3){
+//        }else if(score>=150 && score<=160 && level3){
 //            level3=false;
 //            relativeLayout.setBackground(getResources().getDrawable(R.drawable.level3));
 //            Toast.makeText(GameActivity.this,
@@ -237,7 +237,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 //            bonusArr[i].setDuration(speed).setRepeatCount(Animation.INFINITE);
 //        }
 //    }
-    //-----------------------------------------------------------------
+//    //-----------------------------------------------------------------
 
     private synchronized void addScore(View enemy,ValueAnimator updatedAnimation){
         if(enemy.getY()>player.getY()+player.getHeight()){

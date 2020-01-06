@@ -57,29 +57,29 @@ public class EndActivity extends AppCompatActivity {
         setContentView(R.layout.activity_end);
 
         isGpsOn=getIntent().getBooleanExtra(GPS_ON,false);
-        Log.d("test end", "onCreate: " +getIntent().getBooleanExtra(GPS_ON,false));
+
         //create list of players
         players_list = new ArrayList<>();
         getScoreFromGameActivity();
         listenerOfButtons();//listen to buttons
-    if(!isGpsOn){
-        //default location in Afeka
-        this.lat=32.113601;
-        this.lng=34.817774;
-        Intent intent = getIntent();
-        loadPlayersData();//load player_list from json
-        topTenHighScore(intent.getStringExtra(NAME), lat,lng, intent.getIntExtra(SCORE, 0));
-        savePlayersData();//save player_list to json
-
-    }else{
-        getLocation();//add current location to userLocation
-        if(players_list.size()>=1){
+        if(!isGpsOn){
+            //default location in Afeka
+            this.lat=32.113601;
+            this.lng=34.817774;
             Intent intent = getIntent();
             loadPlayersData();//load player_list from json
             topTenHighScore(intent.getStringExtra(NAME), lat,lng, intent.getIntExtra(SCORE, 0));
             savePlayersData();//save player_list to json
+
+        }else{
+            getLocation();//add current location to userLocation
+            if(players_list.size()>=1){
+                Intent intent = getIntent();
+                loadPlayersData();//load player_list from json
+                topTenHighScore(intent.getStringExtra(NAME), lat,lng, intent.getIntExtra(SCORE, 0));
+                savePlayersData();//save player_list to json
+            }
         }
-    }
     }
 
 
