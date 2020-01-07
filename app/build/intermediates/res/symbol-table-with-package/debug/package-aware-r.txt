@@ -1316,6 +1316,7 @@ id linear4
 id linear5
 id listMode
 id list_item
+id loadingPanel
 id main_layout
 id map
 id masked
